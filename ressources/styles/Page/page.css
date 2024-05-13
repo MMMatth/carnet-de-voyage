@@ -1,0 +1,60 @@
+/* accueil.css */
+
+@font-face {
+    font-family: "Lilita One";
+    src: url("../../fonts/Lilita_One/LilitaOne-Regular.ttf");
+}
+
+@font-face {
+    font-family: "McLaren";
+    src: url("../../fonts/McLaren/McLaren-Regular.ttf");
+}
+
+.root{
+    -fx-font-family: "McLaren";
+    -fx-text-fill: #303841;
+}
+
+TextField{
+    -fx-background-color: none;
+}
+TextArea{
+    -fx-background-color: none;
+
+}
+
+#title{
+    -fx-font-family: "Lilita One";
+    -fx-text-fill: #303841;
+}
+
+Button{
+    -fx-background-color: none;
+}
+
+Button:hover{
+    -fx-cursor: hand;
+}
+
+DatePicker{
+    -fx-background-color: none;
+    -fx-opacity: 1;
+    -fx-text-fill: #303841;
+
+}
+
+/* style dans le mode non edition */
+DatePicker .arrow-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+DatePicker .arrow {
+    -fx-padding: 0;
+    -fx-shape: none;
+}
+
+ImageView{
+    -fx-background-color: none;
+    -fx-border-radius: 50;
+}

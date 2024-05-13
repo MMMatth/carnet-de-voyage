@@ -1,0 +1,46 @@
+/* edition.css */
+
+@font-face {
+    font-family: "Lilita One";
+    src: url("../../fonts/Lilita_One/LilitaOne-Regular.ttf");
+}
+
+@font-face {
+    font-family: "McLaren";
+    src: url("../../fonts/McLaren/McLaren-Regular.ttf");
+}
+
+/* variable de gris */
+/* #303841 */
+
+TextField, TextArea{
+    -fx-background-color: #c8ccd1;
+    -fx-background-radius: 10;
+
+}
+
+#title{
+    -fx-font-family: "Lilita One";
+    -fx-text-fill: #303841;
+}
+
+
+DatePicker{
+    -fx-background-color: #303841;
+    -fx-opacity: 1;
+}
+
+DatePicker {
+    -fx-text-fill: green;
+}
+
+/* style dans le mode edition */
+DatePicker .arrow-button {
+    -fx-padding: 5;
+    -fx-background-color: #303841;
+}
+
+DatePicker .arrow {
+    -fx-padding: 5;
+    -fx-shape: "M0,0 L1,0 L0.5,1 z"; /* Ceci est un exemple de forme, vous pouvez le changer selon vos besoins */
+}

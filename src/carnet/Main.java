@@ -21,7 +21,7 @@ public class Main extends Application {
         Carnet carnet = new Carnet();
         carnet.addPage(new PageAccueil("Titre", "Auteur", null, null, "Participant 1", "Participant 2"));
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PageAccueil.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PageTextPhoto.fxml"));
         loader.setControllerFactory(iC -> new ControleurPageAccueil(carnet));
         Parent root = loader.load();
 
