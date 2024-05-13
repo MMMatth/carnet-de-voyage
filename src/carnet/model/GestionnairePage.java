@@ -32,6 +32,10 @@ public class GestionnairePage implements Iterable<Page>{
         }
     }
 
+    public boolean isEmpty(){
+        return pages.isEmpty();
+    }
+
     @Override
     public Iterator<Page> iterator() {
         return pages.iterator();
