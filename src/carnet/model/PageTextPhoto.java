@@ -33,4 +33,9 @@ public class PageTextPhoto extends PageContenu{
     public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
     }
+
+    @Override
+    public boolean estPageTextPhoto(){
+        return true;
+    }
 }

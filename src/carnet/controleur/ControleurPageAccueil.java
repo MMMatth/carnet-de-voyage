@@ -6,18 +6,13 @@ import carnet.model.Page;
 import carnet.model.PageAccueil;
 import carnet.model.PageContenu;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
-public class ControleurPageAccueil {
+public class ControleurPageAccueil extends ControleurPage{
 
-    private Carnet carnet; // le model
+    private PageAccueil page;
 
-    private PageAccueil page; // la page courante
-
-    private boolean isEditable = false; // Nouvelle variable
-
+    // les champs de la vue
     @FXML
     private TextField titre;
     @FXML
@@ -29,10 +24,11 @@ public class ControleurPageAccueil {
     @FXML
     private DatePicker dateFin;
 
-    public ControleurPageAccueil(Carnet carnet) {
-        this.carnet = carnet;
-        this.page = (PageAccueil) carnet.getPageCourante();
 
+
+    public ControleurPageAccueil(Carnet carnet) {
+        super(carnet, false);
+        this.page = (PageAccueil) carnet.getPageCourante();
     }
 
     @FXML
@@ -44,7 +40,7 @@ public class ControleurPageAccueil {
         dateFin.setValue(page.getDateFin());
     }
 
-    private void save(){
+    protected void save(){
         page.setTitre(titre.getText());
         page.setAuteur(auteur.getText());
         page.setParticipants(participants.getText());
@@ -53,51 +49,22 @@ public class ControleurPageAccueil {
     }
 
     @FXML
-    void toggleModeEdition(){
+    public void toggleModeEdition(){
         if (isEditable){ // dans le cas ou on est en mode edition on sauvegarde les modifications
             save();
         }
 
         isEditable = !isEditable; // Inverser la valeur de isEditable
 
-        titre.setEditable(isEditable);
-        auteur.setEditable(isEditable);
-        participants.setEditable(isEditable);
-        dateDebut.setEditable(isEditable);
-        dateFin.setEditable(isEditable);
-
-        dateDebut.setDisable(!isEditable);
-        dateFin.setDisable(!isEditable);
-
         // Changer le style
-        if (isEditable) {
-            applyStylesheet("/styles/edition.css");
-        } else {
-            applyStylesheet("/styles/nonedition.css");
-        }
+        String css = isEditable ? "/styles/edition.css" : "/styles/nonedition.css";
+
+        applyStylesheet(titre, isEditable, css);
+        applyStylesheet(auteur, isEditable, css);
+        applyStylesheet(participants, isEditable, css);
+        applyStylesheet(dateDebut, isEditable, css);
+        applyStylesheet(dateFin, isEditable, css);
     }
 
-    private void applyStylesheet(String css){
-        titre.getStylesheets().clear();
-        auteur.getStylesheets().clear();
-        participants.getStylesheets().clear();
-        dateDebut.getStylesheets().clear();
-        dateFin.getStylesheets().clear();
 
-        titre.getStylesheets().add(css);
-        auteur.getStylesheets().add(css);
-        participants.getStylesheets().add(css);
-        dateDebut.getStylesheets().add(css);
-        dateFin.getStylesheets().add(css);
-    }
-
-    @FXML
-    void pageSuivante(){
-        try {
-            carnet.pageSuivante();
-            carnet.notifierObservateurs();
-        } catch (PageOutOfRangeException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

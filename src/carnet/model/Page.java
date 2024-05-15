@@ -15,7 +15,7 @@ public class Page {
         return false;
     }
 
-    public boolean estPageContenu(){
+    public boolean estPageTextPhoto(){
         return false;
     }
 

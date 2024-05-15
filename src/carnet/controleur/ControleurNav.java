@@ -29,7 +29,7 @@ public class ControleurNav implements Observateur {
         if (currentPage.estPageAccueil()) {
             loader.setLocation(getClass().getResource("/fxml/PageAccueil.fxml"));
             loader.setControllerFactory(iC -> new ControleurPageAccueil(carnet));
-        } else if (currentPage.estPageContenu()) {
+        } else if (currentPage.estPageTextPhoto()) {
             loader.setLocation(getClass().getResource("/fxml/PageTextPhoto.fxml"));
             loader.setControllerFactory(iC -> new ControleurPageTextPhoto(carnet));
         }

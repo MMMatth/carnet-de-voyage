@@ -35,4 +35,7 @@ public class Carnet extends SujetObservateur {
         pageCourante = gestionnairePage.getPage(index);
     }
 
+    public boolean pageCouranteEstLaDerniere() {
+        return pageCourante.getNumero() == gestionnairePage.getNombrePages();
+    }
 }

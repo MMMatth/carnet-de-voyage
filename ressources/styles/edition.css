@@ -49,7 +49,3 @@ TextArea .content{
     -fx-background-color: #c8ccd1;
     -fx-background-radius: 10;
 }
-
-Button ImageView .image {
-    -fx-opacity: 0.5;
-}

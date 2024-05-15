@@ -1,7 +1,6 @@
 package carnet.controleur;
 
 import carnet.model.Carnet;
-import carnet.model.PageContenu;
 import carnet.model.PageTextPhoto;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,8 +13,7 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 
-public class ControleurPageTextPhoto implements Observateur{
-    private Carnet carnet;
+public class ControleurPageTextPhoto extends ControleurPage{
 
     private PageTextPhoto page;
 
@@ -29,11 +27,12 @@ public class ControleurPageTextPhoto implements Observateur{
     private Label numeroPage;
     @FXML
     private Button filePicker;
+    @FXML
+    private Button flecheDroite;
 
-    private boolean isEditable=false;
 
     public ControleurPageTextPhoto(Carnet carnet) {
-        this.carnet = carnet;
+        super(carnet, false);
         this.page = (PageTextPhoto) carnet.getPageCourante();
     }
 
@@ -42,84 +41,58 @@ public class ControleurPageTextPhoto implements Observateur{
         contenu.setText(page.getContenu());
         File imgFile = new File(page.getImgPath());
         if (imgFile.exists()) {
-            Image image = new Image(imgFile.toURI().toString());
-            img.setImage(image);
+            applyImage(imgFile);
         }
         date.setValue(page.getDate());
         numeroPage.setText(page.getNumero() + "/" + carnet.getNombrePages());
+
+        if (carnet.pageCouranteEstLaDerniere()) {
+            flecheDroite.setDisable(true);
+            flecheDroite.setVisible(false);
+        }
     }
 
     @FXML
     void openFileChooser(){
+        FileChooser fileChooser = createFileChooser();
+        File selectedFile = fileChooser.showOpenDialog(filePicker.getScene().getWindow());
+        if (selectedFile != null) {
+            applyImage(selectedFile);
+        }
+    }
+
+    private FileChooser createFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir une image");
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-        File selectedFile = fileChooser.showOpenDialog(filePicker.getScene().getWindow());
-        if (selectedFile != null) {
-            page.setImgPath(selectedFile.getAbsolutePath());
-            Image image = new Image(selectedFile.toURI().toString());
-            img.setImage(image);
-        }
+        return fileChooser;
     }
 
-    private void save(){
-//        page.setImgPath(img.getImage().getUrl());
+    private void applyImage(File selectedFile) {
+        page.setImgPath(selectedFile.getAbsolutePath());
+        Image image = new Image(selectedFile.toURI().toString());
+        img.setImage(image);
+    }
+
+    protected void save(){
         page.setContenu(contenu.getText());
         page.setDate(date.getValue());
     }
 
     @FXML
-    void toggleModeEdition() {
-        if (isEditable){
+    public void toggleModeEdition() {
+        if (isEditable) {
             save();
         }
+
         isEditable = !isEditable;
 
-        contenu.setEditable(isEditable);
+        String css = isEditable ? "/styles/edition.css" : "/styles/nonedition.css";
+
+        applyStylesheet(contenu, isEditable, css);
+        applyStylesheet(date, isEditable, css);
         filePicker.setDisable(!isEditable);
-        date.setEditable(isEditable);
-
-        date.setDisable(!isEditable);
-
-        if (isEditable) {
-            applyStylesheet("/styles/edition.css");
-        } else {
-            applyStylesheet("/styles/nonedition.css");
-        }
     }
 
-    private void applyStylesheet(String stylesheet){
-        contenu.getStylesheets().clear();
-        date.getStylesheets().clear();
-
-        contenu.getStylesheets().add(stylesheet);
-        date.getStylesheets().add(stylesheet);
-
-    }
-
-    @FXML
-    void pageSuivante() {
-        try {
-            carnet.pageSuivante();
-            carnet.notifierObservateurs();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void pagePrecedente() {
-        try {
-            carnet.pagePrecedente();
-            carnet.notifierObservateurs();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void reagir() {
-
-    }
 }

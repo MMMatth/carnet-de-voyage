@@ -17,6 +17,7 @@ public class PageContenu extends Page{
         return true;
     }
 
+
     public LocalDate getDate() {
         return date;
     }
