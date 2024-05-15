@@ -30,6 +30,8 @@ public class ControleurPageTextPhoto implements Observateur{
     @FXML
     private Button filePicker;
 
+    private boolean isEditable=false;
+
     public ControleurPageTextPhoto(Carnet carnet) {
         this.carnet = carnet;
         this.page = (PageTextPhoto) carnet.getPageCourante();
@@ -42,9 +44,6 @@ public class ControleurPageTextPhoto implements Observateur{
         if (imgFile.exists()) {
             Image image = new Image(imgFile.toURI().toString());
             img.setImage(image);
-        } else {
-            // handle the situation when the image file does not exist
-            // for example, set a default image or show an error message
         }
         date.setValue(page.getDate());
         numeroPage.setText(page.getNumero() + "/" + carnet.getNombrePages());
@@ -61,12 +60,41 @@ public class ControleurPageTextPhoto implements Observateur{
             page.setImgPath(selectedFile.getAbsolutePath());
             Image image = new Image(selectedFile.toURI().toString());
             img.setImage(image);
-            carnet.notifierObservateurs();
         }
+    }
+
+    private void save(){
+//        page.setImgPath(img.getImage().getUrl());
+        page.setContenu(contenu.getText());
+        page.setDate(date.getValue());
     }
 
     @FXML
     void toggleModeEdition() {
+        if (isEditable){
+            save();
+        }
+        isEditable = !isEditable;
+
+        contenu.setEditable(isEditable);
+        filePicker.setDisable(!isEditable);
+        date.setEditable(isEditable);
+
+        date.setDisable(!isEditable);
+
+        if (isEditable) {
+            applyStylesheet("/styles/edition.css");
+        } else {
+            applyStylesheet("/styles/nonedition.css");
+        }
+    }
+
+    private void applyStylesheet(String stylesheet){
+        contenu.getStylesheets().clear();
+        date.getStylesheets().clear();
+
+        contenu.getStylesheets().add(stylesheet);
+        date.getStylesheets().add(stylesheet);
 
     }
 
