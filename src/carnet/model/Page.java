@@ -30,4 +30,5 @@ public class Page {
     public void setFXMLPath(String FXMLPath) {
         this.FXMLPath = FXMLPath;
     }
+
 }

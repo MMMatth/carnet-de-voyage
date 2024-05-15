@@ -22,12 +22,12 @@ public class Carnet extends SujetObservateur {
     }
 
     public void pageSuivante() throws PageOutOfRangeException {
-        int index = pageCourante.getNumero() + 1;
+        int index = pageCourante.getNumero();
         pageCourante = gestionnairePage.getPage(index);
     }
 
     public void pagePrecedente() throws PageOutOfRangeException {
-        int index = pageCourante.getNumero() - 1;
+        int index = pageCourante.getNumero() - 2;
         pageCourante = gestionnairePage.getPage(index);
     }
 
