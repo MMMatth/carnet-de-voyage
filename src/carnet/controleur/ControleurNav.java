@@ -30,6 +30,7 @@ public class ControleurNav implements Observateur {
             loader.setLocation(getClass().getResource("/fxml/PageAccueil.fxml"));
             loader.setControllerFactory(iC -> new ControleurPageAccueil(carnet));
         } else if (currentPage.estPageContenu()) {
+            System.out.println("PageContenu");
             loader.setLocation(getClass().getResource("/fxml/PageTextPhoto.fxml"));
             loader.setControllerFactory(iC -> new ControleurPageTextPhoto(carnet));
         }

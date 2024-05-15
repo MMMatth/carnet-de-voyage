@@ -4,19 +4,20 @@ import java.time.LocalDate;
 
 public class PageContenu extends Page{
 
-    private String contenu;
-    private String imgPath;
-    private LocalDate dateCreation;
+    private LocalDate date;
 
-    public PageContenu(LocalDate dateCreation, String contenu, String imgPath) {
+    public PageContenu(LocalDate date) {
         super();
-        this.dateCreation = dateCreation;
-        this.contenu = contenu;
-        this.imgPath = imgPath;
+        this.date = date;
+
     }
 
     @Override
     public boolean estPageContenu(){
         return true;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 }

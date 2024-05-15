@@ -2,18 +2,18 @@
 
 @font-face {
     font-family: "Lilita One";
-    src: url("../../fonts/Lilita_One/LilitaOne-Regular.ttf");
+    src: url("../fonts/Lilita_One/LilitaOne-Regular.ttf");
 }
 
 @font-face {
     font-family: "McLaren";
-    src: url("../../fonts/McLaren/McLaren-Regular.ttf");
+    src: url("../fonts/McLaren/McLaren-Regular.ttf");
 }
 
 /* variable de gris */
 /* #303841 */
 
-TextField, TextArea{
+TextField{
     -fx-background-color: #c8ccd1;
     -fx-background-radius: 10;
 
@@ -43,4 +43,9 @@ DatePicker .arrow-button {
 DatePicker .arrow {
     -fx-padding: 5;
     -fx-shape: "M0,0 L1,0 L0.5,1 z"; /* Ceci est un exemple de forme, vous pouvez le changer selon vos besoins */
+}
+
+TextArea .content{
+    -fx-background-color: #c8ccd1;
+    -fx-background-radius: 10;
 }

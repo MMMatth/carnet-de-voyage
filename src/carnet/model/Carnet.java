@@ -21,6 +21,10 @@ public class Carnet extends SujetObservateur {
         return pageCourante;
     }
 
+    public int getNombrePages() {
+        return gestionnairePage.getNombrePages();
+    }
+
     public void pageSuivante() throws PageOutOfRangeException {
         int index = pageCourante.getNumero();
         pageCourante = gestionnairePage.getPage(index);

@@ -2,12 +2,12 @@
 
 @font-face {
     font-family: "Lilita One";
-    src: url("../../fonts/Lilita_One/LilitaOne-Regular.ttf");
+    src: url("../fonts/Lilita_One/LilitaOne-Regular.ttf");
 }
 
 @font-face {
     font-family: "McLaren";
-    src: url("../../fonts/McLaren/McLaren-Regular.ttf");
+    src: url("../fonts/McLaren/McLaren-Regular.ttf");
 }
 
 .root{
@@ -20,7 +20,6 @@ TextField{
 }
 TextArea{
     -fx-background-color: none;
-
 }
 
 #title{
@@ -36,13 +35,22 @@ Button:hover{
     -fx-cursor: hand;
 }
 
+Button:disabled{
+    -fx-opacity: 1;
+}
+
 DatePicker{
     -fx-background-color: none;
     -fx-opacity: 1;
     -fx-text-fill: #303841;
-
 }
 
+DatePicker:disabled .text-field {
+    /*-fx-background-color: none;*/
+    -fx-text-fill: #303841;
+    -fx-background-color: none;
+    -fx-opacity: 1;
+}
 /* style dans le mode non edition */
 DatePicker .arrow-button {
     -fx-padding: 0;
@@ -57,4 +65,8 @@ DatePicker .arrow {
 ImageView{
     -fx-background-color: none;
     -fx-border-radius: 50;
+}
+
+TextArea .content{
+    -fx-background-color: none;
 }

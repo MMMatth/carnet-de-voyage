@@ -41,4 +41,7 @@ public class GestionnairePage implements Iterable<Page>{
         return pages.iterator();
     }
 
+    public int getNombrePages() {
+        return pages.size();
+    }
 }

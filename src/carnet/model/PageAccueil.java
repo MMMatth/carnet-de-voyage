@@ -22,6 +22,16 @@ public class PageAccueil extends Page{
         Collections.addAll(this.participants, participants);
     }
 
+    public PageAccueil(){
+        super();
+        this.titre = "TITRE";
+        this.auteur = "Auteur";
+        this.dateDebut = null;
+        this.dateFin = null;
+        this.participants = new ArrayList<>();
+        Collections.addAll( this.participants, "Participant 1", "Participant 2", "Participant 3");
+    }
+
     @Override
     public boolean estPageAccueil(){
         return true;

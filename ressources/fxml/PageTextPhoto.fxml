@@ -11,17 +11,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/Page/page.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carnet.controleur.ControleurPageTextPhoto">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/nonedition.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carnet.controleur.ControleurPageTextPhoto">
    <HBox layoutX="123.0" layoutY="185.0" prefHeight="318.0" prefWidth="570.0">
       <children>
-         <TextArea fx:id="participants" cacheShape="false" centerShape="false" editable="false" focusTraversable="false" prefHeight="310.0" prefWidth="281.0" scaleShape="false" text="Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante." wrapText="true">
+         <TextArea fx:id="contenu" cacheShape="false" centerShape="false" editable="false" focusTraversable="false" prefHeight="310.0" prefWidth="281.0" scaleShape="false" text="Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante." wrapText="true">
             <font>
                <Font size="16.0" />
             </font>
          </TextArea>
-         <Button accessibleRole="DIALOG" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false">
+         <Button fx:id="filePicker" accessibleRole="DIALOG" contentDisplay="GRAPHIC_ONLY" disable="true" mnemonicParsing="false" onAction="#openFileChooser">
             <graphic>
-               <ImageView accessibleRole="BUTTON" fitHeight="310.0" fitWidth="281.0" pickOnBounds="true">
+               <ImageView fx:id="img" accessibleRole="BUTTON" fitHeight="310.0" fitWidth="281.0" pickOnBounds="true">
                   <image>
                      <Image url="@../image/image_ex.png" />
                   </image>
@@ -30,7 +30,7 @@
          </Button>
       </children>
    </HBox>
-    <Button cacheShape="false" centerShape="false" focusTraversable="false" layoutX="21.0" layoutY="306.0" onMouseClicked="#toggleModeEdition" prefHeight="75.0" prefWidth="75.0" scaleShape="false" textAlignment="CENTER" textFill="#4d4d4d00" AnchorPane.bottomAnchor="219.0">
+    <Button cacheShape="false" centerShape="false" focusTraversable="false" layoutX="21.0" layoutY="306.0" onAction="#pagePrecedente" onMouseClicked="#toggleModeEdition" prefHeight="75.0" prefWidth="75.0" scaleShape="false" textAlignment="CENTER" textFill="#4d4d4d00" AnchorPane.bottomAnchor="219.0">
       <cursor>
          <Cursor fx:constant="DEFAULT" />
       </cursor>
@@ -42,7 +42,7 @@
          </ImageView>
       </graphic>
    </Button>
-   <Button cacheShape="false" centerShape="false" focusTraversable="false" layoutX="721.0" layoutY="306.0" onMouseClicked="#toggleModeEdition" prefHeight="75.0" prefWidth="75.0" scaleShape="false" textAlignment="CENTER" textFill="#4d4d4d00">
+   <Button cacheShape="false" centerShape="false" focusTraversable="false" layoutX="721.0" layoutY="306.0" onAction="#pageSuivante" onMouseClicked="#toggleModeEdition" prefHeight="75.0" prefWidth="75.0" scaleShape="false" textAlignment="CENTER" textFill="#4d4d4d00">
       <cursor>
          <Cursor fx:constant="DEFAULT" />
       </cursor>
@@ -63,8 +63,8 @@
          </ImageView>
       </graphic>
    </Button>
-   <DatePicker fx:id="dateDebut" cacheShape="false" centerShape="false" disable="true" editable="false" focusTraversable="false" layoutX="239.0" layoutY="54.0" prefHeight="103.0" prefWidth="338.0" promptText="JJ/MM/AAAA" scaleShape="false" style="-fx-font-size: 40px;" />
-   <Label layoutX="739.0" layoutY="553.0" prefHeight="26.0" prefWidth="39.0" text="1/10">
+   <DatePicker fx:id="date" cacheShape="false" centerShape="false" disable="true" editable="false" focusTraversable="false" layoutX="239.0" layoutY="54.0" prefHeight="103.0" prefWidth="338.0" promptText="JJ/MM/AAAA" scaleShape="false" style="-fx-font-size: 40px;" />
+   <Label fx:id="numeroPage" layoutX="739.0" layoutY="553.0" prefHeight="26.0" prefWidth="39.0" text="1/10">
       <font>
          <Font size="17.0" />
       </font>

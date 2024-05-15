@@ -37,7 +37,6 @@ public class ControleurPageAccueil {
 
     @FXML
     void initialize() {
-        PageAccueil page = (PageAccueil) carnet.getPageCourante();
         titre.setText(page.getTitre());
         auteur.setText(page.getAuteur());
         participants.setText(page.getParticipants());
@@ -72,9 +71,9 @@ public class ControleurPageAccueil {
 
         // Changer le style
         if (isEditable) {
-            applyStylesheet("/styles/PageAccueil/edition.css");
+            applyStylesheet("/styles/edition.css");
         } else {
-            applyStylesheet("/styles/PageAccueil/accueil.css");
+            applyStylesheet("/styles/nonedition.css");
         }
     }
 
