@@ -13,7 +13,7 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 
-public class ControleurPageTextPhoto extends ControleurPage{
+public class ControleurPageTextPhoto extends ControleurPageContenu{
 
     private PageTextPhoto page;
 
@@ -32,7 +32,7 @@ public class ControleurPageTextPhoto extends ControleurPage{
 
 
     public ControleurPageTextPhoto(Carnet carnet) {
-        super(carnet, false);
+        super(carnet, (PageTextPhoto) carnet.getPageCourante());
         this.page = (PageTextPhoto) carnet.getPageCourante();
     }
 
@@ -44,12 +44,15 @@ public class ControleurPageTextPhoto extends ControleurPage{
             applyImage(imgFile);
         }
         date.setValue(page.getDate());
-        numeroPage.setText(page.getNumero() + "/" + carnet.getNombrePages());
+        numeroPage.setText(page.getNumero() + "/" + (carnet.getNombrePages()));
 
         if (carnet.pageCouranteEstLaDerniere()) {
             flecheDroite.setDisable(true);
             flecheDroite.setVisible(false);
         }
+
+        toggleModeEdition();
+
     }
 
     @FXML
@@ -78,21 +81,16 @@ public class ControleurPageTextPhoto extends ControleurPage{
     protected void save(){
         page.setContenu(contenu.getText());
         page.setDate(date.getValue());
+        page.setModeEdition(false);
     }
 
     @FXML
     public void toggleModeEdition() {
-        if (isEditable) {
-            save();
-        }
+        String css = modeEdition ? "/styles/edition.css" : "/styles/nonedition.css";
 
-        isEditable = !isEditable;
-
-        String css = isEditable ? "/styles/edition.css" : "/styles/nonedition.css";
-
-        applyStylesheet(contenu, isEditable, css);
-        applyStylesheet(date, isEditable, css);
-        filePicker.setDisable(!isEditable);
+        applyStylesheet(contenu, modeEdition, css);
+        applyStylesheet(date, modeEdition, css);
+        filePicker.setDisable(!modeEdition);
     }
 
 }

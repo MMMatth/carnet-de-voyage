@@ -1,6 +1,7 @@
 package carnet.model;
 
 import carnet.exceptions.PageOutOfRangeException;
+import carnet.outils.FabriqueNumero;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +43,14 @@ public class GestionnairePage implements Iterable<Page>{
     }
 
     public int getNombrePages() {
-        return pages.size();
+        return pages.size() - 1;
+    }
+
+    public void supprimerPage(int numeroPage) {
+        FabriqueNumero.getInstance().libererPage();
+        pages.remove(numeroPage);
+        for (int i = numeroPage; i < pages.size(); i++){
+            pages.get(i).setNumero(i);
+        }
     }
 }

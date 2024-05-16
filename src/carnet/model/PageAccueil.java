@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-public class PageAccueil extends Page{
+public class PageAccueil extends PageContenu{
     private  String titre;
     private  String auteur;
     private ArrayList<String> participants;
@@ -33,7 +33,7 @@ public class PageAccueil extends Page{
     }
 
     @Override
-    public boolean estPageAccueil(){
+    public boolean estAccueil(){
         return true;
     }
 

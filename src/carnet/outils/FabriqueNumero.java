@@ -7,7 +7,7 @@ public class FabriqueNumero {
     private int numeroPage;
 
     private FabriqueNumero(){
-        numeroPage = 1;
+        numeroPage = 0;
     }
 
     public int getNumeroPage(){
@@ -27,5 +27,9 @@ public class FabriqueNumero {
             instance = new FabriqueNumero();
         }
         return instance;
+    }
+
+    public void libererPage() {
+        numeroPage--;
     }
 }

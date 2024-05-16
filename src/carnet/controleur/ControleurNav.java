@@ -2,7 +2,6 @@ package carnet.controleur;
 
 import carnet.model.Carnet;
 import carnet.model.Page;
-import carnet.model.PageAccueil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -26,12 +25,15 @@ public class ControleurNav implements Observateur {
         Page currentPage = carnet.getPageCourante();
         FXMLLoader loader = new FXMLLoader();
 
-        if (currentPage.estPageAccueil()) {
+        if (currentPage.estAccueil()) {
             loader.setLocation(getClass().getResource("/fxml/PageAccueil.fxml"));
             loader.setControllerFactory(iC -> new ControleurPageAccueil(carnet));
-        } else if (currentPage.estPageTextPhoto()) {
+        } else if (currentPage.estTextPhoto()) {
             loader.setLocation(getClass().getResource("/fxml/PageTextPhoto.fxml"));
             loader.setControllerFactory(iC -> new ControleurPageTextPhoto(carnet));
+        } else if (currentPage.estModeVignette()){
+            loader.setLocation(getClass().getResource("/fxml/ModeVignette.fxml"));
+            loader.setControllerFactory(iC -> new ControleurModeVignette(carnet));
         }
 
         Node newPage = loader.load();
@@ -42,7 +44,6 @@ public class ControleurNav implements Observateur {
     public void reagir() {
         try {
             displayPage();
-            System.out.println("Page changed");
         } catch (IOException e) {
             e.printStackTrace();
         }

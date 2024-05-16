@@ -8,9 +8,11 @@ import carnet.model.PageContenu;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class ControleurPageAccueil extends ControleurPage{
+public class ControleurPageAccueil extends ControleurPageContenu{
 
     private PageAccueil page;
+
+
 
     // les champs de la vue
     @FXML
@@ -27,7 +29,7 @@ public class ControleurPageAccueil extends ControleurPage{
 
 
     public ControleurPageAccueil(Carnet carnet) {
-        super(carnet, false);
+        super(carnet, (PageContenu) carnet.getPageCourante());
         this.page = (PageAccueil) carnet.getPageCourante();
     }
 
@@ -46,24 +48,26 @@ public class ControleurPageAccueil extends ControleurPage{
         page.setParticipants(participants.getText());
         page.setDateDebut(dateDebut.getValue());
         page.setDateFin(dateFin.getValue());
+
+        modeEdition = false;
     }
 
     @FXML
     public void toggleModeEdition(){
-        if (isEditable){ // dans le cas ou on est en mode edition on sauvegarde les modifications
+        if (modeEdition){ // dans le cas ou on est en mode edition on sauvegarde les modifications
             save();
         }
 
-        isEditable = !isEditable; // Inverser la valeur de isEditable
+        modeEdition = !modeEdition; // Inverser la valeur de isEditable
 
         // Changer le style
-        String css = isEditable ? "/styles/edition.css" : "/styles/nonedition.css";
+        String css = modeEdition ? "/styles/edition.css" : "/styles/nonedition.css";
 
-        applyStylesheet(titre, isEditable, css);
-        applyStylesheet(auteur, isEditable, css);
-        applyStylesheet(participants, isEditable, css);
-        applyStylesheet(dateDebut, isEditable, css);
-        applyStylesheet(dateFin, isEditable, css);
+        applyStylesheet(titre, modeEdition, css);
+        applyStylesheet(auteur, modeEdition, css);
+        applyStylesheet(participants, modeEdition, css);
+        applyStylesheet(dateDebut, modeEdition, css);
+        applyStylesheet(dateFin, modeEdition, css);
     }
 
 

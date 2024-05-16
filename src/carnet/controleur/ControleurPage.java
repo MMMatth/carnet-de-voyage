@@ -10,11 +10,9 @@ public abstract class ControleurPage {
 
     protected Carnet carnet;
 
-    protected boolean isEditable;
 
-    public ControleurPage(Carnet carnet, boolean editable) {
+    public ControleurPage(Carnet carnet) {
         this.carnet = carnet;
-        this.isEditable = editable;
     }
 
     /**
@@ -22,25 +20,38 @@ public abstract class ControleurPage {
      */
     protected abstract void save();
 
-    /**
-     * methode qui permet de passer ou non en mode edition
-     */
-    @FXML
-    public abstract void toggleModeEdition();
 
+    @FXML
     public void pageSuivante() {
         try {
             carnet.pageSuivante();
             carnet.notifierObservateurs();
+            this.save();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @FXML
     public void pagePrecedente() {
         try {
             carnet.pagePrecedente();
             carnet.notifierObservateurs();
+            this.save();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void modeVignette() {
+        try {
+            carnet.modeVignette();
+            carnet.notifierObservateurs();
+            this.save();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

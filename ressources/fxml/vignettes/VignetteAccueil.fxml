@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="200.0" prefWidth="333.0" stylesheets="@../../styles/vignette.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="carnet.controleur.vignette.ControleurVignetteAccueil">
+   <children>
+      <Button onMouseClicked="#onClick" fx:id="bouton" layoutX="5.0" layoutY="3.0" mnemonicParsing="false" prefHeight="192.0" prefWidth="285.0">
+         <graphic>
+            <AnchorPane prefHeight="171.0" prefWidth="272.0">
+               <children>
+                  <ImageView fitHeight="191.0" fitWidth="272.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/vignette.png" />
+                     </image>
+                  </ImageView>
+                  <Label id="title" fx:id="titre" alignment="CENTER" layoutX="18.0" layoutY="34.0" prefHeight="41.0" prefWidth="237.0" text="TITRE">
+                     <font>
+                        <Font size="42.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="110.0" fitWidth="202.0" layoutX="64.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/accueil_ligne.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </graphic>
+         <font>
+            <Font size="42.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

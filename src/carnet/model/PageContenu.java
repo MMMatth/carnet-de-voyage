@@ -4,25 +4,20 @@ import java.time.LocalDate;
 
 public class PageContenu extends Page{
 
-    private LocalDate date;
+    private boolean modeEdition;
 
-    public PageContenu(LocalDate date) {
+    public PageContenu() {
         super();
-        this.date = date;
-
-    }
-
-    @Override
-    public boolean estPageContenu(){
-        return true;
+        this.modeEdition = false;
     }
 
 
-    public LocalDate getDate() {
-        return date;
+    public void setModeEdition(boolean modeEdition) {
+        this.modeEdition = modeEdition;
     }
 
-    public void setDate(LocalDate date){
-        this.date = date;
+    public boolean getModeEdition() {
+        return modeEdition;
     }
+
 }
