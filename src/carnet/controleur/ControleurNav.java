@@ -1,5 +1,8 @@
 package carnet.controleur;
 
+import carnet.controleur.page.ControleurModeVignette;
+import carnet.controleur.page.ControleurPageAccueil;
+import carnet.controleur.page.ControleurPageTextPhoto;
 import carnet.model.Carnet;
 import carnet.model.Page;
 import javafx.fxml.FXML;

@@ -1,7 +1,6 @@
-package carnet.controleur;
+package carnet.controleur.page;
 
 import carnet.model.Carnet;
-import carnet.model.Page;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextInputControl;

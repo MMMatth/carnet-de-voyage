@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/nonedition.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carnet.controleur.ControleurPageTextPhoto">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/nonedition.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carnet.controleur.page.ControleurPageTextPhoto">
    <top>
       <AnchorPane BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -23,7 +23,7 @@
          <Button cacheShape="false" centerShape="false" focusTraversable="false" layoutX="28.0" layoutY="26.0" onAction="#modeVignette" scaleShape="false">
             <graphic>
                <ImageView fitHeight="66.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../image/mode_vignette.png" />
+                  <Image url="@../image/vignette/mode_vignette.png" />
                </ImageView>
             </graphic>
          </Button>
@@ -36,7 +36,7 @@
          </cursor>
          <graphic>
             <ImageView fitHeight="92.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-               <Image url="@../image/fleche_bas.png" />
+               <Image url="@../image/page/fleche_bas.png" />
             </ImageView>
          </graphic>
       </Button>
@@ -48,7 +48,7 @@
          </cursor>
          <graphic>
             <ImageView fitHeight="92.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
-               <Image url="@../image/fleche_bas.png" />
+               <Image url="@../image/page/fleche_bas.png" />
             </ImageView>
          </graphic>
       </Button>
@@ -59,7 +59,7 @@
             <Button fx:id="filePicker" accessibleRole="DIALOG" contentDisplay="GRAPHIC_ONLY" disable="true" mnemonicParsing="false" onAction="#openFileChooser">
                <graphic>
                   <ImageView fx:id="img" accessibleRole="BUTTON" fitHeight="337.0" fitWidth="309.0" pickOnBounds="true">
-                     <Image url="@../image/imgBaseGrande.png" />
+                     <Image url="@../image/page/imgBaseGrande.png" />
                   </ImageView>
                </graphic>
             </Button>

@@ -17,14 +17,14 @@
                <children>
                   <ImageView fitHeight="191.0" fitWidth="272.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../image/vignette.png" />
+                        <Image url="@../../image/vignette/vignette.png" />
                      </image>
                   </ImageView>
                   <HBox alignment="CENTER" layoutX="39.0" layoutY="68.0" prefHeight="101.0" prefWidth="194.0" spacing="5.0">
                      <children>
                         <ImageView fx:id="img" accessibleRole="BUTTON" fitHeight="105.0" fitWidth="97.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../image/imgBaseGrande.png" />
+                              <Image url="@../../image/page/imgBaseGrande.png" />
                            </image>
                         </ImageView>
                         <Label fx:id="contenu" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="113.0" prefWidth="86.0" text="Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante." textOverrun="CLIP" wrapText="true" />

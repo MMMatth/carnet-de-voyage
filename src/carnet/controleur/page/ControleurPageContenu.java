@@ -1,7 +1,6 @@
-package carnet.controleur;
+package carnet.controleur.page;
 
 import carnet.model.Carnet;
-import carnet.model.Page;
 import carnet.model.PageContenu;
 
 public abstract class ControleurPageContenu extends ControleurPage{

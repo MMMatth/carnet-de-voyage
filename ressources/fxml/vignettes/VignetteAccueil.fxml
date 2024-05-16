@@ -16,7 +16,7 @@ fx:controller="carnet.controleur.vignette.ControleurVignetteAccueil">
                <children>
                   <ImageView fitHeight="191.0" fitWidth="272.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../image/vignette.png" />
+                        <Image url="@../../image/vignette/vignette.png" />
                      </image>
                   </ImageView>
                   <Label id="title" fx:id="titre" alignment="CENTER" layoutX="18.0" layoutY="34.0" prefHeight="41.0" prefWidth="237.0" text="TITRE">
@@ -26,7 +26,7 @@ fx:controller="carnet.controleur.vignette.ControleurVignetteAccueil">
                   </Label>
                   <ImageView fitHeight="110.0" fitWidth="202.0" layoutX="64.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../image/accueil_ligne.png" />
+                        <Image url="@../../image/page/accueil_ligne.png" />
                      </image>
                   </ImageView>
                </children>

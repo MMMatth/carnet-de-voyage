@@ -16,7 +16,7 @@ public class PageTextPhoto extends PageContenu{
 
     public PageTextPhoto(){
         this.contenu = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante.";
-        this.imgPath = "/image/imgBaseGrande.png";
+        this.imgPath = "/image/page/imgBaseGrande.png";
         this.date = LocalDate.now();
     }
 

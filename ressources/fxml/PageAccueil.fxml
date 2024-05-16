@@ -13,10 +13,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/nonedition.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/" fx:controller="carnet.controleur.ControleurPageAccueil">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/nonedition.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/" fx:controller="carnet.controleur.page.ControleurPageAccueil">
    <ImageView fitHeight="327.0" fitWidth="678.0" layoutX="163.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@../image/accueil_ligne.png" />
+         <Image url="@../image/page/accueil_ligne.png" />
       </image>
    </ImageView>
     <TextField id="title" fx:id="titre" alignment="TOP_CENTER" cacheShape="false" centerShape="false" editable="false" focusTraversable="false" layoutX="82.0" layoutY="82.0" prefHeight="75.0" prefWidth="637.0" scaleShape="false" text="TITRE">
@@ -48,7 +48,7 @@
       <graphic>
          <ImageView fitHeight="92.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@../image/fleche_bas.png" />
+               <Image url="@../image/page/fleche_bas.png" />
             </image>
          </ImageView>
       </graphic>
@@ -57,7 +57,7 @@
       <graphic>
          <ImageView fitHeight="66.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@../image/mode_vignette.png" />
+               <Image url="@../image/vignette/mode_vignette.png" />
             </image>
          </ImageView>
       </graphic>

@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.File;
+
 
 public class ControleurVignetteTextPhoto extends ControleurVignetteContenu {
     private PageTextPhoto page;
@@ -32,8 +34,18 @@ public class ControleurVignetteTextPhoto extends ControleurVignetteContenu {
             date.setText("JJ/MM/AAAA");
         }
         contenu.setText(page.getContenu());
-        img.setImage(new Image(page.getImgPath()));
+        File imgFile = new File(page.getImgPath());
+        if (imgFile.exists()) {
+            applyImage(imgFile);
+        }
     }
+    private void applyImage(File selectedFile) {
+        page.setImgPath(selectedFile.getAbsolutePath());
+        Image image = new Image(selectedFile.toURI().toString());
+        img.setImage(image);
+    }
+
+
 
 }
 

@@ -75,3 +75,27 @@ ImageView{
 TextArea .content{
     -fx-background-color: none;
 }
+
+ScrollPane{
+    -fx-background-color: none;
+}
+
+/* Scroller */
+.scroll-bar{
+    -fx-background-color: none;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #303841;
+    -fx-background-radius: 10;
+}
+
+.scroll-bar:vertical .increment-button {
+    -fx-background-color: #303841;
+    -fx-background-radius: 5;
+}
+
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: #303841;
+    -fx-background-radius: 5;
+}

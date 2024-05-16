@@ -1,4 +1,4 @@
-package carnet.controleur;
+package carnet.controleur.page;
 
 import carnet.controleur.vignette.ControleurVignetteContenu;
 import carnet.controleur.vignette.ControleurVignetteAccueil;

@@ -1,8 +1,6 @@
-package carnet.controleur;
+package carnet.controleur.page;
 
-import carnet.exceptions.PageOutOfRangeException;
 import carnet.model.Carnet;
-import carnet.model.Page;
 import carnet.model.PageAccueil;
 import carnet.model.PageContenu;
 import javafx.fxml.FXML;
@@ -40,6 +38,7 @@ public class ControleurPageAccueil extends ControleurPageContenu{
         participants.setText(page.getParticipants());
         dateDebut.setValue(page.getDateDebut());
         dateFin.setValue(page.getDateFin());
+        toggleModeEdition();
     }
 
     protected void save(){
@@ -49,18 +48,11 @@ public class ControleurPageAccueil extends ControleurPageContenu{
         page.setDateDebut(dateDebut.getValue());
         page.setDateFin(dateFin.getValue());
 
-        modeEdition = false;
+        page.setModeEdition(false);
     }
 
     @FXML
     public void toggleModeEdition(){
-        if (modeEdition){ // dans le cas ou on est en mode edition on sauvegarde les modifications
-            save();
-        }
-
-        modeEdition = !modeEdition; // Inverser la valeur de isEditable
-
-        // Changer le style
         String css = modeEdition ? "/styles/edition.css" : "/styles/nonedition.css";
 
         applyStylesheet(titre, modeEdition, css);

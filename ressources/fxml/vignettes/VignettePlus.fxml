@@ -14,12 +14,12 @@
                <children>
                   <ImageView fitHeight="191.0" fitWidth="272.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../image/vignette.png" />
+                        <Image url="@../../image/vignette/vignette.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="65.0" fitWidth="60.0" layoutX="106.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../image/plus.png" />
+                        <Image url="@../../image/vignette/plus.png" />
                      </image>
                   </ImageView>
                </children>
