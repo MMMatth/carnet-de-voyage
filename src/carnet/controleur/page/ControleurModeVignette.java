@@ -45,8 +45,8 @@ public class ControleurModeVignette {
             }
 
         }
-        column = getColumn(carnet.getNombrePages() + 1);
-        row = getRow(carnet.getNombrePages() + 1 );
+        column = getColumn(carnet.getNombrePagesContenu() + 1);
+        row = getRow(carnet.getNombrePagesContenu() + 1 );
         displayVignette("/fxml/vignettes/VignettePlus.fxml", column, row, new ControleurVignettePlus(carnet));
 
     }

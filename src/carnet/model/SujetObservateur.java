@@ -22,7 +22,6 @@ public class SujetObservateur {
     public void notifierObservateurs() {
         ArrayList<Observateur> copie = new ArrayList<>(observateurs);
         for (Observateur o : copie) {
-            System.out.println("test");
             o.reagir();
         }
     }

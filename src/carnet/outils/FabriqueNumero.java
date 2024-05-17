@@ -7,8 +7,8 @@ public class FabriqueNumero {
     private int numeroPage;
 
     private FabriqueNumero(){
-        numeroPage = 0;
-    }
+        numeroPage = -1;
+    } // -1 car les deux premieres pages sont des pages speciales
 
     public int getNumeroPage(){
         return numeroPage++;

@@ -1,5 +1,6 @@
 package carnet.controleur;
 
+import carnet.controleur.page.ControleurModeAjouterPage;
 import carnet.controleur.page.ControleurModeVignette;
 import carnet.controleur.page.ControleurPageAccueil;
 import carnet.controleur.page.ControleurPageTextPhoto;
@@ -37,6 +38,9 @@ public class ControleurNav implements Observateur {
         } else if (currentPage.estModeVignette()){
             loader.setLocation(getClass().getResource("/fxml/ModeVignette.fxml"));
             loader.setControllerFactory(iC -> new ControleurModeVignette(carnet));
+        } else if (currentPage.estModeAjouterPage()){
+            loader.setLocation(getClass().getResource("/fxml/PageAddPage.fxml"));
+            loader.setControllerFactory(iC -> new ControleurModeAjouterPage(carnet));
         }
 
         Node newPage = loader.load();

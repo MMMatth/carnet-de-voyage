@@ -22,6 +22,10 @@ public class Page {
         return false;
     }
 
+    public boolean estModeAjouterPage(){
+        return false;
+    }
+
     public int getNumero() {
         return numero;
     }

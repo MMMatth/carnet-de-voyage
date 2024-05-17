@@ -27,7 +27,7 @@ public class GestionnairePage implements Iterable<Page>{
 
     public Page getPage(int index) throws PageOutOfRangeException {
         try {
-            return pages.get(index);
+            return pages.get(index + 1); // +1 car la premiere page est le numéro -1
         } catch (IndexOutOfBoundsException e){
             throw new PageOutOfRangeException("La page demandée n'existe pas");
         }
@@ -43,7 +43,11 @@ public class GestionnairePage implements Iterable<Page>{
     }
 
     public int getNombrePages() {
-        return pages.size() - 1;
+        return pages.size() ;
+    }
+
+    public int getNombrePagesContenu() {
+        return pages.size() - 2;
     }
 
     public void supprimerPage(int numeroPage) {

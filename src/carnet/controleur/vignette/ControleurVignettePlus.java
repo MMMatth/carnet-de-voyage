@@ -1,7 +1,7 @@
 package carnet.controleur.vignette;
 
+import carnet.exceptions.PageOutOfRangeException;
 import carnet.model.Carnet;
-import carnet.model.PageContenu;
 import carnet.model.PageTextPhoto;
 import javafx.fxml.FXML;
 
@@ -13,9 +13,8 @@ public class ControleurVignettePlus {
     }
 
     @FXML
-    public void afficherPage() {
-        carnet.addPage(new PageTextPhoto());
-        carnet.moveTo(carnet.getNombrePages());
+    public void afficherPage() throws PageOutOfRangeException {
+        carnet.modeAjouterPage();
         carnet.notifierObservateurs();
     }
 }

@@ -44,7 +44,7 @@ public class ControleurPageTextPhoto extends ControleurPageContenu{
             applyImage(imgFile);
         }
         date.setValue(page.getDate());
-        numeroPage.setText(page.getNumero() + "/" + (carnet.getNombrePages()));
+        numeroPage.setText(page.getNumero() + "/" + (carnet.getNombrePagesContenu()));
 
         if (carnet.pageCouranteEstLaDerniere()) {
             flecheDroite.setDisable(true);
