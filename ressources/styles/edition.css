@@ -16,12 +16,12 @@
 TextField{
     -fx-background-color: #c8ccd1;
     -fx-background-radius: 10;
-
 }
 
-#title{
+TextField #title{
     -fx-font-family: "Lilita One";
     -fx-text-fill: #303841;
+    -fx-font-size: 96px;
 }
 
 
