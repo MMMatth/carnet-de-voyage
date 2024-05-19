@@ -34,4 +34,11 @@ public class Page {
     public void setNumero(int i) {
         numero = i;
     }
+
+    @Override
+    public String toString() {
+        return "Page{" +
+                "numero=" + numero +
+                '}';
+    }
 }

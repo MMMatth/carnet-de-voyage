@@ -32,13 +32,14 @@ public class ControleurPageAccueil extends ControleurPageContenu{
     }
 
     @FXML
-    void initialize() {
+    public void initialize() {
+        super.initialize();
+
         titre.setText(page.getTitre());
         auteur.setText(page.getAuteur());
         participants.setText(page.getParticipants());
         dateDebut.setValue(page.getDateDebut());
         dateFin.setValue(page.getDateFin());
-        toggleModeEdition();
     }
 
     protected void save(){

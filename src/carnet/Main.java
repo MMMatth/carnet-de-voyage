@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
+
 public class Main extends Application {
 
     public static void main(String[] args) {
@@ -20,11 +22,6 @@ public class Main extends Application {
         carnet.addPage(new PageTextPhoto());
         carnet.addPage(new PageTextPhoto());
         carnet.addPage(new PageTextPhoto());
-
-
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PageAccueil.fxml"));
-//        loader.setControllerFactory(iC -> new ControleurPageAccueil(carnet, (PageAccueil) carnet.getPageCourante()));
-//        Parent root = loader.load();
 
         BorderPane MainPane = new BorderPane();
         MainPane.getStylesheets().add(getClass().getResource("/styles/nonedition.css").toExternalForm());

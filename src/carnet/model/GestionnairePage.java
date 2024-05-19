@@ -3,31 +3,31 @@ package carnet.model;
 import carnet.exceptions.PageOutOfRangeException;
 import carnet.outils.FabriqueNumero;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.*;
 
 
 public class GestionnairePage implements Iterable<Page>{
-    private ArrayList<Page> pages;
+    private HashMap<Integer, Page> pages;
 
     public GestionnairePage() {
-        pages = new ArrayList<>();
+        pages = new HashMap<>();
     }
-
     public void ajouterPage(Page ... pages){
-        Collections.addAll(this.pages, pages);
-    }
-
-    public void supprimerPage(Page ... pages){
         for(Page p : pages){
-            this.pages.remove(p);
+            this.pages.put(p.getNumero(), p);
         }
     }
 
-    public Page getPage(int index) throws PageOutOfRangeException {
+
+    public void supprimerPage(Page ... pages){
+        for(Page p : pages){
+            this.pages.remove(p.getNumero());
+        }
+    }
+
+    public Page getPage(int numPage) throws PageOutOfRangeException {
         try {
-            return pages.get(index + 1); // +1 car la premiere page est le numéro -1
+            return pages.get(numPage);
         } catch (IndexOutOfBoundsException e){
             throw new PageOutOfRangeException("La page demandée n'existe pas");
         }
@@ -39,7 +39,7 @@ public class GestionnairePage implements Iterable<Page>{
 
     @Override
     public Iterator<Page> iterator() {
-        return pages.iterator();
+        return pages.values().iterator();
     }
 
     public int getNombrePages() {
@@ -52,9 +52,38 @@ public class GestionnairePage implements Iterable<Page>{
 
     public void supprimerPage(int numeroPage) {
         FabriqueNumero.getInstance().libererPage();
+        // on supprime la page
         pages.remove(numeroPage);
-        for (int i = numeroPage; i < pages.size(); i++){
-            pages.get(i).setNumero(i);
+
+        List<Integer> keysToUpdate = new ArrayList<>();
+        // on enregistre les clés à mettre à jour et on met à jour les numéros des pages
+        for (Map.Entry<Integer, Page> entry : pages.entrySet()) {
+            if (entry.getKey() > numeroPage) {
+                keysToUpdate.add(entry.getKey());
+                entry.getValue().setNumero(entry.getValue().getNumero() - 1);
+            }
         }
+
+        // on décale les pages d'un cran
+        for (Integer key : keysToUpdate) {
+            Page page = pages.remove(key);
+            pages.put(key - 1, page);
+        }
+
+        System.out.println(this);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("GestionnairePage{\n");
+        ArrayList<Integer> keys = new ArrayList<>(pages.keySet());
+        ArrayList<Page> values = new ArrayList<>(pages.values());
+        for (int i = 0; i < pages.size(); i++) {
+            sb.append(keys.get(i)).append(" : ").append(values.get(i)).append("\n");
+        }
+        sb.append("}");
+        return sb.toString();
+    }
+
 }

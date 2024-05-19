@@ -7,10 +7,8 @@ import java.util.Iterator;
 public class Carnet extends SujetObservateur implements Iterable<Page> {
     private Page pageCourante;
     private final GestionnairePage gestionnairePage;
-    int pageOffset = 0;
 
     public Carnet() {
-        pageOffset = 2;
         gestionnairePage = new GestionnairePage();
         gestionnairePage.ajouterPage(new ModeVignette());
         gestionnairePage.ajouterPage(new ModeAjouterPage());
@@ -40,21 +38,17 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
     }
 
     public void pageSuivante() throws PageOutOfRangeException {
-        int index = pageCourante.getNumero() + 1;
-        pageCourante = gestionnairePage.getPage(index);
+        int numPage = pageCourante.getNumero() + 1;
+        pageCourante = gestionnairePage.getPage(numPage);
     }
 
     public void pagePrecedente() throws PageOutOfRangeException {
-        int index = pageCourante.getNumero() - 1;
-        pageCourante = gestionnairePage.getPage(index);
-    }
-
-    public boolean pageCouranteEstLaDerniere() {
-        return pageCourante.getNumero() == gestionnairePage.getNombrePagesContenu();
+        int numPage = pageCourante.getNumero() - 1;
+        pageCourante = gestionnairePage.getPage(numPage);
     }
 
     public void supprimerPage(int numeroPage) {
-        gestionnairePage.supprimerPage(numeroPage + 1);
+        gestionnairePage.supprimerPage(numeroPage);
     }
 
     @Override
@@ -64,10 +58,17 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
 
     public void moveTo(int numeroPage) {
         try {
-            System.out.println("numeroPage: " + numeroPage);
             pageCourante = gestionnairePage.getPage(numeroPage);
         } catch (PageOutOfRangeException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean pageCouranteEstLaPremiere() {
+        return pageCourante.getNumero() == 1;
+    }
+
+    public boolean pageCouranteEstLaDerniere() {
+        return pageCourante.getNumero() == gestionnairePage.getNombrePagesContenu();
     }
 }

@@ -35,7 +35,6 @@ public class ControleurModeVignette {
         grille.getChildren().clear();
         int row, column;
         for (Page page : carnet){
-            FXMLLoader loader = new FXMLLoader();
             column = getColumn(page.getNumero());
             row = getRow(page.getNumero());
             if (page.estAccueil()){

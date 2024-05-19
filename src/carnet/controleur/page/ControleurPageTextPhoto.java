@@ -27,8 +27,7 @@ public class ControleurPageTextPhoto extends ControleurPageContenu{
     private Label numeroPage;
     @FXML
     private Button filePicker;
-    @FXML
-    private Button flecheDroite;
+
 
 
     public ControleurPageTextPhoto(Carnet carnet) {
@@ -37,21 +36,15 @@ public class ControleurPageTextPhoto extends ControleurPageContenu{
     }
 
      @FXML
-    void initialize() {
+    public void initialize() {
+        super.initialize();
+
         contenu.setText(page.getContenu());
         File imgFile = new File(page.getImgPath());
-        if (imgFile.exists()) {
-            applyImage(imgFile);
-        }
+        if (imgFile.exists()) { applyImage(imgFile); }
         date.setValue(page.getDate());
         numeroPage.setText(page.getNumero() + "/" + (carnet.getNombrePagesContenu()));
 
-        if (carnet.pageCouranteEstLaDerniere()) {
-            flecheDroite.setDisable(true);
-            flecheDroite.setVisible(false);
-        }
-
-        toggleModeEdition();
 
     }
 

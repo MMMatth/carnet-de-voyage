@@ -29,18 +29,7 @@ public class ControleurVignetteContenu {
         });
     }
 
-    @FXML
-    public void afficherPage() {
-        carnet.moveTo(page.getNumero());
-        carnet.notifierObservateurs();
-    }
 
-    @FXML
-    public void modeEdition(){
-        page.setModeEdition(true);
-        carnet.moveTo(page.getNumero());
-        carnet.notifierObservateurs();
-    }
 
 
 
@@ -49,18 +38,14 @@ public class ControleurVignetteContenu {
         ContextMenu contextMenu = new ContextMenu();
         MenuItem item1 = new MenuItem("Supprimer");
         item1.setOnAction(e -> {
-            System.out.println("Supprimer");
-            carnet.supprimerPage(page.getNumero());
-            carnet.notifierObservateurs();
+            supprimerPage();
         });
         MenuItem item2 = new MenuItem("Modifier");
         item2.setOnAction(e -> {
-            System.out.println("Modifier");
             modeEdition();
         });
         MenuItem item3 = new MenuItem("Aller à la page");
         item3.setOnAction(e -> {
-            System.out.println("Aller à la page");
             afficherPage();
         });
 
@@ -68,6 +53,22 @@ public class ControleurVignetteContenu {
         contextMenu.show(bouton, event.getScreenX(), event.getScreenY());
         contextMenu.setAutoHide(true);
 
+    }
+
+    private void afficherPage() {
+        carnet.moveTo(page.getNumero());
+        carnet.notifierObservateurs();
+    }
+
+    private void modeEdition(){
+        page.setModeEdition(true);
+        carnet.moveTo(page.getNumero());
+        carnet.notifierObservateurs();
+    }
+
+    private void supprimerPage() {
+        carnet.supprimerPage(page.getNumero());
+        carnet.notifierObservateurs();
     }
 
     @FXML
