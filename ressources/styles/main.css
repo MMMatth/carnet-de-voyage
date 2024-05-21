@@ -74,6 +74,11 @@ DatePicker .arrow {
 ImageView{
     -fx-background-color: none;
     -fx-border-radius: 50;
+
+}
+
+#vignette-label{
+    -fx-font-size: 13px;
 }
 
 WebView{
