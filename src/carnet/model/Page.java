@@ -41,4 +41,8 @@ public class Page {
                 "numero=" + numero +
                 '}';
     }
+
+    public boolean estTextPhotoMap() {
+        return false;
+    }
 }

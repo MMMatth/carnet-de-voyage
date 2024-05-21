@@ -32,6 +32,10 @@ TextArea{
     -fx-text-fill: #303841;
 }
 
+#title:focused{
+    -fx-font-size: 96px;
+}
+
 Button{
     -fx-background-color: none;
 }

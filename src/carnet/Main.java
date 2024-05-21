@@ -20,8 +20,7 @@ public class Main extends Application {
         Carnet carnet = new Carnet();
         carnet.addPage(new PageAccueil());
         carnet.addPage(new PageTextPhoto());
-        carnet.addPage(new PageTextPhoto());
-        carnet.addPage(new PageTextPhoto());
+        carnet.addPage(new PageTextPhotoMap());
 
         BorderPane MainPane = new BorderPane();
         MainPane.getStylesheets().add(getClass().getResource("/styles/nonedition.css").toExternalForm());

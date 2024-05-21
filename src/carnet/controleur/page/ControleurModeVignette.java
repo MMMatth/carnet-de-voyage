@@ -1,13 +1,7 @@
 package carnet.controleur.page;
 
-import carnet.controleur.vignette.ControleurVignetteContenu;
-import carnet.controleur.vignette.ControleurVignetteAccueil;
-import carnet.controleur.vignette.ControleurVignettePlus;
-import carnet.controleur.vignette.ControleurVignetteTextPhoto;
-import carnet.model.Carnet;
-import carnet.model.Page;
-import carnet.model.PageAccueil;
-import carnet.model.PageTextPhoto;
+import carnet.controleur.vignette.*;
+import carnet.model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -41,6 +35,8 @@ public class ControleurModeVignette {
                 displayVignette("/fxml/vignettes/VignetteAccueil.fxml", column, row, new ControleurVignetteAccueil((PageAccueil) page, carnet));
             } else if (page.estTextPhoto()){
                 displayVignette("/fxml/vignettes/VignetteTextPhoto.fxml", column, row, new ControleurVignetteTextPhoto((PageTextPhoto) page, carnet));
+            } else if (page.estTextPhotoMap()){
+                displayVignette("/fxml/vignettes/VignetteTextPhotoMap.fxml", column, row, new ControleurVignetteTextPhotoMap((PageTextPhotoMap) page, carnet));
             }
 
         }
