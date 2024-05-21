@@ -19,7 +19,7 @@ public class PageTextPhotoMap extends PageTextPhoto{
         super();
         this.latitude = 48.6937F;
         this.longitude = 6.185F;
-        this.zoom = 0.001f;
+        this.zoom = 0.01f;
     }
 
     public Float getLatitude() {
@@ -49,5 +49,20 @@ public class PageTextPhotoMap extends PageTextPhoto{
 
     public Float getZoom() {
         return zoom;
+    }
+
+    public void setLatitude(float v) {
+        this.latitude = v;
+    }
+
+    public void setLongitude(float v) {
+        this.longitude = v;
+    }
+
+    public void setZoom(int v) {
+        if ( v <= 0){
+            v = 1;
+        }
+        this.zoom = 0.01f / v;
     }
 }
