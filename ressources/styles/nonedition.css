@@ -95,11 +95,11 @@ ScrollPane{
 }
 
 .scroll-bar:vertical .increment-button {
-    -fx-background-color: #303841;
+    -fx-background-color: none;
     -fx-background-radius: 5;
 }
 
 .scroll-bar:vertical .decrement-button {
-    -fx-background-color: #303841;
+    -fx-background-color: none;
     -fx-background-radius: 5;
 }
