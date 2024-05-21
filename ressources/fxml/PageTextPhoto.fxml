@@ -20,10 +20,21 @@
             <Insets />
          </BorderPane.margin>
          <DatePicker fx:id="date" cacheShape="false" centerShape="false" disable="true" editable="false" focusTraversable="false" layoutX="228.0" layoutY="32.0" prefHeight="103.0" prefWidth="345.0" promptText="JJ/MM/AAAA" scaleShape="false" style="-fx-font-size: 40px;" />
-         <Button cacheShape="false" centerShape="false" focusTraversable="false" layoutX="28.0" layoutY="26.0" onAction="#modeVignette" prefHeight="75.0" prefWidth="75.0" scaleShape="false" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+         <Button fx:id="vignette" cacheShape="false" centerShape="false" focusTraversable="false" onMouseClicked="#modeVignette" prefHeight="75.0" prefWidth="75.0" scaleShape="false" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
             <graphic>
                <ImageView fitHeight="66.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../image/vignette/mode_vignette.png" />
+                  <image>
+                     <Image url="@../image/vignette/mode_vignette.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+         </Button>
+         <Button fx:id="valider" cacheShape="false" centerShape="false" focusTraversable="false" onMouseClicked="#clickOnSave" prefHeight="75.0" prefWidth="75.0" scaleShape="false" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+            <graphic>
+               <ImageView fitHeight="66.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../image/valider.png" />
+                  </image>
                </ImageView>
             </graphic>
          </Button>

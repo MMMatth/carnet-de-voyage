@@ -69,8 +69,6 @@ public class GestionnairePage implements Iterable<Page>{
             Page page = pages.remove(key);
             pages.put(key - 1, page);
         }
-
-        System.out.println(this);
     }
 
     @Override
