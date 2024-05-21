@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-
 public class Main extends Application {
 
     public static void main(String[] args) {
@@ -23,7 +21,7 @@ public class Main extends Application {
         carnet.addPage(new PageTextPhotoMap());
 
         BorderPane MainPane = new BorderPane();
-        MainPane.getStylesheets().add(getClass().getResource("/styles/nonedition.css").toExternalForm());
+        MainPane.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
         MainPane.setPrefSize(800, 600);
 
 

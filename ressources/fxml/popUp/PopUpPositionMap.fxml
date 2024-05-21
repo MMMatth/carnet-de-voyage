@@ -9,7 +9,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="203.0" prefWidth="286.0" spacing="5.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
-      <URL value="@../../styles/nonedition.css" />
+      <URL value="@../../styles/main.css" />
       <URL value="@../../styles/edition.css" />
    </stylesheets>
    <padding>

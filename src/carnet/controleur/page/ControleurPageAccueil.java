@@ -54,7 +54,7 @@ public class ControleurPageAccueil extends ControleurPageContenu{
 
     @FXML
     public void toggleModeEdition(){
-        String css = modeEdition ? "/styles/edition.css" : "/styles/nonedition.css";
+        String css = modeEdition ? "/styles/edition.css" : "/styles/main.css";
 
         applyStylesheet(titre, modeEdition, css);
         applyStylesheet(auteur, modeEdition, css);

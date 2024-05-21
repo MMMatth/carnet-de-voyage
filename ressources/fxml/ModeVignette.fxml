@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/nonedition.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carnet.controleur.page.ControleurModeVignette">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carnet.controleur.page.ControleurModeVignette">
    <children>
       <ScrollPane cacheShape="false" centerShape="false" focusTraversable="false" hbarPolicy="NEVER" layoutX="93.0" layoutY="54.0" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="504.0" prefWidth="639.0" scaleShape="false" vbarPolicy="ALWAYS">
          <content>

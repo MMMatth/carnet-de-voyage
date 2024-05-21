@@ -4,6 +4,7 @@ import carnet.exceptions.PageOutOfRangeException;
 import carnet.model.Carnet;
 import carnet.model.PageAccueil;
 import carnet.model.PageTextPhoto;
+import carnet.model.PageTextPhotoMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -37,6 +38,13 @@ public class ControleurModeAjouterPage {
     @FXML
     public void addTextPhoto() {
         carnet.addPage(new PageTextPhoto());
+        carnet.moveTo(carnet.getNombrePagesContenu());
+        carnet.notifierObservateurs();
+    }
+
+    @FXML
+    public void addTextPhotoMap(){
+        carnet.addPage(new PageTextPhotoMap());
         carnet.moveTo(carnet.getNombrePagesContenu());
         carnet.notifierObservateurs();
     }

@@ -76,6 +76,12 @@ ImageView{
     -fx-border-radius: 50;
 }
 
+WebView{
+    -fx-background-color: none;
+    -fx-border-radius: 50;
+    -fx-border-color: #303841;
+}
+
 TextArea .content{
     -fx-background-color: none;
 }

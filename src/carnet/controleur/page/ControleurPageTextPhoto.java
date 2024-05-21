@@ -79,7 +79,7 @@ public class ControleurPageTextPhoto extends ControleurPageContenu{
 
     @FXML
     public void toggleModeEdition() {
-        String css = modeEdition ? "/styles/edition.css" : "/styles/nonedition.css";
+        String css = modeEdition ? "/styles/edition.css" : "/styles/main.css";
 
         applyStylesheet(contenu, modeEdition, css);
         applyStylesheet(date, modeEdition, css);
