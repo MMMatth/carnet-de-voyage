@@ -4,38 +4,54 @@ import java.time.LocalDate;
 
 public class PageTextPhotoMap extends PageTextPhoto{
 
-    private Float latitude;
-    private Float longitude;
-    private Float zoom;
+    private Double marker_long;
+    private Double marker_lat;
 
-    public PageTextPhotoMap(String contenu, String imgPath, LocalDate date, Float latitude, Float longitude, Float zoom) {
+    private Double center_long;
+    private Double center_lat;
+
+    private Double zoom;
+
+    public PageTextPhotoMap(String contenu, String imgPath, LocalDate date, Double markerLong, Double marketLat, Double centerLat , Double centerLong, Double zoom) {
         super(date,contenu,imgPath);
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.zoom = zoom * 0.001f;
+
+        this.marker_lat = marketLat;
+        this.marker_long = markerLong;
+
+        this.center_lat = centerLat;
+        this.center_long = centerLong;
+
+        this.zoom = zoom;
     }
 
     public PageTextPhotoMap() {
         super();
-        this.latitude = 48.6937F;
-        this.longitude = 6.185F;
-        this.zoom = 0.01f;
+
+        this.marker_lat = 48.6937;
+        this.marker_long = 6.185;
+
+        this.center_lat = 48.6937;
+        this.center_long = 6.185;
+
+        this.zoom = 15.0;
     }
 
-    public Float getLatitude() {
-        return latitude;
+    public Double getMarker_long() {
+        return marker_long;
     }
 
-    public Float getLongitude() {
-        return longitude;
+    public Double getMarker_lat() {
+        return marker_lat;
     }
+
 
     public String getOpenStreetMapLink(){
         StringBuilder link = new StringBuilder().append("https://www.openstreetmap.org/export/embed.html?bbox=");
-        link.append(longitude + zoom).append("%2C");
-        link.append(latitude + zoom).append("%2C");
-        link.append(longitude - zoom).append("%2C");
-        link.append(latitude - zoom).append("&amp;layer=mapnik");
+        Float zoomOffset = 0.05f;
+        link.append(center_long + zoomOffset).append("%2C");
+        link.append(center_lat + zoomOffset).append("%2C");
+        link.append(center_long - zoomOffset).append("%2C");
+        link.append(center_lat - zoomOffset).append("&amp;layer=mapnik");
         return link.toString();
     }
 
@@ -47,22 +63,35 @@ public class PageTextPhotoMap extends PageTextPhoto{
         return false;
     }
 
-    public Float getZoom() {
+    public Double getZoom() {
         return zoom;
     }
 
-    public void setLatitude(float v) {
-        this.latitude = v;
+    public void setMarker_long(Double v) {
+        this.marker_long = v;
     }
 
-    public void setLongitude(float v) {
-        this.longitude = v;
+    public void setMarker_lat(Double v) {
+        this.marker_lat = v;
     }
 
-    public void setZoom(int v) {
-        if ( v <= 0){
-            v = 1;
-        }
-        this.zoom = 0.01f / v;
+    public void setZoom(Double v) {
+        this.zoom = v;
+    }
+
+    public Double getCenter_long() {
+        return center_long;
+    }
+
+    public Double getCenter_lat() {
+        return center_lat;
+    }
+
+    public void setCenter_long(Double v) {
+        this.center_long = v;
+    }
+
+    public void setCenter_lat(Double v) {
+        this.center_lat = v;
     }
 }

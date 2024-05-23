@@ -17,18 +17,18 @@ public class ControleurEditionMap {
     public ControleurEditionMap() {
     }
 
-    public int getZoom() {
-        return (int) zoom.getValue();
+    public Double getZoom() {
+        return zoom.getValue();
     }
 
-    public float getLat() throws PositionException{
+    public Double getLat() throws PositionException{
         String latString = lat.getText();
-        return Float.parseFloat(latString);
+        return Double.parseDouble(latString);
     }
 
-    public float getLon() throws PositionException {
+    public Double getLon() throws PositionException {
         String lonString = lon.getText();
-        return Float.parseFloat(lonString);
+        return Double.parseDouble(lonString);
     }
 
 }

@@ -28,11 +28,6 @@
                         <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="104.0" prefWidth="95.0">
                            <children>
                               <WebView fx:id="map" prefHeight="200.0" prefWidth="200.0" />
-                              <ImageView fx:id="imgMap" accessibleRole="BUTTON" fitHeight="105.0" fitWidth="97.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../../image/page/mapBase.png" />
-                                 </image>
-                              </ImageView>
                            </children>
                         </StackPane>
                         <VBox prefHeight="200.0" prefWidth="100.0">

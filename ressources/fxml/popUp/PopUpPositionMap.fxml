@@ -16,7 +16,7 @@
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <Label text="Zoom" />
-   <Slider fx:id="zoom" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+   <Slider fx:id="zoom" blockIncrement="1.0" majorTickUnit="1.0" max="28.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
    <Label text="Latitude" />
    <TextField fx:id="lat" />
    <Label text="Longitude" />
