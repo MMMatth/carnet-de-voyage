@@ -1,0 +1,47 @@
+@startuml
+top to bottom direction
+skinparam linetype ortho
+
+[VignetteAccueil.fxml]
+[VignettePlus.fxml]
+[VignetteTextPhoto.fxml]
+[VignetteTextPhotoMap.fxml]
+
+package "VignetteAccueil.fxml" {
+    [VignetteAccueil.fxml] ---> [AnchorPane1]
+    [AnchorPane1] ---> [Button1]
+    [Button1] ---> [AnchorPane2]
+    [AnchorPane2] ---> [ImageView1]
+    [AnchorPane2] ---> [Label1]
+}
+
+package "VignettePlus.fxml" {
+    [VignettePlus.fxml] ---> [AnchorPane3]
+    [AnchorPane3] ---> [Button2]
+    [Button2] ---> [AnchorPane4]
+    [AnchorPane4] ---> [ImageView2]
+}
+
+package "VignetteTextPhoto.fxml" {
+    [VignetteTextPhoto.fxml] ---> [AnchorPane5]
+    [AnchorPane5] ---> [Button3]
+    [Button3] ---> [AnchorPane6]
+    [AnchorPane6] ---> [ImageView3]
+    [AnchorPane6] ---> [HBox1]
+    [HBox1] ---> [ImageView4]
+    [HBox1] ---> [Label2]
+}
+
+package "VignetteTextPhotoMap.fxml" {
+    [VignetteTextPhotoMap.fxml] ---> [AnchorPane7]
+    [AnchorPane7] ---> [Button4]
+    [Button4] ---> [AnchorPane8]
+    [AnchorPane8] ---> [ImageView5]
+    [AnchorPane8] ---> [HBox2]
+    [HBox2] ---> [StackPane1]
+    [StackPane1] ---> [WebView1]
+    [HBox2] ---> [VBox1]
+    [VBox1] ---> [ImageView6]
+    [VBox1] ---> [Label3]
+}
+@enduml

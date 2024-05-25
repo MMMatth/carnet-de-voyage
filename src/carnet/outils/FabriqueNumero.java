@@ -15,7 +15,7 @@ public class FabriqueNumero {
     }
 
     public void reset(){
-        numeroPage = 1;
+        numeroPage = -1;
     }
 
     public void supprimerPage(){

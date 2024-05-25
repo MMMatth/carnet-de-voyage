@@ -1,0 +1,85 @@
+@startuml
+top to bottom direction
+skinparam linetype ortho
+
+[ModeVignette.fxml]
+[PageAccueil.fxml]
+[PageAddPage.fxml]
+[PageTextPhoto.fxml]
+[PageTextPhotoMap.fxml]
+
+
+package "PageAccueil.fxml" {
+
+    [PageAccueil.fxml] ---> [AnchorPane1]
+    [AnchorPane1] ---> [TextField1]
+    [AnchorPane1] ---> [HBox1]
+    [AnchorPane1] ---> [DatePicker1]
+    [AnchorPane1] ---> [Button1]
+}
+package "ModeVignette.fxml" {
+    [ModeVignette.fxml] ---> [AnchorPane2]
+    [AnchorPane2] ---> [ScrollPane2]
+    [ScrollPane2] ---> [GridPane2]
+    [GridPane2] --->"*" [Vignette]
+}
+package "PageAddPage.fxml" {
+
+    [PageAddPage.fxml] ---> [AnchorPane4]
+    [AnchorPane4] --->[ScrollPane4]
+    [ScrollPane4] ---> [GridPane4]
+    [GridPane4] --->"3" [Button4_]
+    [Button4_] ---> [ImageView4]
+    [AnchorPane4] ---> [Button4]
+}
+package "PageTextPhoto.fxml" {
+    [PageTextPhoto.fxml] ---> [BorderPane3]
+    [BorderPane3] ---> [Top3]
+    [Top3] ---> [AnchorPane3]
+    [AnchorPane3] ---> [DatePicker3]
+    [AnchorPane3] ---> "2" [Button3]
+
+    [BorderPane3] ---> [Center3]
+    [Center3] ---> [AnchorPane3_]
+    [AnchorPane3_] ---> [Hbox3]
+    [Hbox3] ---> [Button3]
+    [Hbox3] ---> [TextArea3]
+
+
+    [BorderPane3] ---> [Bottom3]
+    [Bottom3] ---> [Label3]
+
+    [BorderPane3] ---> [Left3]
+    [Left3] ---> [Button3_]
+
+    [BorderPane3] ---> [Right3]
+    [Right3] ---> [Button3__]
+}
+package "PageTextPhotoMap.fxml" {
+
+
+    [PageTextPhotoMap.fxml] ---> [BorderPane5]
+    [BorderPane5] ---> [Top5]
+    [Top5] ---> [AnchorPane5]
+    [AnchorPane5] ---> [DatePicker5]
+    [AnchorPane5] ---> "2" [Button5]
+
+    [BorderPane5] ---> [Center5]
+    [Center5] ---> [AnchorPane5_]
+    [AnchorPane5_] ---> [VBox5]
+    [VBox5] ---> [Hbox5]
+    [Hbox5] ---> [ImageView5]
+    [Hbox5] ---> [TextArea5]
+    [VBox5] ---> [MapView5]
+
+    [BorderPane5] ---> [Bottom5]
+    [Bottom5] ---> [AnchorPane5_]
+    [AnchorPane5_] ---> [Label5]
+
+    [BorderPane5] ---> [Left5]
+    [Left5] ---> [Button5_]
+
+    [BorderPane5] ---> [Right5]
+    [Right5] ---> [Button5__]
+}
+@enduml

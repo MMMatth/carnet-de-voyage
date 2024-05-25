@@ -1,0 +1,145 @@
+@startuml
+
+top to bottom direction
+skinparam linetype ortho
+
+
+class ControleurModeAjouterPage {
+  + ControleurModeAjouterPage(Carnet):
+  + modeVignette(): void
+  + addAccueil(): void
+  + addTextPhotoMap(): void
+  + addTextPhoto(): void
+}
+ControleurModeAjouterPage --"3" "Button-"
+
+class ControleurModeVignette {
+  + ControleurModeVignette(Carnet):
+  - displayVignette(String, int, int, ControleurVignettePlus): void
+  + initialize(): void
+  - getColumn(int): int
+  - getRow(int): int
+  - displayVignette(String, int, int, ControleurVignetteContenu): void
+}
+ControleurModeVignette --"1" "Carnet-"
+ControleurModeVignette --"1" GridPane
+
+class ControleurNav {
+  + ControleurNav(Carnet, BorderPane):
+  + displayPage(): void
+  + reagir(): void
+}
+ControleurNav --"1" _Carnet
+ControleurNav --"1" BorderPane
+
+class ControleurPage {
+  + ControleurPage(Carnet):
+  # applyStylesheet(TextInputControl, boolean, String): void
+  # save(): void
+  # applyStylesheet(DatePicker, boolean, String): void
+  + modeVignette(): void
+  + pageSuivante(): void
+  + pagePrecedente(): void
+}
+ControleurPage --"1" Carnet
+
+class ControleurPageAccueil {
+  + ControleurPageAccueil(Carnet):
+  + initialize(): void
+  # save(): void
+  + toggleModeEdition(): void
+}
+ControleurPageAccueil --"2" TextField
+ControleurPageAccueil --"1" TextArea
+ControleurPageAccueil --"2" DatePicker
+
+class ControleurPageContenu {
+  - boolean modeEdition
+  + ControleurPageContenu(Carnet, PageContenu):
+  + clickOnSave(): void
+  + toggleModeEdition(): void
+  + initialize(): void
+  # save(): void
+}
+ControleurPageContenu --"4" Button
+
+class ControleurPageTextPhoto {
+  + ControleurPageTextPhoto(Carnet):
+  ~ openFileChooser(): void
+  # save(): void
+  + initialize(): void
+  - applyImage(File): void
+  + toggleModeEdition(): void
+  - createFileChooser(): FileChooser
+}
+ControleurPageTextPhoto --"1" ImageView
+ControleurPageTextPhoto --"1" TextArea_
+
+class ControleurPageTextPhotoMap {
+  + ControleurPageTextPhotoMap(Carnet):
+  + onClicEditMap(): void
+  - openPopUp(): void
+  - displayAlert(Exception): void
+  + initialize(): void
+  # save(): void
+  - updateMarker(): void
+  + reagir(): void
+  - onMapClicked(MapViewEvent): void
+  - initMap(): void
+  - setData(Double, Double, Double): void
+}
+ControleurPageTextPhotoMap --"1" MapView
+
+class ControleurVignetteAccueil {
+  + ControleurVignetteAccueil(PageAccueil, Carnet):
+  + initialize(): void
+}
+ControleurVignetteAccueil --"1" Label
+
+class ControleurVignetteContenu {
+  + ControleurVignetteContenu(Carnet, PageContenu):
+  + initialize(): void
+  - afficherPage(): void
+  + menuContextuel(MouseEvent): void
+  - supprimerPage(): void
+  + onClick(MouseEvent): void
+  - modeEdition(): void
+}
+ControleurVignetteContenu --"1" Button_
+ControleurVignetteContenu --"1" Carnet__
+ControleurVignetteContenu --"1" PageContenu
+
+class ControleurVignettePlus {
+  + ControleurVignettePlus(Carnet):
+  + afficherPage(): void
+}
+ControleurVignettePlus --"1" Carnet_
+
+class ControleurVignetteTextPhoto {
+  + ControleurVignetteTextPhoto(PageTextPhoto, Carnet):
+  - applyImage(File): void
+  + initialize(): void
+}
+ControleurVignetteTextPhoto --"2" Label_
+ControleurVignetteTextPhoto --"1" ImageView_
+
+class ControleurVignetteTextPhotoMap {
+  + ControleurVignetteTextPhotoMap(PageTextPhotoMap, Carnet):
+  - initMap(): void
+  + initialize(): void
+}
+ControleurVignetteTextPhotoMap --"1" WebView
+
+interface Observateur << interface >> {
+  + reagir(): void
+}
+
+ControleurNav                   ..|>  Observateur
+ControleurPageAccueil           --|>  ControleurPageContenu
+ControleurPageContenu           --|>  ControleurPage
+ControleurPageTextPhoto         --|>  ControleurPageContenu
+ControleurPageTextPhotoMap      --|>  ControleurPageTextPhoto
+ControleurVignetteAccueil       --|>  ControleurVignetteContenu
+ControleurVignetteTextPhoto     --|>  ControleurVignetteContenu
+ControleurVignetteTextPhotoMap  --|>  ControleurVignetteTextPhoto
+@enduml

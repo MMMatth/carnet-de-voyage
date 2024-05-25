@@ -1,7 +1,6 @@
 package carnet.controleur.page;
 
 import carnet.controleur.Observateur;
-import carnet.controleur.popUp.ControleurEditionMap;
 import carnet.exceptions.PositionException;
 import carnet.model.Carnet;
 import carnet.model.PageTextPhotoMap;
@@ -10,13 +9,8 @@ import com.sothawo.mapjfx.MapView;
 import com.sothawo.mapjfx.Marker;
 import com.sothawo.mapjfx.event.MapViewEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
 
-import java.io.IOException;
-
-public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implements Observateur {
+public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto {
 
     @FXML
     private MapView map;
@@ -31,7 +25,6 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implemen
 
     public ControleurPageTextPhotoMap(Carnet carnet) {
         super(carnet);
-        carnet.ajouterObservateur(this);
         this.page = (PageTextPhotoMap) carnet.getPageCourante();
 
         this.centreCoord = new Coordinate(page.getCenter_lat(), page.getCenter_long());
@@ -89,58 +82,6 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implemen
         page.setZoom(map.getZoom());
     }
 
-    @FXML
-    public void onClicEditMap() {
-        openPopUp();
-    }
-
-    private void openPopUp(){
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Edition de la carte");
-        dialog.setGraphic(null);
-        dialog.setHeaderText(null);
-
-        // on charge le fxml
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/popUp/PopUpPositionMap.fxml"));
-        ControleurEditionMap controlEdit = new ControleurEditionMap();
-        loader.setController(controlEdit);
-
-        try {
-            VBox vbox = loader.load();
-            dialog.getDialogPane().setContent(vbox);
-            dialog.showAndWait();
-
-            // on récupère les données
-            try {
-                setData(controlEdit.getZoom(), controlEdit.getLat(), controlEdit.getLon());
-                carnet.notifierObservateurs();
-            }catch (PositionException e){ // le cas ou les données des latitudes et longitudes ne sont pas des float
-                displayAlert(e);
-            }
-
-        } catch (IOException e) {
-            displayAlert(e);
-        }
-    }
 
 
-    private void setData(Double zoom, Double lat, Double lon) {
-        page.setZoom(zoom);
-        page.setMarker_long(lat);
-        page.setMarker_lat(lon);
-    }
-
-    private void displayAlert(Exception e) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erreur");
-        alert.setHeaderText("Erreur de saisie");
-        alert.setContentText(e.getMessage());
-        alert.showAndWait();
-    }
-
-
-    @Override
-    public void reagir() {
-
-    }
 }

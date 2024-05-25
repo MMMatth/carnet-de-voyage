@@ -1,6 +1,6 @@
-package carnet.controleur;
+package carnet.controleur.page;
 
-import carnet.controleur.page.*;
+import carnet.controleur.Observateur;
 import carnet.model.Carnet;
 import carnet.model.Page;
 import javafx.fxml.FXML;

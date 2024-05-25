@@ -2,7 +2,6 @@ package carnet.controleur.vignette;
 
 import carnet.exceptions.PageOutOfRangeException;
 import carnet.model.Carnet;
-import carnet.model.PageTextPhoto;
 import javafx.fxml.FXML;
 
 public class ControleurVignettePlus {

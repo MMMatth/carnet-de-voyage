@@ -4,10 +4,6 @@ import carnet.exceptions.LoadNotWork;
 import carnet.exceptions.PageOutOfRangeException;
 import carnet.exceptions.SaveNotWork;
 import carnet.outils.JsonManager;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.util.Iterator;
 
 public class Carnet extends SujetObservateur implements Iterable<Page> {
@@ -41,11 +37,13 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
     }
 
     public void modeVignette() throws PageOutOfRangeException {
-       pageCourante = gestionnairePage.getPage(-1);
+        if (!pageCourante.estModeVignette())
+            pageCourante = gestionnairePage.getPage(-1);
     }
 
     public void modeAjouterPage() throws PageOutOfRangeException {
-        pageCourante = gestionnairePage.getPage(0);
+        if (!pageCourante.estModeAjouterPage())
+            pageCourante = gestionnairePage.getPage(0);
     }
 
     public Page getPageCourante() {
@@ -93,4 +91,7 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
     }
 
 
+    public int getNombrePages() {
+        return gestionnairePage.getNombrePages();
+    }
 }

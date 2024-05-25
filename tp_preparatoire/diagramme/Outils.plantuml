@@ -1,0 +1,27 @@
+@startuml
+
+top to bottom direction
+skinparam linetype ortho
+
+
+class FabriqueNumero {
+  - FabriqueNumero():
+  - numeroPage: int
+  + reset(): void
+  + supprimerPage(): void
+  + libererPage(): void
+   numeroPage: int
+   instance: FabriqueNumero
+}
+FabriqueNumero -- "1" FabriqueNumero
+
+class JsonManager {
+  + JsonManager(GestionnairePage):
+  + load(String): void
+  - ajouterPageAccueil(JSONObject): void
+  + save(String): void
+  - ajouterPageTextPhoto(JSONObject): void
+  - ajouterPageTextPhotoMap(JSONObject): void
+}
+
+@enduml

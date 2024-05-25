@@ -26,11 +26,11 @@ public class GestionnairePage implements Iterable<Page>{
     }
 
     public Page getPage(int numPage) throws PageOutOfRangeException {
-        try {
-            return pages.get(numPage);
-        } catch (IndexOutOfBoundsException e){
-            throw new PageOutOfRangeException("La page demandée n'existe pas");
+        Page page = pages.get(numPage);
+        if (page == null) {
+            throw new PageOutOfRangeException("Page " + numPage + " non trouvée");
         }
+        return page;
     }
 
     public boolean isEmpty(){

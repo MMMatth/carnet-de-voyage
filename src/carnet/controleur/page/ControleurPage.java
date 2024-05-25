@@ -5,7 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextInputControl;
 
-public abstract class ControleurPage {
+public abstract class
+ControleurPage {
 
     protected Carnet carnet;
 

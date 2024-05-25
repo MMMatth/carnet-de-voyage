@@ -1,6 +1,6 @@
 package carnet;
 
-import carnet.controleur.ControleurNav;
+import carnet.controleur.page.ControleurNav;
 import carnet.exceptions.SaveNotWork;
 import carnet.model.*;
 import javafx.application.Application;

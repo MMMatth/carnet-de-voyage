@@ -1,0 +1,129 @@
+@startuml
+
+top to bottom direction
+skinparam linetype ortho
+
+class Carnet implements "Iterator<Page>" {
+  + Carnet():
+  - pageCourante: Page
+  + addPage(Page): void
+  + save(): void
+  + modeAjouterPage(): void
+  + moveTo(int): void
+  + pageSuivante(): void
+  + iterator(): Iterator<Page>
+  + pagePrecedente(): void
+  + supprimerPage(int): void
+  + pageCouranteEstLaDerniere(): boolean
+  + pageCouranteEstLaPremiere(): boolean
+  + load(): void
+  + modeVignette(): void
+   nombrePages: int
+   pageCourante: Page
+   nombrePagesContenu: int
+}
+Carnet --"1" GestionnairePage
+
+class GestionnairePage implements "Iterator<Page>"{
+  + GestionnairePage():
+  + iterator(): Iterator<Page>
+  + toString(): String
+  + ajouterPage(Page[]): void
+  + getPage(int): Page
+  + supprimerPage(int): void
+  + supprimerPage(Page[]): void
+   nombrePages: int
+   empty: boolean
+   nombrePagesContenu: int
+}
+GestionnairePage --"*" Page
+
+class ModeAjouterPage {
+  + ModeAjouterPage():
+  + estModeAjouterPage(): boolean
+}
+class ModeVignette {
+  + ModeVignette():
+  + estModeVignette(): boolean
+}
+class Page {
+  + Page():
+  - numero: int
+  + estModeVignette(): boolean
+  + estTextPhotoMap(): boolean
+  + estAccueil(): boolean
+  + estTextPhoto(): boolean
+  + toString(): String
+  + estUnePageContenu(): boolean
+  + estModeAjouterPage(): boolean
+  + toJson(): String
+   numero: int
+}
+class PageAccueil {
+  + PageAccueil(String, String, LocalDate, LocalDate, String[]):
+  + PageAccueil():
+  - auteur: String
+  - titre: String
+  - participants: ArrayList<String>
+  - dateFin: LocalDate
+  - dateDebut: LocalDate
+  + toJson(): String
+  + estAccueil(): boolean
+  + addParticipant(String): void
+   dateDebut: LocalDate
+   participants: String
+   titre: String
+   dateFin: LocalDate
+   auteur: String
+}
+class PageContenu {
+  + PageContenu():
+  - modeEdition: boolean
+  + estUnePageContenu(): boolean
+   modeEdition: boolean
+}
+class PageTextPhoto {
+  + PageTextPhoto():
+  + PageTextPhoto(LocalDate, String, String):
+  - contenu: String
+  - imgPath: String
+  - date: LocalDate
+  + toJson(): String
+  + estTextPhoto(): boolean
+   date: LocalDate
+   imgPath: String
+   contenu: String
+}
+class PageTextPhotoMap {
+  + PageTextPhotoMap():
+  + PageTextPhotoMap(String, String, LocalDate, Double, Double, Double, Double, Double):
+  - marker_long: Double
+  - marker_lat: Double
+  - center_lat: Double
+  - zoom: Double
+  - center_long: Double
+  + estTextPhotoMap(): boolean
+  + estTextPhoto(): boolean
+  + toJson(): String
+   openStreetMapLink: String
+   center_long: Double
+   zoom: Double
+   marker_long: Double
+   marker_lat: Double
+   center_lat: Double
+}
+class SujetObservateur {
+  + SujetObservateur():
+  + ajouterObservateur(Observateur): void
+  + supprimerObservateur(Observateur): void
+  + notifierObservateurs(): void
+}
+
+Carnet            --|>  SujetObservateur
+ModeAjouterPage   --|>  Page
+ModeVignette      --|>  Page
+PageAccueil       --|>  PageContenu
+PageContenu       --|>  Page
+PageTextPhoto     --|>  PageContenu
+PageTextPhotoMap  --|>  PageTextPhoto
+@enduml
