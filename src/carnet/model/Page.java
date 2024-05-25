@@ -10,6 +10,10 @@ public class Page {
         numero = FabriqueNumero.getInstance().getNumeroPage();
     }
 
+    public boolean estUnePageContenu() {
+        return false;
+    }
+
     public boolean estAccueil(){
         return false;
     }
@@ -40,6 +44,10 @@ public class Page {
         return "Page{" +
                 "numero=" + numero +
                 '}';
+    }
+
+    public String toJson(){
+        return "";
     }
 
     public boolean estTextPhotoMap() {

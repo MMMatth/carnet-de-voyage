@@ -57,6 +57,7 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implemen
         });
         // on ajoute un ajouter au bouton de zoom
         map.zoomProperty().addListener((observable, oldValue, newValue) -> updateMarker());
+
         map.initialize();
 
         map.addEventHandler(MapViewEvent.MAP_CLICKED, this::onMapClicked);

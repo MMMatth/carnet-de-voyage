@@ -11,6 +11,10 @@ public class PageContenu extends Page{
         this.modeEdition = false;
     }
 
+    public boolean estUnePageContenu() {
+        return true;
+    }
+
 
     public void setModeEdition(boolean modeEdition) {
         this.modeEdition = modeEdition;

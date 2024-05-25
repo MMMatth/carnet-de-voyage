@@ -2,6 +2,9 @@ package carnet.model;
 
 import carnet.exceptions.PageOutOfRangeException;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Iterator;
 
 public class Carnet extends SujetObservateur implements Iterable<Page> {
@@ -51,6 +54,7 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
         gestionnairePage.supprimerPage(numeroPage);
     }
 
+
     @Override
     public Iterator<Page> iterator() {
         return gestionnairePage.iterator();
@@ -70,5 +74,28 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
 
     public boolean pageCouranteEstLaDerniere() {
         return pageCourante.getNumero() == gestionnairePage.getNombrePagesContenu();
+    }
+
+    public void saveJson(String path) {
+        StringBuilder json = new StringBuilder();
+        json.append("[\n");
+        for (Page page : this) {
+            if (page.estUnePageContenu()) {
+                json.append(page.toJson());
+                json.append(",\n");
+            }
+        }
+        json.deleteCharAt(json.length() - 2);
+        json.append("]");
+        System.out.println(json);
+
+        try {
+            File file = new File(path);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            writer.write(json.toString());
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

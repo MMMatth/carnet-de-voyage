@@ -20,6 +20,8 @@ public class Main extends Application {
         carnet.addPage(new PageTextPhoto());
         carnet.addPage(new PageTextPhotoMap());
 
+        carnet.saveJson("carnet.json");
+
         BorderPane MainPane = new BorderPane();
         MainPane.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
         MainPane.setPrefSize(800, 600);

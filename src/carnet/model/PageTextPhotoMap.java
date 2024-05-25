@@ -48,10 +48,10 @@ public class PageTextPhotoMap extends PageTextPhoto{
     public String getOpenStreetMapLink(){
         StringBuilder link = new StringBuilder().append("https://www.openstreetmap.org/export/embed.html?bbox=");
         Float zoomOffset = 0.05f;
-        link.append(center_long + zoomOffset).append("%2C");
-        link.append(center_lat + zoomOffset).append("%2C");
-        link.append(center_long - zoomOffset).append("%2C");
-        link.append(center_lat - zoomOffset).append("&amp;layer=mapnik");
+        link.append(marker_long + zoomOffset).append("%2C");
+        link.append(marker_lat + zoomOffset).append("%2C");
+        link.append(marker_long - zoomOffset).append("%2C");
+        link.append(marker_lat - zoomOffset).append("&amp;layer=mapnik");
         return link.toString();
     }
 
@@ -93,5 +93,21 @@ public class PageTextPhotoMap extends PageTextPhoto{
 
     public void setCenter_lat(Double v) {
         this.center_lat = v;
+    }
+
+    public String toJson(){
+        StringBuilder json = new StringBuilder();
+        json.append("{\n");
+        json.append("  \"type\": \"textPhotoMap\",\n");
+        json.append("  \"date\": \"").append(getDate()).append("\",\n");
+        json.append("  \"contenu\": \"").append(getContenu()).append("\",\n");
+        json.append("  \"imgPath\": \"").append(getImgPath()).append("\",\n");
+        json.append("  \"marker_long\": ").append(marker_long).append(",\n");
+        json.append("  \"marker_lat\": ").append(marker_lat).append(",\n");
+        json.append("  \"center_long\": ").append(center_long).append(",\n");
+        json.append("  \"center_lat\": ").append(center_lat).append(",\n");
+        json.append("  \"zoom\": ").append(zoom).append("\n");
+        json.append("}");
+        return json.toString();
     }
 }

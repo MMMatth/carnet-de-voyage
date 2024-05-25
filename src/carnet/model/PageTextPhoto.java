@@ -48,4 +48,15 @@ public class PageTextPhoto extends PageContenu{
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    public String toJson() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\n");
+        sb.append("  \"type\": \"textPhoto\",\n");
+        sb.append("  \"date\": \"").append(date).append("\",\n");
+        sb.append("  \"contenu\": \"").append(contenu).append("\",\n");
+        sb.append("  \"imgPath\": \"").append(imgPath).append("\"\n");
+        sb.append("}");
+        return sb.toString();
+    }
 }

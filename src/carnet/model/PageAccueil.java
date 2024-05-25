@@ -86,4 +86,22 @@ public class PageAccueil extends PageContenu{
     public void addParticipant(String participant){
         participants.add(participant);
     }
+
+    public String toJson(){
+        StringBuilder json = new StringBuilder();
+        json.append("{\n");
+        json.append("  \"type\": \"accueil\",\n");
+        json.append("  \"titre\": \"").append(titre).append("\",\n");
+        json.append("  \"auteur\": \"").append(auteur).append("\",\n");
+        json.append("  \"dateDebut\": \"").append(dateDebut).append("\",\n");
+        json.append("  \"dateFin\": \"").append(dateFin).append("\",\n");
+        json.append("  \"participants\": [\n");
+        for (String participant : participants){
+            json.append("    \"").append(participant).append("\",\n");
+        }
+        json.deleteCharAt(json.length() - 2);
+        json.append("  ]\n");
+        json.append("}");
+        return json.toString();
+    }
 }
