@@ -37,7 +37,7 @@
       <TextArea fx:id="participants" cacheShape="false" centerShape="false" editable="false" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" scaleShape="false" text="- Nom du participant" />
     </VBox>
 
-          <HBox alignment="CENTER_LEFT" layoutX="482.0" layoutY="542.0" prefHeight="26.0" prefWidth="292.0" spacing="10.0">
+          <HBox alignment="CENTER" layoutX="495.0" layoutY="543.0" prefHeight="26.0" prefWidth="292.0" spacing="10.0">
         <Label text="Réalisé par :" />
         <TextField fx:id="auteur" editable="false" focusTraversable="false" text="Nom du réalisateur" />
     </HBox>

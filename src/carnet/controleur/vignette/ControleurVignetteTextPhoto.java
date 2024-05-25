@@ -34,9 +34,16 @@ public class ControleurVignetteTextPhoto extends ControleurVignetteContenu {
             date.setText("JJ/MM/AAAA");
         }
         contenu.setText(page.getContenu());
-        File imgFile = new File(page.getImgPath());
+        File imgFile;
+        try {
+            imgFile = new File(page.getImgPath());
+        } catch (Exception e) {
+            imgFile = new File("/image/page/imgBaseGrande.png");
+        }
         if (imgFile.exists()) {
             applyImage(imgFile);
+        }else {
+            page.setImgPath("/image/page/imgBaseGrande.png");
         }
     }
     private void applyImage(File selectedFile) {

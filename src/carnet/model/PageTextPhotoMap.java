@@ -12,7 +12,7 @@ public class PageTextPhotoMap extends PageTextPhoto{
 
     private Double zoom;
 
-    public PageTextPhotoMap(String contenu, String imgPath, LocalDate date, Double markerLong, Double marketLat, Double centerLat , Double centerLong, Double zoom) {
+    public PageTextPhotoMap(String contenu, String imgPath, LocalDate date, Double markerLong, Double marketLat, Double centerLong , Double centerLat, Double zoom) {
         super(date,contenu,imgPath);
 
         this.marker_lat = marketLat;

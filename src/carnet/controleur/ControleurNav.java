@@ -45,6 +45,7 @@ public class ControleurNav implements Observateur {
 
         Node newPage = loader.load();
         mainPane.setCenter(newPage);
+
     }
 
     @Override
