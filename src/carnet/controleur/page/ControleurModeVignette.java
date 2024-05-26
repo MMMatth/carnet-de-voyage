@@ -32,11 +32,17 @@ public class ControleurModeVignette {
             column = getColumn(page.getNumero());
             row = getRow(page.getNumero());
             if (page.estAccueil()){
-                displayVignette("/fxml/vignettes/VignetteAccueil.fxml", column, row, new ControleurVignetteAccueil((PageAccueil) page, carnet));
+                displayVignette(
+                        "/fxml/vignettes/VignetteAccueil.fxml",
+                        column, row,
+                        new ControleurVignetteAccueil((PageAccueil) page, carnet));
             } else if (page.estTextPhoto()){
-                displayVignette("/fxml/vignettes/VignetteTextPhoto.fxml", column, row, new ControleurVignetteTextPhoto((PageTextPhoto) page, carnet));
+                displayVignette("/fxml/vignettes/VignetteTextPhoto.fxml",
+                        column, row,
+                        new ControleurVignetteTextPhoto((PageTextPhoto) page, carnet));
             } else if (page.estTextPhotoMap()){
-                displayVignette("/fxml/vignettes/VignetteTextPhotoMap.fxml", column, row, new ControleurVignetteTextPhotoMap((PageTextPhotoMap) page, carnet));
+                displayVignette("/fxml/vignettes/VignetteTextPhotoMap.fxml",
+                        column, row, new ControleurVignetteTextPhotoMap((PageTextPhotoMap) page, carnet));
             }
 
         }

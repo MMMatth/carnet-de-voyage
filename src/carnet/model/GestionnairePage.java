@@ -7,15 +7,14 @@ import java.util.*;
 
 
 public class GestionnairePage implements Iterable<Page>{
-    private HashMap<Integer, Page> pages;
+    private ArrayList<Page> pages;
 
     public GestionnairePage() {
-        pages = new HashMap<>();
+        pages = new ArrayList<>();
     }
+
     public void ajouterPage(Page ... pages){
-        for(Page p : pages){
-            this.pages.put(p.getNumero(), p);
-        }
+        this.pages.addAll(Arrays.asList(pages));
     }
 
 
@@ -25,8 +24,32 @@ public class GestionnairePage implements Iterable<Page>{
         }
     }
 
+    /**
+     * fonction qui permet de recuperer l'indice de la List par rapport au numero de la page
+     * @param numeroPage le numero de la page
+     * @return l'indice de la page dans la List
+     */
+    public int getIndicePage(int numeroPage) {
+        for (int i = 0; i < pages.size(); i++) {
+            if (pages.get(i).getNumero() == numeroPage) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * fonction qui permet de recuperer une page par rapport a son numero
+     * @param numPage le numero de la page
+     * @return la page
+     * @throws PageOutOfRangeException si la page n'existe pas
+     */
     public Page getPage(int numPage) throws PageOutOfRangeException {
-        Page page = pages.get(numPage);
+        int indice = getIndicePage(numPage);
+        if (indice == -1) {
+            throw new PageOutOfRangeException("Page " + numPage + " non trouvée");
+        }
+        Page page = pages.get(indice);
         if (page == null) {
             throw new PageOutOfRangeException("Page " + numPage + " non trouvée");
         }
@@ -39,7 +62,7 @@ public class GestionnairePage implements Iterable<Page>{
 
     @Override
     public Iterator<Page> iterator() {
-        return pages.values().iterator();
+        return pages.iterator();
     }
 
     public int getNombrePages() {
@@ -50,38 +73,67 @@ public class GestionnairePage implements Iterable<Page>{
         return pages.size() - 2;
     }
 
+    /**
+     * fonction qui permet de supprimer une page
+     * @param numeroPage
+     */
     public void supprimerPage(int numeroPage) {
         FabriqueNumero.getInstance().libererPage();
         // on supprime la page
-        pages.remove(numeroPage);
-
-        List<Integer> keysToUpdate = new ArrayList<>();
-        // on enregistre les clés à mettre à jour et on met à jour les numéros des pages
-        for (Map.Entry<Integer, Page> entry : pages.entrySet()) {
-            if (entry.getKey() > numeroPage) {
-                keysToUpdate.add(entry.getKey());
-                entry.getValue().setNumero(entry.getValue().getNumero() - 1);
-            }
-        }
-
-        // on décale les pages d'un cran
-        for (Integer key : keysToUpdate) {
-            Page page = pages.remove(key);
-            pages.put(key - 1, page);
+        int indice = getIndicePage(numeroPage);
+        pages.remove(indice);
+        // on renumérote les pages
+        for (int i = indice; i < pages.size(); i++) {
+            pages.get(i).setNumero(pages.get(i).getNumero() - 1);
         }
     }
+
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("GestionnairePage{\n");
-        ArrayList<Integer> keys = new ArrayList<>(pages.keySet());
-        ArrayList<Page> values = new ArrayList<>(pages.values());
-        for (int i = 0; i < pages.size(); i++) {
-            sb.append(keys.get(i)).append(" : ").append(values.get(i)).append("\n");
+        for (Page page : pages) {
+            sb.append(page.toString()).append("\n");
         }
-        sb.append("}");
+        sb.append("}\n");
         return sb.toString();
     }
 
+    public void deplacerAvant(int numeroPage) {
+        if (numeroPage == 1) {
+            return;
+        }
+
+        int indicePageADeplacer = getIndicePage(numeroPage);
+        int indicePagePrecedente = getIndicePage(numeroPage - 1);
+
+        Page pageADeplacer = pages.get(indicePageADeplacer);
+        Page pagePrecedente = pages.get(indicePagePrecedente);
+
+        pageADeplacer.setNumero(numeroPage - 1);
+        pagePrecedente.setNumero(numeroPage);
+
+        pages.set(indicePagePrecedente, pageADeplacer);
+        pages.set(indicePageADeplacer, pagePrecedente);
+
+    }
+
+    public void deplacerApres(int numeroPage){
+        if (numeroPage == this.getNombrePagesContenu()) {
+            return;
+        }
+
+        int indicePageADeplacer = getIndicePage(numeroPage);
+        int indicePageSuivante = getIndicePage(numeroPage + 1);
+
+        Page pageADeplacer = pages.get(indicePageADeplacer);
+        Page pageSuivante = pages.get(indicePageSuivante);
+
+        pageADeplacer.setNumero(numeroPage + 1);
+        pageSuivante.setNumero(numeroPage);
+
+        pages.set(indicePageSuivante, pageADeplacer);
+        pages.set(indicePageADeplacer, pageSuivante);
+    }
 }

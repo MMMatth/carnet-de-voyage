@@ -39,6 +39,8 @@ public class Main extends Application {
 
         stage.setTitle("Carnet de notes");
         stage.setScene(new Scene(MainPane, 800, 600));
+        stage.setMinHeight(600);
+        stage.setMinWidth(800);
         stage.show();
 
     }

@@ -30,21 +30,21 @@ public class ControleurModeAjouterPage {
 
     @FXML
     public void addAccueil() {
-        carnet.addPage(new PageAccueil());
+        carnet.addPageContenu(new PageAccueil());
         carnet.moveTo(carnet.getNombrePagesContenu());
         carnet.notifierObservateurs();
     }
 
     @FXML
     public void addTextPhoto() {
-        carnet.addPage(new PageTextPhoto());
+        carnet.addPageContenu(new PageTextPhoto());
         carnet.moveTo(carnet.getNombrePagesContenu());
         carnet.notifierObservateurs();
     }
 
     @FXML
     public void addTextPhotoMap(){
-        carnet.addPage(new PageTextPhotoMap());
+        carnet.addPageContenu(new PageTextPhotoMap());
         carnet.moveTo(carnet.getNombrePagesContenu());
         carnet.notifierObservateurs();
     }

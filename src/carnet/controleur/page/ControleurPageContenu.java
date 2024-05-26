@@ -19,9 +19,9 @@ public abstract class ControleurPageContenu extends ControleurPage{
     @FXML
     protected Button valider;
 
-    public ControleurPageContenu(Carnet carnet, PageContenu carnetPage){
+    public ControleurPageContenu(Carnet carnet){
         super(carnet);
-        modeEdition = carnetPage.getModeEdition();
+        modeEdition = false;
     }
 
     @FXML

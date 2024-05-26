@@ -18,7 +18,11 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
         this.addPage(new ModeAjouterPage());
 
         jsonManager = new JsonManager(gestionnairePage);
-        path = getClass().getResource("/").getPath() + "carnet.json";
+        if (getClass().getResource("/") == null) {
+            path = "carnet.json";
+        } else {
+            path = getClass().getResource("/").getPath() + "carnet.json";
+        }
     }
 
     public void save() throws SaveNotWork {
@@ -34,6 +38,11 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
             pageCourante = page;
         }
         gestionnairePage.ajouterPage(page);
+    }
+
+    public void addPageContenu(PageContenu page) {
+        this.addPage(page);
+        page.setModeEdition(true);
     }
 
     public void modeVignette() throws PageOutOfRangeException {
@@ -93,5 +102,13 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
 
     public int getNombrePages() {
         return gestionnairePage.getNombrePages();
+    }
+
+    public void deplacerAvant(int numero) {
+        gestionnairePage.deplacerAvant(numero);
+    }
+
+    public void deplacerApres(int numero) {
+        gestionnairePage.deplacerApres(numero);
     }
 }

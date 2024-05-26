@@ -1,5 +1,6 @@
 package carnet.controleur.page;
 
+import carnet.exceptions.ProblemePage;
 import carnet.model.Carnet;
 import carnet.model.PageTextPhoto;
 import javafx.fxml.FXML;
@@ -30,19 +31,31 @@ public class ControleurPageTextPhoto extends ControleurPageContenu{
 
 
 
-    public ControleurPageTextPhoto(Carnet carnet) {
-        super(carnet, (PageTextPhoto) carnet.getPageCourante());
+    public ControleurPageTextPhoto(Carnet carnet) throws ProblemePage {
+        super(carnet);
+
+        if (!carnet.getPageCourante().estTextPhoto() && !carnet.getPageCourante().estTextPhotoMap()){
+            throw new ProblemePage("La page courante n'est pas une page de texte et photo" + carnet.getPageCourante().getClass());
+        }
         this.page = (PageTextPhoto) carnet.getPageCourante();
+
+        this.modeEdition = page.getModeEdition();
     }
 
      @FXML
     public void initialize() {
+
         super.initialize();
+         System.out.println("Mode edition : " + modeEdition);
 
         contenu.setText(page.getContenu());
+
         File imgFile = new File(page.getImgPath());
         if (imgFile.exists()) { applyImage(imgFile); }
+
         date.setValue(page.getDate());
+        date.setDisable(!modeEdition);
+
         numeroPage.setText(page.getNumero() + "/" + (carnet.getNombrePagesContenu()));
 
 

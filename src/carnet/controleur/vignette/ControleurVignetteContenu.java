@@ -24,32 +24,28 @@ public class ControleurVignetteContenu {
 
     @FXML
     public void initialize(){
-        bouton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            afficherPage();
-        });
+        bouton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> afficherPage());
     }
-
-
-
-
 
     @FXML
     public void menuContextuel(MouseEvent event) {
         ContextMenu contextMenu = new ContextMenu();
         MenuItem item1 = new MenuItem("Supprimer");
-        item1.setOnAction(e -> {
-            supprimerPage();
-        });
-        MenuItem item2 = new MenuItem("Modifier");
-        item2.setOnAction(e -> {
-            modeEdition();
-        });
-        MenuItem item3 = new MenuItem("Aller à la page");
-        item3.setOnAction(e -> {
-            afficherPage();
-        });
+        item1.setOnAction(e -> supprimerPage());
 
-        contextMenu.getItems().addAll(item1, item2, item3);
+        MenuItem item2 = new MenuItem("Modifier");
+        item2.setOnAction(e -> modeEdition());
+
+        MenuItem item3 = new MenuItem("Aller à la page");
+        item3.setOnAction(e -> afficherPage());
+
+        MenuItem item4 = new MenuItem("Déplacer avant");
+        item4.setOnAction(e -> deplacerAvant());
+
+        MenuItem item5 = new MenuItem("Déplacer après");
+        item5.setOnAction(e -> deplacerApres());
+
+        contextMenu.getItems().addAll(item1, item2, item3, item4, item5);
         contextMenu.show(bouton, event.getScreenX(), event.getScreenY());
         contextMenu.setAutoHide(true);
 
@@ -68,6 +64,16 @@ public class ControleurVignetteContenu {
 
     private void supprimerPage() {
         carnet.supprimerPage(page.getNumero());
+        carnet.notifierObservateurs();
+    }
+
+    private void deplacerAvant() {
+        carnet.deplacerAvant(page.getNumero());
+        carnet.notifierObservateurs();
+    }
+
+    private void deplacerApres() {
+        carnet.deplacerApres(page.getNumero());
         carnet.notifierObservateurs();
     }
 

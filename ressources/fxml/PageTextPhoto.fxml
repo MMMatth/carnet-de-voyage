@@ -11,34 +11,41 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carnet.controleur.page.ControleurPageTextPhoto">
    <top>
-      <AnchorPane BorderPane.alignment="CENTER">
+      <StackPane prefHeight="136.0" prefWidth="800.0" BorderPane.alignment="BOTTOM_CENTER">
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
-         <DatePicker fx:id="date" cacheShape="false" centerShape="false" disable="true" editable="false" focusTraversable="false" layoutX="228.0" layoutY="32.0" prefHeight="103.0" prefWidth="345.0" promptText="JJ/MM/AAAA" scaleShape="false" style="-fx-font-size: 40px;" />
-         <Button fx:id="vignette" cacheShape="false" centerShape="false" focusTraversable="false" onMouseClicked="#modeVignette" prefHeight="75.0" prefWidth="75.0" scaleShape="false" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
-            <graphic>
-               <ImageView fitHeight="66.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../image/vignette/mode_vignette.png" />
-                  </image>
-               </ImageView>
-            </graphic>
-         </Button>
-         <Button fx:id="valider" cacheShape="false" centerShape="false" focusTraversable="false" onMouseClicked="#clickOnSave" prefHeight="75.0" prefWidth="75.0" scaleShape="false" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
-            <graphic>
-               <ImageView fitHeight="66.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../image/valider.png" />
-                  </image>
-               </ImageView>
-            </graphic>
-         </Button>
-      </AnchorPane>
+         <children>
+            <AnchorPane prefHeight="193.0" prefWidth="800.0">
+               <children>
+                  <Button fx:id="vignette" alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="711.0" layoutY="14.0" onMouseClicked="#modeVignette" prefHeight="75.0" prefWidth="75.0" scaleShape="false" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                     <graphic>
+                        <ImageView fitHeight="66.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/vignette/mode_vignette.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="valider" alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="711.0" layoutY="14.0" onMouseClicked="#clickOnSave" prefHeight="75.0" prefWidth="75.0" scaleShape="false" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                     <graphic>
+                        <ImageView fitHeight="66.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/valider.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <DatePicker fx:id="date" cacheShape="false" disable="true" editable="false" focusTraversable="false" prefHeight="103.0" prefWidth="337.0" promptText="JJ/MM/AAAA" scaleShape="false" style="-fx-font-size: 40px;" />
+         </children>
+      </StackPane>
    </top>
    <left>
        <Button fx:id="pagePrec" cacheShape="false" centerShape="false" focusTraversable="false" onAction="#pagePrecedente" prefHeight="75.0" prefWidth="75.0" scaleShape="false" textAlignment="CENTER" textFill="#4d4d4d00" BorderPane.alignment="CENTER">
@@ -65,22 +72,24 @@
       </Button>
    </right>
    <center>
-      <AnchorPane prefHeight="357.0" prefWidth="650.0" BorderPane.alignment="CENTER">
-         <HBox alignment="CENTER" layoutX="5.0" layoutY="24.0" minHeight="-Infinity" prefHeight="367.0" prefWidth="640.0">
-            <Button fx:id="filePicker" accessibleRole="DIALOG" contentDisplay="GRAPHIC_ONLY" disable="true" mnemonicParsing="false" onAction="#openFileChooser" prefHeight="364.0" prefWidth="309.0">
-               <graphic>
-                  <ImageView fx:id="img" accessibleRole="BUTTON" fitHeight="354.0" fitWidth="344.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../image/page/imgBaseGrande.png" />
-                  </ImageView>
-               </graphic>
-            </Button>
-            <TextArea fx:id="contenu" cacheShape="false" centerShape="false" editable="false" focusTraversable="false" prefHeight="323.0" prefWidth="298.0" scaleShape="false" text="Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante." wrapText="true" HBox.hgrow="NEVER">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </TextArea>
-         </HBox>
-      </AnchorPane>
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="318.0" prefWidth="650.0">
+               <Button fx:id="filePicker" accessibleRole="DIALOG" contentDisplay="GRAPHIC_ONLY" disable="true" mnemonicParsing="false" onAction="#openFileChooser">
+                  <graphic>
+                     <ImageView fx:id="img" accessibleRole="BUTTON" fitHeight="371.0" fitWidth="312.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../image/page/imgBaseGrande.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <TextArea fx:id="contenu" cacheShape="false" centerShape="false" editable="false" focusTraversable="false" minHeight="-Infinity" prefHeight="348.0" prefWidth="297.0" scaleShape="false" text="Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante." wrapText="true" HBox.hgrow="NEVER">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </TextArea>
+            </HBox>
+         </children>
+      </StackPane>
    </center>
    <bottom>
       <AnchorPane prefHeight="73.0" prefWidth="694.0" BorderPane.alignment="CENTER">

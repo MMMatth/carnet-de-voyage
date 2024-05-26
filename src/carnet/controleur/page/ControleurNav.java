@@ -1,6 +1,7 @@
 package carnet.controleur.page;
 
 import carnet.controleur.Observateur;
+import carnet.exceptions.ProblemePage;
 import carnet.model.Carnet;
 import carnet.model.Page;
 import javafx.fxml.FXML;
@@ -26,22 +27,42 @@ public class ControleurNav implements Observateur {
         Page currentPage = carnet.getPageCourante();
         FXMLLoader loader = new FXMLLoader();
 
+
         if (currentPage.estAccueil()) {
             loader.setLocation(getClass().getResource("/fxml/PageAccueil.fxml"));
-            loader.setControllerFactory(iC -> new ControleurPageAccueil(carnet));
+
+            loader.setControllerFactory(iC -> {
+                try { return new ControleurPageAccueil(carnet);
+                } catch (ProblemePage e) { throw new RuntimeException(e); }
+            });
+
         } else if (currentPage.estTextPhoto()) {
+            System.out.println("TextPhoto");
             loader.setLocation(getClass().getResource("/fxml/PageTextPhoto.fxml"));
-            loader.setControllerFactory(iC -> new ControleurPageTextPhoto(carnet));
-        } else if (currentPage.estTextPhotoMap()){
+
+            loader.setControllerFactory(iC -> {
+                try { return new ControleurPageTextPhoto(carnet);
+                } catch (ProblemePage e) {throw new RuntimeException(e);}
+            });
+
+
+        } else if (currentPage.estTextPhotoMap()) {
+            System.out.println("TextPhotoMap");
             loader.setLocation(getClass().getResource("/fxml/PageTextPhotoMap.fxml"));
-            loader.setControllerFactory(iC -> new ControleurPageTextPhotoMap(carnet));
-        } else if (currentPage.estModeVignette()){
+
+            loader.setControllerFactory(iC -> {
+                try { return new ControleurPageTextPhotoMap(carnet);
+                } catch (ProblemePage e) { throw new RuntimeException(e); }
+            });
+
+        } else if (currentPage.estModeVignette()) {
             loader.setLocation(getClass().getResource("/fxml/ModeVignette.fxml"));
             loader.setControllerFactory(iC -> new ControleurModeVignette(carnet));
-        } else if (currentPage.estModeAjouterPage()){
+        } else if (currentPage.estModeAjouterPage()) {
             loader.setLocation(getClass().getResource("/fxml/PageAddPage.fxml"));
             loader.setControllerFactory(iC -> new ControleurModeAjouterPage(carnet));
         }
+
 
         Node newPage = loader.load();
         mainPane.setCenter(newPage);

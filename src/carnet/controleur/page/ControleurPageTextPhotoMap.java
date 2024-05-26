@@ -2,6 +2,7 @@ package carnet.controleur.page;
 
 import carnet.controleur.Observateur;
 import carnet.exceptions.PositionException;
+import carnet.exceptions.ProblemePage;
 import carnet.model.Carnet;
 import carnet.model.PageTextPhotoMap;
 import com.sothawo.mapjfx.Coordinate;
@@ -23,14 +24,17 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto {
 
     private Marker marker;
 
-    public ControleurPageTextPhotoMap(Carnet carnet) {
+    public ControleurPageTextPhotoMap(Carnet carnet) throws ProblemePage {
         super(carnet);
+
+        if (!carnet.getPageCourante().estTextPhotoMap() && !carnet.getPageCourante().estTextPhoto())
+            throw new ProblemePage("La page courante n'est pas une page de texte et photo avec carte" + carnet.getPageCourante().getClass());
         this.page = (PageTextPhotoMap) carnet.getPageCourante();
 
+        this.modeEdition = page.getModeEdition();
+
         this.centreCoord = new Coordinate(page.getCenter_lat(), page.getCenter_long());
-
         this.pointCoord = new Coordinate(page.getMarker_lat(), page.getMarker_long());
-
         this.marker = Marker.createProvided(Marker.Provided.RED).setPosition(pointCoord).setVisible(true);
     }
 

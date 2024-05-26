@@ -10,12 +10,25 @@ skinparam linetype ortho
 
 
 package "PageAccueil.fxml" {
-
     [PageAccueil.fxml] ---> [AnchorPane1]
-    [AnchorPane1] ---> [TextField1]
-    [AnchorPane1] ---> [HBox1]
-    [AnchorPane1] ---> [DatePicker1]
-    [AnchorPane1] ---> [Button1]
+
+    [AnchorPane1] ---> [Vbox1]
+    [Vbox1] ---> [Hbox1]
+    [Vbox1] ---> [TextField1]
+    [Hbox1] ---> "2"[Label1]
+    [Hbox1] ---> "2"[DatePicker1]
+
+    [AnchorPane1] ---> [Vbox1_]
+    [Vbox1_] ---> [Label1_]
+    [Vbox1_] ---> [TextArea1]
+
+    [AnchorPane1] ---> [Hbox1_]
+    [Hbox1_] ---> [Label1__]
+    [Hbox1_] ---> [TextArea1_]
+
+    [AnchorPane1] --->"4" [Button1]
+
+    [AnchorPane1] ---> [ImageView1]
 }
 package "ModeVignette.fxml" {
     [ModeVignette.fxml] ---> [AnchorPane2]
@@ -34,15 +47,17 @@ package "PageAddPage.fxml" {
 }
 package "PageTextPhoto.fxml" {
     [PageTextPhoto.fxml] ---> [BorderPane3]
+
     [BorderPane3] ---> [Top3]
-    [Top3] ---> [AnchorPane3]
-    [AnchorPane3] ---> [DatePicker3]
-    [AnchorPane3] ---> "2" [Button3]
+    [Top3] ---> [StackPane3]
+    [StackPane3] ---> [DatePicker3]
+    [StackPane3] ---> "2" [Button3]
 
     [BorderPane3] ---> [Center3]
-    [Center3] ---> [AnchorPane3_]
-    [AnchorPane3_] ---> [Hbox3]
-    [Hbox3] ---> [Button3]
+    [Center3] ---> [StackPane3_]
+    [StackPane3_] ---> [Hbox3]
+    [Hbox3] ---> [Button3___]
+    [Button3___] ---> [ImageView3_]
     [Hbox3] ---> [TextArea3]
 
 
@@ -60,13 +75,13 @@ package "PageTextPhotoMap.fxml" {
 
     [PageTextPhotoMap.fxml] ---> [BorderPane5]
     [BorderPane5] ---> [Top5]
-    [Top5] ---> [AnchorPane5]
-    [AnchorPane5] ---> [DatePicker5]
-    [AnchorPane5] ---> "2" [Button5]
+    [Top5] ---> [StackPane5]
+    [StackPane5] ---> [DatePicker5]
+    [StackPane5] ---> "2" [Button5]
 
     [BorderPane5] ---> [Center5]
-    [Center5] ---> [AnchorPane5_]
-    [AnchorPane5_] ---> [VBox5]
+    [Center5] ---> [StackPane5_]
+    [StackPane5_] ---> [VBox5]
     [VBox5] ---> [Hbox5]
     [Hbox5] ---> [ImageView5]
     [Hbox5] ---> [TextArea5]

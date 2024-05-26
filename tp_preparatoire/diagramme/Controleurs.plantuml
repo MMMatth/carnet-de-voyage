@@ -77,7 +77,6 @@ ControleurPageTextPhoto --"1" TextArea_
 
 class ControleurPageTextPhotoMap {
   + ControleurPageTextPhotoMap(Carnet):
-  + onClicEditMap(): void
   - openPopUp(): void
   - displayAlert(Exception): void
   + initialize(): void

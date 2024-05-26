@@ -1,5 +1,6 @@
 package carnet.controleur.page;
 
+import carnet.exceptions.ProblemePage;
 import carnet.model.Carnet;
 import carnet.model.PageAccueil;
 import carnet.model.PageContenu;
@@ -9,8 +10,6 @@ import javafx.scene.control.*;
 public class ControleurPageAccueil extends ControleurPageContenu{
 
     private PageAccueil page;
-
-
 
     // les champs de la vue
     @FXML
@@ -26,9 +25,14 @@ public class ControleurPageAccueil extends ControleurPageContenu{
 
 
 
-    public ControleurPageAccueil(Carnet carnet) {
-        super(carnet, (PageContenu) carnet.getPageCourante());
+    public ControleurPageAccueil(Carnet carnet) throws ProblemePage {
+        super(carnet);
+        if (!carnet.getPageCourante().estAccueil()){
+            throw new ProblemePage("La page courante n'est pas une page d'accueil" + carnet.getPageCourante().getClass());
+        }
         this.page = (PageAccueil) carnet.getPageCourante();
+
+        this.modeEdition = page.getModeEdition();
     }
 
     @FXML
