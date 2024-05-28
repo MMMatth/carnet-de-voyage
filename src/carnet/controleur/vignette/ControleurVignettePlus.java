@@ -14,6 +14,5 @@ public class ControleurVignettePlus {
     @FXML
     public void afficherPage() throws PageOutOfRangeException {
         carnet.modeAjouterPage();
-        carnet.notifierObservateurs();
     }
 }

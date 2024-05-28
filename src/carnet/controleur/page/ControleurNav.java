@@ -27,7 +27,7 @@ public class ControleurNav implements Observateur {
     private HashMap<String, Scene> scenes;
 
 
-    public ControleurNav(Carnet carnet, BorderPane mainPane, Stage stage) {
+    public ControleurNav(Carnet carnet, Stage stage) {
         this.carnet = carnet;
         this.stage = stage;
         this.carnet.ajouterObservateur(this);
@@ -35,8 +35,6 @@ public class ControleurNav implements Observateur {
         this.scenes = new HashMap<>();
 
         initPages();
-
-        carnet.notifierObservateurs();
     }
 
     private void initPages() {

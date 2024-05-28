@@ -82,6 +82,7 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
 
     public void supprimerPage(int numeroPage) {
         gestionnairePage.supprimerPage(numeroPage);
+        this.notifierObservateurs();
     }
 
 
@@ -114,9 +115,11 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
 
     public void deplacerAvant(int numero) {
         gestionnairePage.deplacerAvant(numero);
+        this.notifierObservateurs();
     }
 
     public void deplacerApres(int numero) {
         gestionnairePage.deplacerApres(numero);
+        this.notifierObservateurs();
     }
 }

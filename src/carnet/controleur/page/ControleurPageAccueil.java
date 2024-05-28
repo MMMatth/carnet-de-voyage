@@ -1,12 +1,12 @@
 package carnet.controleur.page;
 
 import carnet.controleur.Observateur;
-import carnet.exceptions.ProblemePage;
-import carnet.exceptions.SaveNotWork;
 import carnet.model.Carnet;
 import carnet.model.PageAccueil;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.time.LocalDate;
 
 public class ControleurPageAccueil extends ControleurPageContenu implements Observateur {
 
@@ -35,15 +35,18 @@ public class ControleurPageAccueil extends ControleurPageContenu implements Obse
 
 
     protected void save(){
-        page.setTitre(titre.getText());
-        page.setAuteur(auteur.getText());
-        page.setParticipants(participants.getText());
-        page.setDateDebut(dateDebut.getValue());
-        page.setDateFin(dateFin.getValue());
+        if (page.estAccueil()){
+            String titre = this.titre.getText();
+            String auteur = this.auteur.getText();
+            String[] participants = this.participants.getText().split("\n");
+            LocalDate dateDebut = this.dateDebut.getValue();
+            LocalDate dateFin = this.dateFin.getValue();
+
+            page.setData(titre, auteur, dateDebut, dateFin, participants);
+        }
 
         page.setModeEdition(false);
 
-        carnet.notifierObservateurs();
     }
 
     @FXML
@@ -71,8 +74,9 @@ public class ControleurPageAccueil extends ControleurPageContenu implements Obse
             dateDebut.setValue(page.getDateDebut());
             dateFin.setValue(page.getDateFin());
 
+            update();
+
         }
-        super.reagir();
     }
 
 

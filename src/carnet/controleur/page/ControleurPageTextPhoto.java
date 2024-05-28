@@ -1,8 +1,6 @@
 package carnet.controleur.page;
 
 import carnet.controleur.Observateur;
-import carnet.exceptions.ProblemePage;
-import carnet.exceptions.SaveNotWork;
 import carnet.model.Carnet;
 import carnet.model.PageTextPhoto;
 import javafx.fxml.FXML;
@@ -21,11 +19,11 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
     private PageTextPhoto page;
 
     @FXML
-    private TextArea contenu;
+    protected TextArea contenu;
     @FXML
-    private ImageView img;
+    protected ImageView img;
     @FXML
-    private DatePicker date;
+    protected DatePicker date;
     @FXML
     private Label numeroPage;
     @FXML
@@ -36,10 +34,7 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
     public ControleurPageTextPhoto(Carnet carnet) {
         super(carnet);
         carnet.ajouterObservateur(this);
-
     }
-
-
 
     @FXML
     void openFileChooser(){
@@ -58,19 +53,21 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
         return fileChooser;
     }
 
-    private void applyImage(File selectedFile) {
-        page.setImgPath(selectedFile.getAbsolutePath());
+    protected void applyImage(File selectedFile) {
         Image image = new Image(selectedFile.toURI().toString());
+        System.out.println(selectedFile.toURI().toString());
         img.setImage(image);
     }
 
     protected void save(){
-        page.setContenu(contenu.getText());
-        page.setDate(date.getValue());
+        if (page.estTextPhoto()) {
+            page.setData(contenu.getText(), date.getValue(), img.getImage().getUrl());
+        }
+
         page.setModeEdition(false);
 
-        carnet.notifierObservateurs();
     }
+
 
     @FXML
     public void estModeEdition() {
@@ -98,9 +95,7 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
             date.setValue(page.getDate());
             date.setDisable(!modeEdition);
 
-
+            update();
         }
-        super.reagir();
-
     }
 }

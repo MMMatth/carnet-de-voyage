@@ -16,7 +16,7 @@ public class PageTextPhoto extends PageContenu{
 
     public PageTextPhoto(){
         this.contenu = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante.";
-        this.imgPath = "/image/page/imgBaseGrande.png";
+        this.imgPath = getClass().getResource("/image/page/imgBaseGrande.png").toExternalForm();
         this.date = LocalDate.now();
     }
 
@@ -58,5 +58,11 @@ public class PageTextPhoto extends PageContenu{
         sb.append("  \"imgPath\": \"").append(imgPath).append("\"\n");
         sb.append("}");
         return sb.toString();
+    }
+
+    public void setData(String contenu, LocalDate date, String imgPath){
+        this.contenu = contenu;
+        this.date = date;
+        this.imgPath = imgPath;
     }
 }

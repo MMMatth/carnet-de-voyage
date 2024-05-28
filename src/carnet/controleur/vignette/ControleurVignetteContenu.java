@@ -53,28 +53,23 @@ public class ControleurVignetteContenu {
 
     private void afficherPage() {
         carnet.moveTo(page.getNumero());
-        carnet.notifierObservateurs();
     }
 
     private void modeEdition(){
         page.setModeEdition(true);
         carnet.moveTo(page.getNumero());
-        carnet.notifierObservateurs();
     }
 
     private void supprimerPage() {
         carnet.supprimerPage(page.getNumero());
-        carnet.notifierObservateurs();
     }
 
     private void deplacerAvant() {
         carnet.deplacerAvant(page.getNumero());
-        carnet.notifierObservateurs();
     }
 
     private void deplacerApres() {
         carnet.deplacerApres(page.getNumero());
-        carnet.notifierObservateurs();
     }
 
     @FXML

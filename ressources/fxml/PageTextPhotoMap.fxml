@@ -105,7 +105,7 @@
                   </Button>
                </children>
             </AnchorPane>
-            <DatePicker id="title_date" fx:id="date" cacheShape="false" centerShape="false" disable="true" editable="false" focusTraversable="false" prefHeight="103.0" prefWidth="345.0" promptText="JJ/MM/AAAA" scaleShape="false" style="-fx-font-size: 40px;" />
+            <DatePicker id="title_date" fx:id="date" cacheShape="false" centerShape="false" disable="true" editable="false" focusTraversable="false" prefHeight="103.0" prefWidth="345.0" promptText="JJ/MM/AAAA" scaleShape="false" />
 
          </children>
       </StackPane>

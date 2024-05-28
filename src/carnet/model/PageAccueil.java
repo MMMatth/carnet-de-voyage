@@ -3,7 +3,6 @@ package carnet.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 
 public class PageAccueil extends PageContenu{
     private  String titre;
@@ -103,5 +102,14 @@ public class PageAccueil extends PageContenu{
         json.append("  ]\n");
         json.append("}");
         return json.toString();
+    }
+
+    public void setData(String titre, String auteur, LocalDate dateDebut, LocalDate dateFin, String ... participants){
+        this.titre = titre;
+        this.auteur = auteur;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.participants = new ArrayList<>();
+        Collections.addAll(this.participants, participants);
     }
 }

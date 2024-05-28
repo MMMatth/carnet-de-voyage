@@ -1,8 +1,6 @@
 package carnet.controleur.page;
 
 import carnet.controleur.Observateur;
-import carnet.exceptions.ProblemePage;
-import carnet.exceptions.SaveNotWork;
 import carnet.model.Carnet;
 import carnet.model.PageTextPhotoMap;
 import com.sothawo.mapjfx.Coordinate;
@@ -10,6 +8,8 @@ import com.sothawo.mapjfx.MapView;
 import com.sothawo.mapjfx.Marker;
 import com.sothawo.mapjfx.event.MapViewEvent;
 import javafx.fxml.FXML;
+
+import java.io.File;
 
 public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implements Observateur {
 
@@ -60,17 +60,11 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implemen
 
     @Override
     protected void save() {
-        super.save();
+        if (page.estTextPhotoMap() && !page.estTextPhoto()) {
+            page.setData(contenu.getText(), date.getValue(), img.getImage().getUrl(), pointCoord.getLongitude(), pointCoord.getLatitude(), map.getCenter().getLongitude(), map.getCenter().getLatitude(), map.getZoom());
+        }
 
-        page.setMarker_long(pointCoord.getLongitude());
-        page.setMarker_lat(pointCoord.getLatitude());
-
-        page.setCenter_long(map.getCenter().getLongitude());
-        page.setCenter_lat(map.getCenter().getLatitude());
-
-        page.setZoom(map.getZoom());
-
-        carnet.notifierObservateurs();
+        page.setModeEdition(false);
     }
 
     @Override
@@ -82,14 +76,22 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implemen
 
             this.modeEdition = page.getModeEdition();
 
+            contenu.setText(page.getContenu());
+
             centreCoord = new Coordinate(page.getCenter_lat(), page.getCenter_long());
             pointCoord = new Coordinate(page.getMarker_lat(), page.getMarker_long());
             marker = Marker.createProvided(Marker.Provided.RED).setPosition(pointCoord).setVisible(true);
 
+            File imgFile = new File(page.getImgPath());
+            if (imgFile.exists()) {
+                applyImage(imgFile);
+            }
+
+            update();
+
             initMap();
 
         }
-        super.reagir();
     }
 
 

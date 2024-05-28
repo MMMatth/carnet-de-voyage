@@ -110,4 +110,13 @@ public class PageTextPhotoMap extends PageTextPhoto{
         json.append("}");
         return json.toString();
     }
+
+    public void setData(String contenu, LocalDate date, String imgPath, Double markerLong, Double marketLat, Double centerLong , Double centerLat, Double zoom){
+        super.setData(contenu, date, imgPath);
+        this.marker_lat = marketLat;
+        this.marker_long = markerLong;
+        this.center_lat = centerLat;
+        this.center_long = centerLong;
+        this.zoom = zoom;
+    }
 }

@@ -23,8 +23,6 @@ public class ControleurVignetteAccueil extends ControleurVignetteContenu {
         titre.setText(page.getTitre());
     }
 
-
-
 }
 
 

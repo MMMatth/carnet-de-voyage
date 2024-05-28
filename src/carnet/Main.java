@@ -24,16 +24,13 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        BorderPane MainPane = new BorderPane();
-        MainPane.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
-        MainPane.setPrefSize(800, 600);
 
-        stage.setScene(new Scene(MainPane));
-        ControleurNav controleurNav = new ControleurNav(carnet, MainPane, stage);
+        ControleurNav controleurNav = new ControleurNav(carnet, stage);
 
         stage.setTitle("Carnet de notes");
-//        stage.setMinHeight(600);
-//        stage.setMinWidth(800);
+
+        carnet.notifierObservateurs();
+
         stage.show();
 
     }

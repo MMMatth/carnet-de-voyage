@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public abstract class ControleurPageContenu extends ControleurPage implements Observateur {
+public abstract class ControleurPageContenu extends ControleurPage  {
 
     protected boolean modeEdition;
 
@@ -38,35 +38,61 @@ public abstract class ControleurPageContenu extends ControleurPage implements Ob
     @FXML
     public void clickOnSave(){
         save();
+        modeEdition = false;
+        carnet.notifierObservateurs();
     }
+
 
     public abstract void estModeEdition();
 
 
-    @Override
-    public void reagir() {
-        estModeEdition();
+    public void update() {
+        if (carnet.getPageCourante().estUnePageContenu()) {
+            estModeEdition();
 
-        if (carnet.pageCouranteEstLaDerniere()) {
-            pageSuiv.setDisable(true);
-            pageSuiv.setVisible(false);
-        }
-        if (carnet.pageCouranteEstLaPremiere()) {
-            pagePrec.setDisable(true);
-            pagePrec.setVisible(false);
-        }
-        if (modeEdition) {
-            vignette.setDisable(true);
-            vignette.setVisible(false);
-            valider.setDisable(false);
-            valider.setVisible(true);
-        } else {
-            vignette.setDisable(false);
-            vignette.setVisible(true);
-            valider.setDisable(true);
-            valider.setVisible(false);
+            if (carnet.pageCouranteEstLaDerniere() && carnet.pageCouranteEstLaPremiere()) {
+                setPagePrec(false);
+                setPageSuiv(false);
+            } else if (carnet.pageCouranteEstLaDerniere()) {
+                setPagePrec(true);
+                setPageSuiv(false);
+            } else if (carnet.pageCouranteEstLaPremiere()) {
+                setPagePrec(false);
+                setPageSuiv(true);
+            } else {
+                setPagePrec(true);
+                setPageSuiv(true);
+            }
+
+            if (modeEdition) {
+                setVignette(false);
+                setValider(true);
+            } else {
+                setVignette(true);
+                setValider(false);
+            }
         }
 
         numeroPage.setText(String.valueOf(carnet.getPageCourante().getNumero()));
+    }
+
+    private void setPageSuiv(boolean enable){
+        pageSuiv.setDisable(!enable);
+        pageSuiv.setVisible(enable);
+    }
+
+    private void setPagePrec(boolean enable){
+        pagePrec.setDisable(!enable);
+        pagePrec.setVisible(enable);
+    }
+
+    private void setVignette(boolean enable){
+        vignette.setDisable(!enable);
+        vignette.setVisible(enable);
+    }
+
+    private void setValider(boolean enable){
+        valider.setDisable(!enable);
+        valider.setVisible(enable);
     }
 }
