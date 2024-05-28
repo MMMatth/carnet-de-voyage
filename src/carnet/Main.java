@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    Carnet carnet;
 
     public static void main(String[] args) {
         launch(args);
@@ -16,7 +17,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Carnet carnet = new Carnet();
+        carnet = new Carnet();
         try {
             carnet.load();
         } catch (Exception e) {
@@ -26,22 +27,23 @@ public class Main extends Application {
         BorderPane MainPane = new BorderPane();
         MainPane.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
         MainPane.setPrefSize(800, 600);
-        stage.setOnCloseRequest(e -> {
-            try {
-                carnet.save();
-            } catch (SaveNotWork ex) {
-                throw new RuntimeException(ex);
-            }
-        });
 
-        ControleurNav controleurNav = new ControleurNav(carnet, MainPane);
-        controleurNav.displayPage();
+        stage.setScene(new Scene(MainPane));
+        ControleurNav controleurNav = new ControleurNav(carnet, MainPane, stage);
 
         stage.setTitle("Carnet de notes");
-        stage.setScene(new Scene(MainPane, 800, 600));
-        stage.setMinHeight(600);
-        stage.setMinWidth(800);
+//        stage.setMinHeight(600);
+//        stage.setMinWidth(800);
         stage.show();
 
+    }
+
+    @Override
+    public void stop() {
+        try {
+            carnet.save();
+        } catch (SaveNotWork ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }

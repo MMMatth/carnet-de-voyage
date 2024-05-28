@@ -1,6 +1,8 @@
 package carnet.controleur.page;
 
+import carnet.controleur.Observateur;
 import carnet.exceptions.ProblemePage;
+import carnet.exceptions.SaveNotWork;
 import carnet.model.Carnet;
 import carnet.model.PageTextPhoto;
 import javafx.fxml.FXML;
@@ -14,7 +16,7 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 
-public class ControleurPageTextPhoto extends ControleurPageContenu{
+public class ControleurPageTextPhoto extends ControleurPageContenu implements Observateur {
 
     private PageTextPhoto page;
 
@@ -31,35 +33,13 @@ public class ControleurPageTextPhoto extends ControleurPageContenu{
 
 
 
-    public ControleurPageTextPhoto(Carnet carnet) throws ProblemePage {
+    public ControleurPageTextPhoto(Carnet carnet) {
         super(carnet);
-
-        if (!carnet.getPageCourante().estTextPhoto() && !carnet.getPageCourante().estTextPhotoMap()){
-            throw new ProblemePage("La page courante n'est pas une page de texte et photo" + carnet.getPageCourante().getClass());
-        }
-        this.page = (PageTextPhoto) carnet.getPageCourante();
-
-        this.modeEdition = page.getModeEdition();
-    }
-
-     @FXML
-    public void initialize() {
-
-        super.initialize();
-         System.out.println("Mode edition : " + modeEdition);
-
-        contenu.setText(page.getContenu());
-
-        File imgFile = new File(page.getImgPath());
-        if (imgFile.exists()) { applyImage(imgFile); }
-
-        date.setValue(page.getDate());
-        date.setDisable(!modeEdition);
-
-        numeroPage.setText(page.getNumero() + "/" + (carnet.getNombrePagesContenu()));
-
+        carnet.ajouterObservateur(this);
 
     }
+
+
 
     @FXML
     void openFileChooser(){
@@ -88,10 +68,12 @@ public class ControleurPageTextPhoto extends ControleurPageContenu{
         page.setContenu(contenu.getText());
         page.setDate(date.getValue());
         page.setModeEdition(false);
+
+        carnet.notifierObservateurs();
     }
 
     @FXML
-    public void toggleModeEdition() {
+    public void estModeEdition() {
         String css = modeEdition ? "/styles/edition.css" : "/styles/main.css";
 
         applyStylesheet(contenu, modeEdition, css);
@@ -99,4 +81,26 @@ public class ControleurPageTextPhoto extends ControleurPageContenu{
         filePicker.setDisable(!modeEdition);
     }
 
+    @Override
+    public void reagir(){
+
+        if (carnet.getPageCourante().estTextPhoto() && !carnet.getPageCourante().estTextPhotoMap()) {
+
+            this.page = (PageTextPhoto) carnet.getPageCourante();
+            this.modeEdition = page.getModeEdition();
+            contenu.setText(page.getContenu());
+
+            File imgFile = new File(page.getImgPath());
+            if (imgFile.exists()) {
+                applyImage(imgFile);
+            }
+
+            date.setValue(page.getDate());
+            date.setDisable(!modeEdition);
+
+
+        }
+        super.reagir();
+
+    }
 }

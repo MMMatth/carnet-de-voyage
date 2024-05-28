@@ -7,7 +7,7 @@ import java.util.*;
 
 
 public class GestionnairePage implements Iterable<Page>{
-    private ArrayList<Page> pages;
+    private final ArrayList<Page> pages;
 
     public GestionnairePage() {
         pages = new ArrayList<>();
@@ -75,7 +75,7 @@ public class GestionnairePage implements Iterable<Page>{
 
     /**
      * fonction qui permet de supprimer une page
-     * @param numeroPage
+     * @param numeroPage le numero de la page a supprimer
      */
     public void supprimerPage(int numeroPage) {
         FabriqueNumero.getInstance().libererPage();

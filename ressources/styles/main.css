@@ -54,8 +54,14 @@ DatePicker{
     -fx-text-fill: #303841;
 }
 
+
+#title_date .text-field{
+    -fx-font-size: 45px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
 DatePicker:disabled .text-field {
-    /*-fx-background-color: none;*/
     -fx-text-fill: #303841;
     -fx-background-color: none;
     -fx-opacity: 1;

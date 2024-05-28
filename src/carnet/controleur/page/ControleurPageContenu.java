@@ -1,11 +1,13 @@
 package carnet.controleur.page;
 
+import carnet.controleur.Observateur;
 import carnet.model.Carnet;
-import carnet.model.PageContenu;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public abstract class ControleurPageContenu extends ControleurPage{
+public abstract class ControleurPageContenu extends ControleurPage implements Observateur {
 
     protected boolean modeEdition;
 
@@ -19,34 +21,16 @@ public abstract class ControleurPageContenu extends ControleurPage{
     @FXML
     protected Button valider;
 
+    @FXML
+    protected Label numeroPage;
+
+
     public ControleurPageContenu(Carnet carnet){
         super(carnet);
         modeEdition = false;
     }
 
-    @FXML
-    public void initialize(){
-        toggleModeEdition();
-        if (carnet.pageCouranteEstLaDerniere()){
-            pageSuiv.setDisable(true);
-            pageSuiv.setVisible(false);
-        }
-        if (carnet.pageCouranteEstLaPremiere()){
-            pagePrec.setDisable(true);
-            pagePrec.setVisible(false);
-        }
-        if (modeEdition){
-            vignette.setDisable(true);
-            vignette.setVisible(false);
-            valider.setDisable(false);
-            valider.setVisible(true);
-        }else {
-            vignette.setDisable(false);
-            vignette.setVisible(true);
-            valider.setDisable(true);
-            valider.setVisible(false);
-        }
-    }
+
 
     @Override
     protected abstract void save();
@@ -54,8 +38,35 @@ public abstract class ControleurPageContenu extends ControleurPage{
     @FXML
     public void clickOnSave(){
         save();
-        carnet.notifierObservateurs();
     }
 
-    public abstract void toggleModeEdition();
+    public abstract void estModeEdition();
+
+
+    @Override
+    public void reagir() {
+        estModeEdition();
+
+        if (carnet.pageCouranteEstLaDerniere()) {
+            pageSuiv.setDisable(true);
+            pageSuiv.setVisible(false);
+        }
+        if (carnet.pageCouranteEstLaPremiere()) {
+            pagePrec.setDisable(true);
+            pagePrec.setVisible(false);
+        }
+        if (modeEdition) {
+            vignette.setDisable(true);
+            vignette.setVisible(false);
+            valider.setDisable(false);
+            valider.setVisible(true);
+        } else {
+            vignette.setDisable(false);
+            vignette.setVisible(true);
+            valider.setDisable(true);
+            valider.setVisible(false);
+        }
+
+        numeroPage.setText(String.valueOf(carnet.getPageCourante().getNumero()));
+    }
 }

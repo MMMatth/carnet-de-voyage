@@ -30,10 +30,6 @@ DatePicker{
     -fx-opacity: 1;
 }
 
-DatePicker {
-    -fx-text-fill: green;
-}
-
 /* style dans le mode edition */
 DatePicker .arrow-button {
     -fx-padding: 5;

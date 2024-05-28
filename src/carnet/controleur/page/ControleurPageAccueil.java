@@ -1,13 +1,14 @@
 package carnet.controleur.page;
 
+import carnet.controleur.Observateur;
 import carnet.exceptions.ProblemePage;
+import carnet.exceptions.SaveNotWork;
 import carnet.model.Carnet;
 import carnet.model.PageAccueil;
-import carnet.model.PageContenu;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class ControleurPageAccueil extends ControleurPageContenu{
+public class ControleurPageAccueil extends ControleurPageContenu implements Observateur {
 
     private PageAccueil page;
 
@@ -25,26 +26,13 @@ public class ControleurPageAccueil extends ControleurPageContenu{
 
 
 
-    public ControleurPageAccueil(Carnet carnet) throws ProblemePage {
+    public ControleurPageAccueil(Carnet carnet) {
         super(carnet);
-        if (!carnet.getPageCourante().estAccueil()){
-            throw new ProblemePage("La page courante n'est pas une page d'accueil" + carnet.getPageCourante().getClass());
-        }
-        this.page = (PageAccueil) carnet.getPageCourante();
-
-        this.modeEdition = page.getModeEdition();
+        carnet.ajouterObservateur(this);
     }
 
-    @FXML
-    public void initialize() {
-        super.initialize();
 
-        titre.setText(page.getTitre());
-        auteur.setText(page.getAuteur());
-        participants.setText(page.getParticipants());
-        dateDebut.setValue(page.getDateDebut());
-        dateFin.setValue(page.getDateFin());
-    }
+
 
     protected void save(){
         page.setTitre(titre.getText());
@@ -54,10 +42,12 @@ public class ControleurPageAccueil extends ControleurPageContenu{
         page.setDateFin(dateFin.getValue());
 
         page.setModeEdition(false);
+
+        carnet.notifierObservateurs();
     }
 
     @FXML
-    public void toggleModeEdition(){
+    public void estModeEdition(){
         String css = modeEdition ? "/styles/edition.css" : "/styles/main.css";
 
         applyStylesheet(titre, modeEdition, css);
@@ -65,6 +55,24 @@ public class ControleurPageAccueil extends ControleurPageContenu{
         applyStylesheet(participants, modeEdition, css);
         applyStylesheet(dateDebut, modeEdition, css);
         applyStylesheet(dateFin, modeEdition, css);
+    }
+
+    @Override
+    public void reagir(){
+
+        if (carnet.getPageCourante().estAccueil()) {
+            this.page = (PageAccueil) carnet.getPageCourante();
+
+            this.modeEdition = page.getModeEdition();
+
+            titre.setText(page.getTitre());
+            auteur.setText(page.getAuteur());
+            participants.setText(page.getParticipants());
+            dateDebut.setValue(page.getDateDebut());
+            dateFin.setValue(page.getDateFin());
+
+        }
+        super.reagir();
     }
 
 

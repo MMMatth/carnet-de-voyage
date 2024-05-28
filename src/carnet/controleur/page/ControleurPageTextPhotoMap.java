@@ -1,8 +1,8 @@
 package carnet.controleur.page;
 
 import carnet.controleur.Observateur;
-import carnet.exceptions.PositionException;
 import carnet.exceptions.ProblemePage;
+import carnet.exceptions.SaveNotWork;
 import carnet.model.Carnet;
 import carnet.model.PageTextPhotoMap;
 import com.sothawo.mapjfx.Coordinate;
@@ -11,7 +11,7 @@ import com.sothawo.mapjfx.Marker;
 import com.sothawo.mapjfx.event.MapViewEvent;
 import javafx.fxml.FXML;
 
-public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto {
+public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implements Observateur {
 
     @FXML
     private MapView map;
@@ -24,25 +24,10 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto {
 
     private Marker marker;
 
-    public ControleurPageTextPhotoMap(Carnet carnet) throws ProblemePage {
+    public ControleurPageTextPhotoMap(Carnet carnet)  {
         super(carnet);
-
-        if (!carnet.getPageCourante().estTextPhotoMap() && !carnet.getPageCourante().estTextPhoto())
-            throw new ProblemePage("La page courante n'est pas une page de texte et photo avec carte" + carnet.getPageCourante().getClass());
-        this.page = (PageTextPhotoMap) carnet.getPageCourante();
-
-        this.modeEdition = page.getModeEdition();
-
-        this.centreCoord = new Coordinate(page.getCenter_lat(), page.getCenter_long());
-        this.pointCoord = new Coordinate(page.getMarker_lat(), page.getMarker_long());
-        this.marker = Marker.createProvided(Marker.Provided.RED).setPosition(pointCoord).setVisible(true);
     }
 
-    @FXML
-    public void initialize() {
-        super.initialize();
-        initMap();
-    }
 
     private void initMap(){
         map.initializedProperty().addListener((observable, oldValue, newValue) -> {
@@ -84,6 +69,27 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto {
         page.setCenter_lat(map.getCenter().getLatitude());
 
         page.setZoom(map.getZoom());
+
+        carnet.notifierObservateurs();
+    }
+
+    @Override
+    public void reagir() {
+
+        if (carnet.getPageCourante().estTextPhotoMap() && !carnet.getPageCourante().estTextPhoto()) {
+
+            this.page = (PageTextPhotoMap) carnet.getPageCourante();
+
+            this.modeEdition = page.getModeEdition();
+
+            centreCoord = new Coordinate(page.getCenter_lat(), page.getCenter_long());
+            pointCoord = new Coordinate(page.getMarker_lat(), page.getMarker_long());
+            marker = Marker.createProvided(Marker.Provided.RED).setPosition(pointCoord).setVisible(true);
+
+            initMap();
+
+        }
+        super.reagir();
     }
 
 

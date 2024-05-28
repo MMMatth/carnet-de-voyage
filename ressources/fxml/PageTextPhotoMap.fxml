@@ -73,7 +73,7 @@
    </center>
    <bottom>
       <AnchorPane prefHeight="73.0" prefWidth="694.0" BorderPane.alignment="CENTER">
-         <Label fx:id="numeroPage" alignment="CENTER" layoutX="631.0" layoutY="15.0" prefHeight="46.0" prefWidth="103.0" text="1/10" AnchorPane.rightAnchor="22.0">
+         <Label fx:id="numeroPage" alignment="CENTER" layoutX="349.0" layoutY="14.0" prefHeight="46.0" prefWidth="103.0" text="1/10" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="349.0" AnchorPane.rightAnchor="348.0">
             <font>
                <Font size="21.0" />
             </font>
@@ -105,7 +105,7 @@
                   </Button>
                </children>
             </AnchorPane>
-            <DatePicker fx:id="date" cacheShape="false" centerShape="false" disable="true" editable="false" focusTraversable="false" prefHeight="103.0" prefWidth="345.0" promptText="JJ/MM/AAAA" scaleShape="false" style="-fx-font-size: 40px;" />
+            <DatePicker id="title_date" fx:id="date" cacheShape="false" centerShape="false" disable="true" editable="false" focusTraversable="false" prefHeight="103.0" prefWidth="345.0" promptText="JJ/MM/AAAA" scaleShape="false" style="-fx-font-size: 40px;" />
 
          </children>
       </StackPane>

@@ -27,6 +27,7 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
 
     public void save() throws SaveNotWork {
         jsonManager.save(path);
+        this.notifierObservateurs();
     }
 
     public void load() throws LoadNotWork {
@@ -46,13 +47,17 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
     }
 
     public void modeVignette() throws PageOutOfRangeException {
-        if (!pageCourante.estModeVignette())
+        if (!pageCourante.estModeVignette()) {
             pageCourante = gestionnairePage.getPage(-1);
+            this.notifierObservateurs();
+        }
     }
 
     public void modeAjouterPage() throws PageOutOfRangeException {
-        if (!pageCourante.estModeAjouterPage())
+        if (!pageCourante.estModeAjouterPage()) {
             pageCourante = gestionnairePage.getPage(0);
+            this.notifierObservateurs();
+        }
     }
 
     public Page getPageCourante() {
@@ -66,11 +71,13 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
     public void pageSuivante() throws PageOutOfRangeException {
         int numPage = pageCourante.getNumero() + 1;
         pageCourante = gestionnairePage.getPage(numPage);
+        this.notifierObservateurs();
     }
 
     public void pagePrecedente() throws PageOutOfRangeException {
         int numPage = pageCourante.getNumero() - 1;
         pageCourante = gestionnairePage.getPage(numPage);
+        this.notifierObservateurs();
     }
 
     public void supprimerPage(int numeroPage) {
@@ -86,6 +93,7 @@ public class Carnet extends SujetObservateur implements Iterable<Page> {
     public void moveTo(int numeroPage) {
         try {
             pageCourante = gestionnairePage.getPage(numeroPage);
+            this.notifierObservateurs();
         } catch (PageOutOfRangeException e) {
             throw new RuntimeException(e);
         }

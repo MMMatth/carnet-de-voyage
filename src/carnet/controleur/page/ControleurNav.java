@@ -3,78 +3,74 @@ package carnet.controleur.page;
 import carnet.controleur.Observateur;
 import carnet.exceptions.ProblemePage;
 import carnet.model.Carnet;
+import carnet.model.ModeAjouterPage;
 import carnet.model.Page;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class ControleurNav implements Observateur {
-    Carnet carnet;
 
-    @FXML
-    BorderPane mainPane;
+    private Carnet carnet;
 
-    public ControleurNav(Carnet carnet, BorderPane mainPane) {
+    private Stage stage;
+
+    private Scene scene;
+
+    private HashMap<String, Scene> scenes;
+
+
+    public ControleurNav(Carnet carnet, BorderPane mainPane, Stage stage) {
         this.carnet = carnet;
+        this.stage = stage;
         this.carnet.ajouterObservateur(this);
-        this.mainPane = mainPane;
+
+        this.scenes = new HashMap<>();
+
+        initPages();
+
+        carnet.notifierObservateurs();
     }
 
-    public void displayPage() throws IOException {
-        Page currentPage = carnet.getPageCourante();
-        FXMLLoader loader = new FXMLLoader();
-
-
-        if (currentPage.estAccueil()) {
-            loader.setLocation(getClass().getResource("/fxml/PageAccueil.fxml"));
-
-            loader.setControllerFactory(iC -> {
-                try { return new ControleurPageAccueil(carnet);
-                } catch (ProblemePage e) { throw new RuntimeException(e); }
-            });
-
-        } else if (currentPage.estTextPhoto()) {
-            System.out.println("TextPhoto");
-            loader.setLocation(getClass().getResource("/fxml/PageTextPhoto.fxml"));
-
-            loader.setControllerFactory(iC -> {
-                try { return new ControleurPageTextPhoto(carnet);
-                } catch (ProblemePage e) {throw new RuntimeException(e);}
-            });
-
-
-        } else if (currentPage.estTextPhotoMap()) {
-            System.out.println("TextPhotoMap");
-            loader.setLocation(getClass().getResource("/fxml/PageTextPhotoMap.fxml"));
-
-            loader.setControllerFactory(iC -> {
-                try { return new ControleurPageTextPhotoMap(carnet);
-                } catch (ProblemePage e) { throw new RuntimeException(e); }
-            });
-
-        } else if (currentPage.estModeVignette()) {
-            loader.setLocation(getClass().getResource("/fxml/ModeVignette.fxml"));
-            loader.setControllerFactory(iC -> new ControleurModeVignette(carnet));
-        } else if (currentPage.estModeAjouterPage()) {
-            loader.setLocation(getClass().getResource("/fxml/PageAddPage.fxml"));
-            loader.setControllerFactory(iC -> new ControleurModeAjouterPage(carnet));
+    private void initPages() {
+        try {
+            loadPage("Accueil", "/fxml/PageAccueil.fxml", new ControleurPageAccueil(carnet));
+            loadPage("TextPhoto", "/fxml/PageTextPhoto.fxml", new ControleurPageTextPhoto(carnet));
+            loadPage("TextPhotoMap", "/fxml/PageTextPhotoMap.fxml", new ControleurPageTextPhotoMap(carnet));
+            loadPage("ModeAjouterPage", "/fxml/PageAddPage.fxml", new ControleurModeAjouterPage(carnet));
+            loadPage("ModeVignette", "/fxml/ModeVignette.fxml", new ControleurModeVignette(carnet));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
 
-
-        Node newPage = loader.load();
-        mainPane.setCenter(newPage);
-
+    private void loadPage(String name, String fxmlPath, Object controller) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        loader.setControllerFactory(iC -> controller);
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        scenes.put(name, scene);
     }
 
     @Override
     public void reagir() {
-        try {
-            displayPage();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (carnet.getPageCourante().estModeVignette()) {
+            stage.setScene(scenes.get("ModeVignette"));
+        } else if (carnet.getPageCourante().estModeAjouterPage()) {
+            stage.setScene(scenes.get("ModeAjouterPage"));
+        } else if (carnet.getPageCourante().estTextPhoto()){
+            stage.setScene(scenes.get("TextPhoto"));
+        } else if (carnet.getPageCourante().estTextPhotoMap()){
+            stage.setScene(scenes.get("TextPhotoMap"));
+        } else {
+            stage.setScene(scenes.get("Accueil"));
         }
     }
 }

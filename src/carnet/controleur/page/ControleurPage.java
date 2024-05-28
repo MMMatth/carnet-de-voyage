@@ -5,8 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextInputControl;
 
-public abstract class
-ControleurPage {
+public abstract class ControleurPage {
 
     protected Carnet carnet;
 
@@ -25,7 +24,6 @@ ControleurPage {
     public void pageSuivante() {
         try {
             carnet.pageSuivante();
-            carnet.notifierObservateurs();
             this.save();
 
         } catch (Exception e) {
@@ -37,7 +35,6 @@ ControleurPage {
     public void pagePrecedente() {
         try {
             carnet.pagePrecedente();
-            carnet.notifierObservateurs();
             this.save();
 
         } catch (Exception e) {
@@ -49,7 +46,6 @@ ControleurPage {
     public void modeVignette() {
         try {
             carnet.modeVignette();
-            carnet.notifierObservateurs();
             this.save();
 
         } catch (Exception e) {
