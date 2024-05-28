@@ -1,5 +1,6 @@
 package carnet.model;
 
+import java.net.URI;
 import java.time.LocalDate;
 
 public class PageTextPhotoMap extends PageTextPhoto{
@@ -26,6 +27,9 @@ public class PageTextPhotoMap extends PageTextPhoto{
 
     public PageTextPhotoMap() {
         super();
+
+        URI uri = URI.create(getClass().getResource("/image/page/imgBasePetit.png").toExternalForm());
+        this.setImgPath(uri.getPath());
 
         this.marker_lat = 48.6937;
         this.marker_long = 6.185;

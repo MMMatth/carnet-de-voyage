@@ -10,6 +10,7 @@ import com.sothawo.mapjfx.event.MapViewEvent;
 import javafx.fxml.FXML;
 
 import java.io.File;
+import java.net.URI;
 
 public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implements Observateur {
 
@@ -61,7 +62,9 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implemen
     @Override
     protected void save() {
         if (page.estTextPhotoMap() && !page.estTextPhoto()) {
-            page.setData(contenu.getText(), date.getValue(), img.getImage().getUrl(), pointCoord.getLongitude(), pointCoord.getLatitude(), map.getCenter().getLongitude(), map.getCenter().getLatitude(), map.getZoom());
+            URI uri = URI.create(img.getImage().getUrl());
+            String path = uri.getPath();
+            page.setData(contenu.getText(), date.getValue(), path, pointCoord.getLongitude(), pointCoord.getLatitude(), map.getCenter().getLongitude(), map.getCenter().getLatitude(), map.getZoom());
         }
 
         page.setModeEdition(false);

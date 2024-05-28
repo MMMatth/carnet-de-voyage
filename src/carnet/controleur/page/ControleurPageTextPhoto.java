@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.net.URI;
 
 public class ControleurPageTextPhoto extends ControleurPageContenu implements Observateur {
 
@@ -55,13 +56,14 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
 
     protected void applyImage(File selectedFile) {
         Image image = new Image(selectedFile.toURI().toString());
-        System.out.println(selectedFile.toURI().toString());
         img.setImage(image);
     }
 
     protected void save(){
         if (page.estTextPhoto()) {
-            page.setData(contenu.getText(), date.getValue(), img.getImage().getUrl());
+            URI uri = URI.create(img.getImage().getUrl());
+            String path = uri.getPath();
+            page.setData(contenu.getText(), date.getValue(), path);
         }
 
         page.setModeEdition(false);
@@ -91,6 +93,7 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
             if (imgFile.exists()) {
                 applyImage(imgFile);
             }
+
 
             date.setValue(page.getDate());
             date.setDisable(!modeEdition);

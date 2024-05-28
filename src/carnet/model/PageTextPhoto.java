@@ -1,5 +1,6 @@
 package carnet.model;
 
+import java.net.URI;
 import java.time.LocalDate;
 
 public class PageTextPhoto extends PageContenu{
@@ -16,7 +17,8 @@ public class PageTextPhoto extends PageContenu{
 
     public PageTextPhoto(){
         this.contenu = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante.";
-        this.imgPath = getClass().getResource("/image/page/imgBaseGrande.png").toExternalForm();
+        URI uri = URI.create(getClass().getResource("/image/page/imgBaseGrande.png").toExternalForm());
+        this.imgPath = uri.getPath();
         this.date = LocalDate.now();
     }
 

@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
+import java.net.URI;
 
 
 public class ControleurVignetteTextPhoto extends ControleurVignetteContenu {
@@ -42,8 +43,6 @@ public class ControleurVignetteTextPhoto extends ControleurVignetteContenu {
         }
         if (imgFile.exists()) {
             applyImage(imgFile);
-        }else {
-            page.setImgPath("/image/page/imgBaseGrande.png");
         }
     }
     private void applyImage(File selectedFile) {
