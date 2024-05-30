@@ -2,12 +2,15 @@ package carnet.model;
 
 import carnet.outils.FabriqueNumero;
 
-public class Page {
+/**
+ * model pour les pages
+ */
+public abstract class Page {
 
     private int numero; // numero de la page unique
 
     public Page(){
-        numero = FabriqueNumero.getInstance().getNumeroPage();
+        numero = FabriqueNumero.getInstance().getNumeroPage(); // on attribue un numero de page unique
     }
 
     public boolean estUnePageContenu() {
@@ -30,6 +33,10 @@ public class Page {
         return false;
     }
 
+    public boolean estTextPhotoMap() {
+        return false;
+    }
+
     public int getNumero() {
         return numero;
     }
@@ -46,11 +53,7 @@ public class Page {
                 '}';
     }
 
-    public String toJson(){
-        return "";
-    }
+    public abstract String toJson();
 
-    public boolean estTextPhotoMap() {
-        return false;
-    }
+
 }

@@ -18,23 +18,24 @@ class Carnet implements "Iterator<Page>" {
   + pageCouranteEstLaPremiere(): boolean
   + load(): void
   + modeVignette(): void
-   nombrePages: int
    pageCourante: Page
-   nombrePagesContenu: int
 }
 Carnet --"1" GestionnairePage
 
-class GestionnairePage implements "Iterator<Page>"{
+class GestionnairePage {
   + GestionnairePage():
+  + deplacerApres(int): void
   + iterator(): Iterator<Page>
-  + toString(): String
-  + ajouterPage(Page[]): void
+  + getIndicePage(int): int
   + getPage(int): Page
-  + supprimerPage(int): void
+  + estVide(): boolean
   + supprimerPage(Page[]): void
-   nombrePages: int
-   empty: boolean
-   nombrePagesContenu: int
+  + toString(): String
+  + deplacerAvant(int): void
+  + ajouterPage(Page[]): void
+  + supprimerPage(int): void
+    + getNbPages(): int
+    + getNbPagesContenu(): int
 }
 GestionnairePage --"*" Page
 
@@ -70,17 +71,11 @@ class PageAccueil {
   + toJson(): String
   + estAccueil(): boolean
   + addParticipant(String): void
-   dateDebut: LocalDate
-   participants: String
-   titre: String
-   dateFin: LocalDate
-   auteur: String
 }
 class PageContenu {
   + PageContenu():
   - modeEdition: boolean
   + estUnePageContenu(): boolean
-   modeEdition: boolean
 }
 class PageTextPhoto {
   + PageTextPhoto():
@@ -91,7 +86,7 @@ class PageTextPhoto {
   + toJson(): String
   + estTextPhoto(): boolean
    date: LocalDate
-   imgPath: String
+   URI: String
    contenu: String
 }
 class PageTextPhotoMap {
@@ -105,12 +100,7 @@ class PageTextPhotoMap {
   + estTextPhotoMap(): boolean
   + estTextPhoto(): boolean
   + toJson(): String
-   openStreetMapLink: String
-   center_long: Double
-   zoom: Double
-   marker_long: Double
-   marker_lat: Double
-   center_lat: Double
+  +  getOpenStreetMapLink() : String
 }
 class SujetObservateur {
   + SujetObservateur():

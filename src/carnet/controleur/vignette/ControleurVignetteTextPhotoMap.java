@@ -17,8 +17,7 @@ public class ControleurVignetteTextPhotoMap extends ControleurVignetteTextPhoto{
     public ControleurVignetteTextPhotoMap(PageTextPhotoMap page, Carnet carnet) {
         super(page, carnet);
         this.page = page;
-
-
+        defaultImgPath = "/image/page/imgBasePetit.png";
     }
 
     public void initialize() {

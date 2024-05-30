@@ -23,14 +23,14 @@ class GestionnairePageTest {
 
     @Test
     void testAjouterPage() {
-        Page page = new Page();
+        Page page = new PageAccueil();
         gestionnairePage.ajouterPage(page);
         assertEquals(1, gestionnairePage.getNombrePages());
     }
 
     @Test
     void testSupprimerPage() {
-        Page page = new Page();
+        Page page = new PageAccueil();;
         gestionnairePage.ajouterPage(page);
         gestionnairePage.supprimerPage(page);
         assertEquals(0, gestionnairePage.getNombrePages());
@@ -38,7 +38,7 @@ class GestionnairePageTest {
 
     @Test
     void testGetPage() {
-        Page page = new Page();
+        Page page = new PageAccueil();
         gestionnairePage.ajouterPage(page);
         try {
             Page retrievedPage = gestionnairePage.getPage(page.getNumero());
@@ -50,16 +50,16 @@ class GestionnairePageTest {
 
     @Test
     void testIsEmpty() {
-        assertTrue(gestionnairePage.isEmpty());
-        Page page = new Page();
+        assertTrue(gestionnairePage.estVide());
+        Page page = new PageAccueil();
         gestionnairePage.ajouterPage(page);
-        assertFalse(gestionnairePage.isEmpty());
+        assertFalse(gestionnairePage.estVide());
     }
 
     @Test
     void testGetNombrePages() {
         assertEquals(0, gestionnairePage.getNombrePages());
-        Page page = new Page();
+        Page page = new PageAccueil();
         gestionnairePage.ajouterPage(page);
         assertEquals(1, gestionnairePage.getNombrePages());
     }
@@ -67,7 +67,7 @@ class GestionnairePageTest {
 
     @Test
     void testSupprimerPageByNumero() {
-        Page page = new Page();
+        Page page = new PageAccueil();
         gestionnairePage.ajouterPage(page);
         gestionnairePage.supprimerPage(page.getNumero());
         assertEquals(0, gestionnairePage.getNombrePages());

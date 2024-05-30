@@ -74,7 +74,7 @@ public class ControleurPageAccueil extends ControleurPageContenu implements Obse
             dateDebut.setValue(page.getDateDebut());
             dateFin.setValue(page.getDateFin());
 
-            update();
+            updatePageContenu();
 
         }
     }

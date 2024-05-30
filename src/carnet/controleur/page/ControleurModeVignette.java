@@ -18,12 +18,9 @@ public class ControleurModeVignette implements Observateur {
     @FXML
     private GridPane grille;
 
-    private HashMap<String, Node> vignettes;
-
     public ControleurModeVignette(Carnet carnet) {
         this.carnet = carnet;
         carnet.ajouterObservateur(this);
-        this.vignettes = new HashMap<>();
     }
 
     private Node loadVignette(String fxmlPath, Object controller) throws IOException {

@@ -16,6 +16,9 @@ import java.time.LocalDate;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * Classe qui permet de gérer la sauvegarde et le chargement du gestionnaire de page
+ */
 public class JsonManager {
     private GestionnairePage gPage;
 

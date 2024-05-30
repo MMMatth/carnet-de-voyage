@@ -4,12 +4,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * model pour la page accueil
+ */
 public class PageAccueil extends PageContenu{
-    private  String titre;
-    private  String auteur;
-    private ArrayList<String> participants;
-    private  LocalDate dateDebut;
-    private  LocalDate dateFin;
+
+    private  String titre; // titre de la page
+    private  String auteur; // auteur de la page
+    private ArrayList<String> participants; // liste des participants au carnet
+    private  LocalDate dateDebut; // date de debut du carnet
+    private  LocalDate dateFin;  // date de fin du carnet
 
     public PageAccueil(String titre, String auteur, LocalDate dateDebut, LocalDate dateFin, String ... participants){
         super();
@@ -31,18 +35,6 @@ public class PageAccueil extends PageContenu{
         Collections.addAll( this.participants, "Participant 1", "Participant 2", "Participant 3");
     }
 
-    @Override
-    public boolean estAccueil(){
-        return true;
-    }
-
-    public String getTitre() {
-        return titre;
-    }
-
-    public String getAuteur() {
-        return auteur;
-    }
 
     public String getParticipants() {
         StringBuilder sb = new StringBuilder();
@@ -60,30 +52,17 @@ public class PageAccueil extends PageContenu{
         return dateFin;
     }
 
-    public void setTitre(String text) {
-        this.titre = text;
+    @Override
+    public boolean estAccueil(){
+        return true;
     }
 
-    public void setAuteur(String text) {
-        this.auteur = text;
+    public String getTitre() {
+        return titre;
     }
 
-    public void setParticipants(String text) {
-        this.participants.clear();
-        String[] parts = text.split("\n");
-        Collections.addAll(this.participants, parts);
-    }
-
-    public void setDateDebut(LocalDate value) {
-        this.dateDebut = value;
-    }
-
-    public void setDateFin(LocalDate value) {
-        this.dateFin = value;
-    }
-
-    public void addParticipant(String participant){
-        participants.add(participant);
+    public String getAuteur() {
+        return auteur;
     }
 
     public String toJson(){
@@ -104,6 +83,14 @@ public class PageAccueil extends PageContenu{
         return json.toString();
     }
 
+    /**
+     * setter pour toutes les données
+     * @param titre titre de la page
+     * @param auteur auteur de la page
+     * @param dateDebut la date de debut
+     * @param dateFin  la date de fin
+     * @param participants les participants
+     */
     public void setData(String titre, String auteur, LocalDate dateDebut, LocalDate dateFin, String ... participants){
         this.titre = titre;
         this.auteur = auteur;

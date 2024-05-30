@@ -1,11 +1,9 @@
 package carnet.controleur.page;
 
-import carnet.controleur.Observateur;
 import carnet.model.Carnet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 public abstract class ControleurPageContenu extends ControleurPage  {
 
@@ -46,7 +44,7 @@ public abstract class ControleurPageContenu extends ControleurPage  {
     public abstract void estModeEdition();
 
 
-    public void update() {
+    public void updatePageContenu() {
         if (carnet.getPageCourante().estUnePageContenu()) {
             estModeEdition();
 
@@ -67,6 +65,8 @@ public abstract class ControleurPageContenu extends ControleurPage  {
             if (modeEdition) {
                 setVignette(false);
                 setValider(true);
+                setPageSuiv(false);
+                setPagePrec(false);
             } else {
                 setVignette(true);
                 setValider(false);

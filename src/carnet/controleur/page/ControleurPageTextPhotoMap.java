@@ -8,8 +8,10 @@ import com.sothawo.mapjfx.MapView;
 import com.sothawo.mapjfx.Marker;
 import com.sothawo.mapjfx.event.MapViewEvent;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URI;
 
 public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implements Observateur {
@@ -38,12 +40,11 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implemen
                 map.setCenter(centreCoord);
             }
         });
-        // on ajoute un ajouter au bouton de zoom
-        map.zoomProperty().addListener((observable, oldValue, newValue) -> updateMarker());
+
+        map.addEventHandler(MapViewEvent.MAP_CLICKED, this::onMapClicked);
 
         map.initialize();
 
-        map.addEventHandler(MapViewEvent.MAP_CLICKED, this::onMapClicked);
     }
 
     private void onMapClicked(MapViewEvent event) {
@@ -54,17 +55,22 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implemen
     }
 
     private void updateMarker(){
-        map.removeMarker(marker);
-        marker = Marker.createProvided(Marker.Provided.RED).setPosition(pointCoord).setVisible(true);
-        map.addMarker(marker);
+        if (map.getInitialized()) {
+            map.removeMarker(marker);
+            marker = Marker.createProvided(Marker.Provided.RED).setPosition(pointCoord).setVisible(true);
+            map.addMarker(marker);
+        }
     }
 
     @Override
     protected void save() {
         if (page.estTextPhotoMap() && !page.estTextPhoto()) {
-            URI uri = URI.create(img.getImage().getUrl());
-            String path = uri.getPath();
-            page.setData(contenu.getText(), date.getValue(), path, pointCoord.getLongitude(), pointCoord.getLatitude(), map.getCenter().getLongitude(), map.getCenter().getLatitude(), map.getZoom());
+            try {
+                URI path = URI.create(img.getImage().getUrl());
+                page.setData(contenu.getText(), date.getValue(), path, pointCoord.getLongitude(), pointCoord.getLatitude(), map.getCenter().getLongitude(), map.getCenter().getLatitude(), map.getZoom());
+            }catch (Exception e){
+                page.setData(contenu.getText(), date.getValue(), null, pointCoord.getLongitude(), pointCoord.getLatitude(), map.getCenter().getLongitude(), map.getCenter().getLatitude(), map.getZoom());
+            }
         }
 
         page.setModeEdition(false);
@@ -77,22 +83,19 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implemen
 
             this.page = (PageTextPhotoMap) carnet.getPageCourante();
 
-            this.modeEdition = page.getModeEdition();
-
-            contenu.setText(page.getContenu());
+            initTextPhoto("/image/page/imgBasePetit.png", page);
 
             centreCoord = new Coordinate(page.getCenter_lat(), page.getCenter_long());
             pointCoord = new Coordinate(page.getMarker_lat(), page.getMarker_long());
             marker = Marker.createProvided(Marker.Provided.RED).setPosition(pointCoord).setVisible(true);
 
-            File imgFile = new File(page.getImgPath());
-            if (imgFile.exists()) {
-                applyImage(imgFile);
+            if (map.getInitialized()){
+                updateMarker();
+                map.setCenter(centreCoord);
+            }else {
+                initMap();
             }
 
-            update();
-
-            initMap();
 
         }
     }

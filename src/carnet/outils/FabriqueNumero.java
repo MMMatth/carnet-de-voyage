@@ -1,5 +1,8 @@
 package carnet.outils;
 
+/**
+ * singleton pour la creation de numero de page
+ */
 public class FabriqueNumero {
 
     private static FabriqueNumero instance;

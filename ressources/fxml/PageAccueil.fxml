@@ -19,9 +19,9 @@
          <Image url="@../image/page/accueil_ligne.png" />
       </image>
    </ImageView>
-   <VBox layoutX="82.0" layoutY="82.0" AnchorPane.bottomAnchor="319.0" AnchorPane.leftAnchor="82.0" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="82.0">
+   <VBox layoutX="82.0" layoutY="82.0" AnchorPane.bottomAnchor="319.0" AnchorPane.leftAnchor="82.0" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="69.0">
       <children>
-          <TextField id="title" fx:id="titre" alignment="TOP_CENTER" cacheShape="false" centerShape="false" editable="false" focusTraversable="false" minHeight="-Infinity" prefHeight="157.0" prefWidth="637.0" scaleShape="false" text="TITRE">
+          <TextField id="title" fx:id="titre" alignment="TOP_CENTER" cacheShape="false" centerShape="false" editable="false" focusTraversable="false" minHeight="-Infinity" prefHeight="175.0" prefWidth="637.0" scaleShape="false" text="Titre">
             <font>
                <Font size="96.0" />
             </font>

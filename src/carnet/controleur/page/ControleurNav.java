@@ -22,8 +22,6 @@ public class ControleurNav implements Observateur {
 
     private Stage stage;
 
-    private Scene scene;
-
     private HashMap<String, Scene> scenes;
 
 
@@ -33,11 +31,9 @@ public class ControleurNav implements Observateur {
         this.carnet.ajouterObservateur(this);
 
         this.scenes = new HashMap<>();
-
-        initPages();
     }
 
-    private void initPages() {
+    public void initPages() {
         try {
             loadPage("Accueil", "/fxml/PageAccueil.fxml", new ControleurPageAccueil(carnet));
             loadPage("TextPhoto", "/fxml/PageTextPhoto.fxml", new ControleurPageTextPhoto(carnet));

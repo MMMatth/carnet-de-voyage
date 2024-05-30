@@ -24,8 +24,6 @@ public abstract class ControleurPage {
     public void pageSuivante() {
         try {
             carnet.pageSuivante();
-            this.save();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,8 +33,6 @@ public abstract class ControleurPage {
     public void pagePrecedente() {
         try {
             carnet.pagePrecedente();
-            this.save();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,8 +42,6 @@ public abstract class ControleurPage {
     public void modeVignette() {
         try {
             carnet.modeVignette();
-            this.save();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

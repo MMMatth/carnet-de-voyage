@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URI;
 
 
@@ -21,10 +22,13 @@ public class ControleurVignetteTextPhoto extends ControleurVignetteContenu {
     @FXML
     private ImageView img;
 
+    protected String defaultImgPath;
+
     public ControleurVignetteTextPhoto(PageTextPhoto page, Carnet carnet){
         super(carnet, page);
         this.page = page;
         this.carnet = carnet;
+        defaultImgPath = "/image/page/imgBaseGrande.png";
     }
 
     @FXML
@@ -35,21 +39,23 @@ public class ControleurVignetteTextPhoto extends ControleurVignetteContenu {
             date.setText("JJ/MM/AAAA");
         }
         contenu.setText(page.getContenu());
-        File imgFile;
-        try {
-            imgFile = new File(page.getImgPath());
-        } catch (Exception e) {
-            imgFile = new File("/image/page/imgBaseGrande.png");
+
+        InputStream stream;
+        if (page.getImgPath() == null) {
+            stream = getClass().getResourceAsStream(defaultImgPath);
+        } else {
+            try {
+                stream = page.getImgPath().toURL().openStream();
+            } catch (Exception e) {
+                stream = getClass().getResourceAsStream(defaultImgPath);
+            }
         }
-        if (imgFile.exists()) {
-            applyImage(imgFile);
+        if (stream != null) {
+            Image image = new Image(stream);
+            img.setImage(image);
         }
     }
-    private void applyImage(File selectedFile) {
-        page.setImgPath(selectedFile.getAbsolutePath());
-        Image image = new Image(selectedFile.toURI().toString());
-        img.setImage(image);
-    }
+
 
 
 

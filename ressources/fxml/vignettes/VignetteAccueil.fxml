@@ -7,10 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="333.0" stylesheets="@../../styles/vignette.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="carnet.controleur.vignette.ControleurVignetteAccueil">
+<AnchorPane prefHeight="200.0" prefWidth="333.0" stylesheets="@../../styles/vignette.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carnet.controleur.vignette.ControleurVignetteAccueil">
    <children>
-      <Button onMouseClicked="#onClick" fx:id="bouton" layoutX="5.0" layoutY="3.0" mnemonicParsing="false" prefHeight="192.0" prefWidth="285.0">
+      <Button fx:id="bouton" layoutX="5.0" layoutY="3.0" mnemonicParsing="false" onMouseClicked="#onClick" prefHeight="192.0" prefWidth="285.0">
          <graphic>
             <AnchorPane prefHeight="171.0" prefWidth="272.0">
                <children>
@@ -24,7 +23,7 @@ fx:controller="carnet.controleur.vignette.ControleurVignetteAccueil">
                         <Font size="42.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="110.0" fitWidth="202.0" layoutX="64.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="125.0" fitWidth="190.0" layoutX="93.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../image/page/accueil_ligne.png" />
                      </image>

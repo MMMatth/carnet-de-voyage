@@ -3,13 +3,16 @@ package carnet;
 import carnet.controleur.page.ControleurNav;
 import carnet.exceptions.SaveNotWork;
 import carnet.model.*;
+import carnet.outils.JsonManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    Carnet carnet;
+    private Carnet carnet;
+    private JsonManager jsonManager;
+    private String path;
 
     public static void main(String[] args) {
         launch(args);
@@ -18,16 +21,23 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         carnet = new Carnet();
+        jsonManager = new JsonManager(carnet.getGestionnairePage());
+        path = "/tmp/carnet.json";
+
         try {
-            carnet.load();
+            jsonManager.load(path);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Impossible de charger le fichier de sauvegarde, un nouveau carnet sera créé à la fermeture de l'application.");
         }
 
 
         ControleurNav controleurNav = new ControleurNav(carnet, stage);
+        controleurNav.initPages();
 
-        stage.setTitle("Carnet de notes");
+        stage.setTitle("Carnet de voyages");
+
+        stage.setMinHeight(600);
+        stage.setMinWidth(800);
 
         carnet.notifierObservateurs();
 
@@ -38,7 +48,7 @@ public class Main extends Application {
     @Override
     public void stop() {
         try {
-            carnet.save();
+            jsonManager.save(path);
         } catch (SaveNotWork ex) {
             throw new RuntimeException(ex);
         }

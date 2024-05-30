@@ -1,10 +1,11 @@
 package carnet.model;
 
-import java.time.LocalDate;
+/**
+ * model pour les pages de contenu
+ */
+public abstract class PageContenu extends Page{
 
-public class PageContenu extends Page{
-
-    private boolean modeEdition;
+    private boolean modeEdition; // pour savoir si on est en mode edition ou non
 
     public PageContenu() {
         super();
@@ -14,7 +15,6 @@ public class PageContenu extends Page{
     public boolean estUnePageContenu() {
         return true;
     }
-
 
     public void setModeEdition(boolean modeEdition) {
         this.modeEdition = modeEdition;

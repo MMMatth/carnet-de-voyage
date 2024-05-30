@@ -11,9 +11,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import java.io.InputStream;
 
 import java.io.File;
 import java.net.URI;
+import java.net.URL;
 
 public class ControleurPageTextPhoto extends ControleurPageContenu implements Observateur {
 
@@ -25,8 +27,6 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
     protected ImageView img;
     @FXML
     protected DatePicker date;
-    @FXML
-    private Label numeroPage;
     @FXML
     private Button filePicker;
 
@@ -60,14 +60,17 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
     }
 
     protected void save(){
-        if (page.estTextPhoto()) {
-            URI uri = URI.create(img.getImage().getUrl());
-            String path = uri.getPath();
-            page.setData(contenu.getText(), date.getValue(), path);
+        if (carnet.getPageCourante().estTextPhoto()) {
+            System.out.println(img.getImage().getUrl());
+            try {
+                URI path = URI.create(img.getImage().getUrl());
+                page.setData(contenu.getText(), date.getValue(), path);
+            } catch (Exception e) {
+                page.setData(contenu.getText(), date.getValue(), null);
+            }
         }
 
         page.setModeEdition(false);
-
     }
 
 
@@ -80,25 +83,41 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
         filePicker.setDisable(!modeEdition);
     }
 
+    protected void initTextPhoto(String defaultImg, PageTextPhoto page){
+        this.modeEdition = page.getModeEdition();
+
+        updatePageContenu();
+
+        contenu.setText(page.getContenu());
+
+        InputStream stream;
+        if (page.getImgPath() == null) {
+            stream = getClass().getResourceAsStream(defaultImg);
+        } else {
+            try {
+                stream = page.getImgPath().toURL().openStream();
+            } catch (Exception e) {
+                stream = getClass().getResourceAsStream(defaultImg);
+            }
+        }
+        if (stream != null) {
+            Image image = new Image(stream);
+            img.setImage(image);
+        }
+
+
+        date.setValue(page.getDate());
+        date.setDisable(!modeEdition);
+    }
+
     @Override
     public void reagir(){
 
         if (carnet.getPageCourante().estTextPhoto() && !carnet.getPageCourante().estTextPhotoMap()) {
-
             this.page = (PageTextPhoto) carnet.getPageCourante();
-            this.modeEdition = page.getModeEdition();
-            contenu.setText(page.getContenu());
 
-            File imgFile = new File(page.getImgPath());
-            if (imgFile.exists()) {
-                applyImage(imgFile);
-            }
+            initTextPhoto("/image/page/imgBaseGrande.png", page);
 
-
-            date.setValue(page.getDate());
-            date.setDisable(!modeEdition);
-
-            update();
         }
     }
 }

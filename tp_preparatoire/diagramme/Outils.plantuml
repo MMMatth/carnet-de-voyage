@@ -23,5 +23,6 @@ class JsonManager {
   - ajouterPageTextPhoto(JSONObject): void
   - ajouterPageTextPhotoMap(JSONObject): void
 }
+JsonManager -- "1" GestionnairePage
 
 @enduml

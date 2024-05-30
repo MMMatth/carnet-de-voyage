@@ -11,9 +11,9 @@ class ControleurModeAjouterPage {
   + addTextPhotoMap(): void
   + addTextPhoto(): void
 }
-ControleurModeAjouterPage --"3" "Button-"
+ControleurModeAjouterPage --"1" "Carnet-_"
 
-class ControleurModeVignette {
+class ControleurModeVignette implements Observateur {
   + ControleurModeVignette(Carnet):
   - displayVignette(String, int, int, ControleurVignettePlus): void
   + initialize(): void
@@ -24,13 +24,16 @@ class ControleurModeVignette {
 ControleurModeVignette --"1" "Carnet-"
 ControleurModeVignette --"1" GridPane
 
+
 class ControleurNav {
   + ControleurNav(Carnet, BorderPane):
-  + displayPage(): void
+  + initPages(): void
+  - loadPage(Page): void
   + reagir(): void
 }
 ControleurNav --"1" _Carnet
 ControleurNav --"1" BorderPane
+ControleurNav --"*" Scene
 
 class ControleurPage {
   + ControleurPage(Carnet):
@@ -43,11 +46,12 @@ class ControleurPage {
 }
 ControleurPage --"1" Carnet
 
-class ControleurPageAccueil {
+class ControleurPageAccueil implements Observateur {
   + ControleurPageAccueil(Carnet):
   + initialize(): void
   # save(): void
   + toggleModeEdition(): void
+    + reagir(): void
 }
 ControleurPageAccueil --"2" TextField
 ControleurPageAccueil --"1" TextArea
@@ -58,12 +62,13 @@ class ControleurPageContenu {
   + ControleurPageContenu(Carnet, PageContenu):
   + clickOnSave(): void
   + toggleModeEdition(): void
-  + initialize(): void
+  + updatePageContenu(): void
   # save(): void
 }
 ControleurPageContenu --"4" Button
+ControleurPageContenu --"1" Label__
 
-class ControleurPageTextPhoto {
+class ControleurPageTextPhoto implements Observateur{
   + ControleurPageTextPhoto(Carnet):
   ~ openFileChooser(): void
   # save(): void
@@ -71,9 +76,12 @@ class ControleurPageTextPhoto {
   - applyImage(File): void
   + toggleModeEdition(): void
   - createFileChooser(): FileChooser
+    + reagir(): void
 }
 ControleurPageTextPhoto --"1" ImageView
 ControleurPageTextPhoto --"1" TextArea_
+ControleurPageTextPhoto --"1" "DatePicker-_"
+
 
 class ControleurPageTextPhotoMap {
   + ControleurPageTextPhotoMap(Carnet):
