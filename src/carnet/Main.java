@@ -8,6 +8,11 @@ import carnet.outils.JsonManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class Main extends Application {
     private Carnet carnet;
     private JsonManager jsonManager;
@@ -21,7 +26,10 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         carnet = new Carnet();
         jsonManager = new JsonManager(carnet.getGestionnairePage());
-        path = "/tmp/carnet.json";
+
+        URL url = Main.class.getProtectionDomain().getCodeSource().getLocation();
+        Path jarPath = Paths.get(url.toURI()).getParent();
+        path = jarPath.resolve("carnet.json").toString();
 
         try {
             jsonManager.load(path);
