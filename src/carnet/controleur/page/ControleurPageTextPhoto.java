@@ -61,7 +61,6 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
 
     protected void save(){
         if (carnet.getPageCourante().estTextPhoto()) {
-            System.out.println(img.getImage().getUrl());
             try {
                 URI path = URI.create(img.getImage().getUrl());
                 page.setData(contenu.getText(), date.getValue(), path);

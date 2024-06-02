@@ -1,12 +1,11 @@
 package carnet;
 
 import carnet.controleur.page.ControleurNav;
-import carnet.exceptions.SaveNotWork;
+import carnet.exceptions.JsonLoadExeception;
+import carnet.exceptions.JsonSaveProblem;
 import carnet.model.*;
 import carnet.outils.JsonManager;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -26,8 +25,8 @@ public class Main extends Application {
 
         try {
             jsonManager.load(path);
-        } catch (Exception e) {
-            System.out.println("Impossible de charger le fichier de sauvegarde, un nouveau carnet sera créé à la fermeture de l'application.");
+        } catch (JsonLoadExeception e) {
+            System.out.println(e.getMessage());
         }
 
 
@@ -49,8 +48,8 @@ public class Main extends Application {
     public void stop() {
         try {
             jsonManager.save(path);
-        } catch (SaveNotWork ex) {
-            throw new RuntimeException(ex);
+        } catch (JsonSaveProblem ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

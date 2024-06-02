@@ -1,9 +1,7 @@
 package carnet.model;
 
-import carnet.exceptions.LoadNotWork;
 import carnet.exceptions.PageOutOfRangeException;
-import carnet.exceptions.SaveNotWork;
-import carnet.outils.JsonManager;
+
 import java.util.Iterator;
 
 /**

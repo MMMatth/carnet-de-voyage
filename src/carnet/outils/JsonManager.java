@@ -1,17 +1,17 @@
 package carnet.outils;
 
-import carnet.exceptions.LoadNotWork;
-import carnet.exceptions.SaveNotWork;
+import carnet.exceptions.JsonLoadExeception;
+import carnet.exceptions.JsonSaveProblem;
 import carnet.model.*;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,7 +26,7 @@ public class JsonManager {
         this.gPage = gPage;
     }
 
-    public void save(String path) throws SaveNotWork {
+    public void save(String path) throws JsonSaveProblem {
         StringBuilder json = new StringBuilder();
         json.append("[\n");
         for (Page page : gPage) {
@@ -45,34 +45,50 @@ public class JsonManager {
             writer.write(json.toString());
             writer.close();
         } catch (Exception e) {
-            throw new SaveNotWork("Problème sur la sauvegarde du carnet");
+            throw new JsonSaveProblem("Problème sur la sauvegarde du carnet");
         }
     }
 
-    public void load(String path) throws LoadNotWork {
+    public void load(String path) throws JsonLoadExeception {
+        ArrayList<JsonLoadExeception> exceptions = new ArrayList<>();
+        Boolean isErreur = false;
         try {
             String cotent = new String(Files.readAllBytes(Paths.get(path)));
             JSONArray jsonArray = new JSONArray(cotent);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                switch (jsonObject.getString("type")) {
-                    case "accueil":
-                        ajouterPageAccueil(jsonObject);
-                        break;
-                    case "textPhoto":
-                        ajouterPageTextPhoto(jsonObject);
-                        break;
-                    case "textPhotoMap":
-                        ajouterPageTextPhotoMap(jsonObject);
-                        break;
+                try {
+                    switch (jsonObject.getString("type")) {
+                        case "accueil":
+                            ajouterPageAccueil(jsonObject);
+                            break;
+                        case "textPhoto":
+                            ajouterPageTextPhoto(jsonObject);
+                            break;
+                        case "textPhotoMap":
+                            ajouterPageTextPhotoMap(jsonObject);
+                            break;
+                        default:
+                            isErreur = true;
+                            exceptions.add(new JsonLoadExeception("Type de page inconnu"));
+                            break;
+                    }
+                }catch (JsonLoadExeception e){
+                    isErreur = true;
+                    exceptions.add(e);
                 }
             }
         } catch (IOException e) {
-            throw new LoadNotWork("Problème sur le chargement du carnet");
+            throw new JsonLoadExeception("Problème sur le chargement du carnet");
+        }
+        if (isErreur) {
+            for (JsonLoadExeception e : exceptions) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
-    private void ajouterPageAccueil(JSONObject jsonObject) throws LoadNotWork{
+    private void ajouterPageAccueil(JSONObject jsonObject) throws JsonLoadExeception {
         String titre, auteur, strDateDebut, stdDateFin;
         String[] participants;
         LocalDate dateDebut, dateFin;
@@ -87,12 +103,12 @@ public class JsonManager {
 
             participants = jsonObject.getJSONArray("participants").toList().toArray(new String[0]);
         } catch (Exception e) {
-            throw new LoadNotWork("Problème sur le chargement d'une page accueil");
+            throw new JsonLoadExeception("Problème sur le chargement d'une page accueil");
         }
         gPage.ajouterPage(new PageAccueil(titre, auteur, dateDebut, dateFin, participants));
     }
 
-    private void ajouterPageTextPhoto(JSONObject jsonObject) throws LoadNotWork{
+    private void ajouterPageTextPhoto(JSONObject jsonObject) throws JsonLoadExeception {
         String imgPath, contenu, strDate;
         LocalDate date;
         try {
@@ -102,12 +118,12 @@ public class JsonManager {
             strDate = jsonObject.getString("date");
             date = strDate.equals("null") ? null : LocalDate.parse(strDate);
         } catch (Exception e) {
-            throw new LoadNotWork("Problème sur le chargement d'une page textPhoto");
+            throw new JsonLoadExeception("Problème sur le chargement d'une page textPhoto");
         }
         gPage.ajouterPage(new PageTextPhoto(date, contenu, imgPath));
     }
 
-    private void ajouterPageTextPhotoMap(JSONObject jsonObject) throws LoadNotWork{
+    private void ajouterPageTextPhotoMap(JSONObject jsonObject) throws JsonLoadExeception {
         String imgPath, contenu, strDate;
         LocalDate date;
         Double marker_long, marker_lat, center_long, center_lat, zoom;
@@ -124,7 +140,7 @@ public class JsonManager {
             zoom = jsonObject.getDouble("zoom");
             date = strDate.equals("null") ? null : LocalDate.parse(strDate);
         }catch (Exception e){
-            throw new LoadNotWork("Problème sur le chargement d'une page textPhotoMap");
+            throw new JsonLoadExeception("Problème sur le chargement d'une page textPhotoMap");
         }
         gPage.ajouterPage(new PageTextPhotoMap(contenu, imgPath, date, marker_long, marker_lat, center_long, center_lat, zoom));
     }
