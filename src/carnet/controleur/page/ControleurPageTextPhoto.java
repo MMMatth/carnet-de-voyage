@@ -30,12 +30,15 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
     @FXML
     private Button filePicker;
 
+    private File selectedImageFile;
+
 
 
     public ControleurPageTextPhoto(Carnet carnet) {
         super(carnet);
         carnet.ajouterObservateur(this);
     }
+
 
     @FXML
     void openFileChooser(){
@@ -57,14 +60,16 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
     protected void applyImage(File selectedFile) {
         Image image = new Image(selectedFile.toURI().toString());
         img.setImage(image);
+        selectedImageFile = selectedFile;
     }
 
     protected void save(){
         if (carnet.getPageCourante().estTextPhoto()) {
             try {
-                URI path = URI.create(img.getImage().getUrl());
+                URI path = selectedImageFile.toURI();
                 page.setData(contenu.getText(), date.getValue(), path);
-            } catch (Exception e) {
+            } catch (Exception e) { // cas où l'image = null
+                System.out.println("Erreur lors de la sauvegarde de la page");
                 page.setData(contenu.getText(), date.getValue(), null);
             }
         }
@@ -83,6 +88,7 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
     }
 
     protected void initTextPhoto(String defaultImg, PageTextPhoto page){
+
         this.modeEdition = page.getModeEdition();
 
         updatePageContenu();
