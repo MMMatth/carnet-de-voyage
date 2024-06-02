@@ -2,6 +2,7 @@ package carnet.controleur.page;
 
 import carnet.controleur.Observateur;
 import carnet.model.Carnet;
+import carnet.model.Page;
 import carnet.model.PageTextPhoto;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,6 +32,7 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
     private Button filePicker;
 
     private File selectedImageFile;
+    private Page selectedPageFile;
 
 
 
@@ -60,16 +62,17 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
     protected void applyImage(File selectedFile) {
         Image image = new Image(selectedFile.toURI().toString());
         img.setImage(image);
-        selectedImageFile = selectedFile;
+        // on le sauvegarde automatiquement au moment de l'import d'image
+        page.setImgPath(URI.create(image.getUrl()));
+
     }
 
     protected void save(){
         if (carnet.getPageCourante().estTextPhoto()) {
             try {
-                URI path = selectedImageFile.toURI();
+                URI path = page.getImgPath();
                 page.setData(contenu.getText(), date.getValue(), path);
             } catch (Exception e) { // cas où l'image = null
-                System.out.println("Erreur lors de la sauvegarde de la page");
                 page.setData(contenu.getText(), date.getValue(), null);
             }
         }
