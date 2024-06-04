@@ -11,15 +11,14 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 
 import java.io.File;
-import java.io.InputStream;
 import java.net.URI;
 
 public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implements Observateur {
 
+    private PageTextPhotoMap page;
+
     @FXML
     private MapView map;
-
-    private PageTextPhotoMap page;
 
     private Coordinate centreCoord;
 
@@ -44,9 +43,12 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implemen
         map.addEventHandler(MapViewEvent.MAP_CLICKED, this::onMapClicked);
 
         map.initialize();
-
     }
 
+    /**
+     * fonction qui permet de mettre à jour la position du marqueur sur la carte
+     * @param event l'événement de clic sur la carte
+     */
     private void onMapClicked(MapViewEvent event) {
         if (page.getModeEdition()) {
             pointCoord = event.getCoordinate();
@@ -63,13 +65,13 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implemen
     }
 
     @Override
-    protected void save() {
-        if (page.estTextPhotoMap() && !page.estTextPhoto()) {
+    protected void save(){
+        if (carnet.getPageCourante().estTextPhoto()) {
             try {
-                URI path = URI.create(img.getImage().getUrl());
-                page.setData(contenu.getText(), date.getValue(), path, pointCoord.getLongitude(), pointCoord.getLatitude(), map.getCenter().getLongitude(), map.getCenter().getLatitude(), map.getZoom());
-            }catch (Exception e){
-                page.setData(contenu.getText(), date.getValue(), null, pointCoord.getLongitude(), pointCoord.getLatitude(), map.getCenter().getLongitude(), map.getCenter().getLatitude(), map.getZoom());
+                URI path = page.getImgPath();
+                page.setData(contenu.getText(), date.getValue(), path);
+            } catch (Exception e) { // cas où l'image = null
+                page.setData(contenu.getText(), date.getValue(), null);
             }
         }
 
@@ -77,25 +79,34 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implemen
     }
 
     @Override
+    protected void applyImage(File selectedFile) {
+        Image image = new Image(selectedFile.toURI().toString());
+        img.setImage(image);
+        page.setImgPath(URI.create(image.getUrl()));
+    }
+
+    private void updatePageTextPhotoMap(PageTextPhotoMap page){
+        centreCoord = new Coordinate(page.getCenter_lat(), page.getCenter_long());
+        pointCoord = new Coordinate(page.getMarker_lat(), page.getMarker_long());
+        marker = Marker.createProvided(Marker.Provided.RED).setPosition(pointCoord).setVisible(true);
+
+        if (map.getInitialized()){
+            updateMarker();
+            map.setCenter(centreCoord);
+        }else {
+            initMap();
+        }
+    }
+
+    @Override
     public void reagir() {
 
         if (carnet.getPageCourante().estTextPhotoMap() && !carnet.getPageCourante().estTextPhoto()) {
-
             this.page = (PageTextPhotoMap) carnet.getPageCourante();
 
-            initTextPhoto("/image/page/imgBasePetit.png", page);
+            updatePageTextPhoto("/image/page/imgBasePetit.png", page);
 
-            centreCoord = new Coordinate(page.getCenter_lat(), page.getCenter_long());
-            pointCoord = new Coordinate(page.getMarker_lat(), page.getMarker_long());
-            marker = Marker.createProvided(Marker.Provided.RED).setPosition(pointCoord).setVisible(true);
-
-            if (map.getInitialized()){
-                updateMarker();
-                map.setCenter(centreCoord);
-            }else {
-                initMap();
-            }
-
+            updatePageTextPhotoMap(page);
 
         }
     }

@@ -2,12 +2,10 @@ package carnet.controleur.page;
 
 import carnet.controleur.Observateur;
 import carnet.model.Carnet;
-import carnet.model.Page;
 import carnet.model.PageTextPhoto;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,7 +14,6 @@ import java.io.InputStream;
 
 import java.io.File;
 import java.net.URI;
-import java.net.URL;
 
 public class ControleurPageTextPhoto extends ControleurPageContenu implements Observateur {
 
@@ -30,9 +27,6 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
     protected DatePicker date;
     @FXML
     private Button filePicker;
-
-    private File selectedImageFile;
-    private Page selectedPageFile;
 
 
 
@@ -59,6 +53,10 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
         return fileChooser;
     }
 
+    /**
+     * Fonction qui applique l'image sélectionnée dans le fileChooser
+     * @param selectedFile le fichier sélectionné
+     */
     protected void applyImage(File selectedFile) {
         Image image = new Image(selectedFile.toURI().toString());
         img.setImage(image);
@@ -90,7 +88,7 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
         filePicker.setDisable(!modeEdition);
     }
 
-    protected void initTextPhoto(String defaultImg, PageTextPhoto page){
+    protected void updatePageTextPhoto(String defaultImg, PageTextPhoto page){
 
         this.modeEdition = page.getModeEdition();
 
@@ -120,12 +118,9 @@ public class ControleurPageTextPhoto extends ControleurPageContenu implements Ob
 
     @Override
     public void reagir(){
-
         if (carnet.getPageCourante().estTextPhoto() && !carnet.getPageCourante().estTextPhotoMap()) {
             this.page = (PageTextPhoto) carnet.getPageCourante();
-
-            initTextPhoto("/image/page/imgBaseGrande.png", page);
-
+            updatePageTextPhoto("/image/page/imgBaseGrande.png", page);
         }
     }
 }
