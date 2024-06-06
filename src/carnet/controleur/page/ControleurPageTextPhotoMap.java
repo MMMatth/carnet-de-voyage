@@ -66,15 +66,26 @@ public class ControleurPageTextPhotoMap extends ControleurPageTextPhoto implemen
 
     @Override
     protected void save(){
-        if (carnet.getPageCourante().estTextPhoto()) {
+        if (carnet.getPageCourante().estTextPhotoMap()) {
             try {
                 URI path = page.getImgPath();
-                page.setData(contenu.getText(), date.getValue(), path);
+                System.out.println("z");
+                page.setData(contenu.getText(), date.getValue(), path,
+                        marker.getPosition().getLongitude(),
+                        marker.getPosition().getLatitude(),
+                        map.getCenter().getLongitude(),
+                        map.getCenter().getLatitude(),
+                        map.getZoom());
             } catch (Exception e) { // cas où l'image = null
-                page.setData(contenu.getText(), date.getValue(), null);
+                System.out.println("z2");
+                page.setData(contenu.getText(), date.getValue(), null,
+                        marker.getPosition().getLongitude(),
+                        marker.getPosition().getLatitude(),
+                        map.getCenter().getLongitude(),
+                        map.getCenter().getLatitude(),
+                        map.getZoom());
             }
         }
-
         page.setModeEdition(false);
     }
 
